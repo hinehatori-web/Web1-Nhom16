@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý danh mục sản phẩm</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="dark-theme">
+    <div class="container">
+        <h1>🛒 Quản lý danh mục sản phẩm</h1>
+
+        <!-- Thêm sản phẩm -->
+        <section class="form-section">
+            <h2>➕ Thêm sản phẩm</h2>
+            <form id="addProductForm">
+                <label>Loại sản phẩm:</label>
+                <input type="text" id="productType" placeholder="Ví dụ: Valorant">
+
+                <label>Mã sản phẩm:</label>
+                <input type="text" id="productCode" placeholder="VD: VAL001">
+
+                <label>Tên sản phẩm:</label>
+                <input type="text" id="productName" placeholder="Acc Valorant VIP">
+
+                <label>Hình ảnh:</label>
+                <input type="file" id="productImage" accept="image/*">
+
+                <label>Mô tả:</label>
+                <textarea id="productDesc" rows="3" placeholder="Nhập mô tả sản phẩm..."></textarea>
+
+                <button type="submit" class="btn">Thêm sản phẩm</button>
+            </form>
+        </section>
+
+        <!-- Danh sách sản phẩm -->
+        <section class="table-section">
+            <h2>📦 Danh sách sản phẩm</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mã</th>
+                        <th>Loại</th>
+                        <th>Tên</th>
+                        <th>Hình</th>
+                        <th>Mô tả</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody id="productTable">
+                    <tr>
+                        <td>VAL001</td>
+                        <td>Valorant</td>
+                        <td>Acc VIP</td>
+                        <td><img src="images/sample-product.jpg" alt="Acc Valorant" width="80"></td>
+                        <td>Tài khoản cấp Kim Cương, nhiều skin hiếm.</td>
+                        <td>
+                            <button class="btn-edit">Sửa</button>
+                            <button class="btn-delete">Ẩn</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <script>
+        // Chức năng thêm sản phẩm mẫu (giả lập)
+        const form = document.getElementById('addProductForm');
+        const table = document.getElementById('productTable');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const code = document.getElementById('productCode').value;
+            const type = document.getElementById('productType').value;
+            const name = document.getElementById('productName').value;
+            const desc = document.getElementById('productDesc').value;
+            const image = 'images/sample-product.jpg'; // demo ảnh tạm
+
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td>${code}</td>
+                <td>${type}</td>
+                <td>${name}</td>
+                <td><img src="${image}" width="80"></td>
+                <td>${desc}</td>
+                <td>
+                    <button class="btn-edit">Sửa</button>
+                    <button class="btn-delete">Ẩn</button>
+                </td>
+            `;
+            table.appendChild(newRow);
+            form.reset();
+        });
+    </script>
+</body>
+</html>
