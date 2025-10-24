@@ -1,98 +1,255 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý danh mục sản phẩm</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quản lý danh mục sản phẩm</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #0f1724;
+      color: #e2e8f0;
+      margin: 0;
+      padding: 24px;
+    }
+    .container { max-width: 1000px; margin: auto; }
+    h1 { color: #38bdf8; font-size: 22px; }
+    .card {
+      background: rgba(255,255,255,0.04);
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+    input, textarea, select {
+      width: 100%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #e2e8f0;
+      padding: 8px;
+      border-radius: 8px;
+      outline: none;
+      margin-top: 6px;
+    }
+    input[type="file"] { border: none; background: none; }
+    button {
+      padding: 8px 14px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    button.add { background: #06b6d4; color: #041324; }
+    button.edit { background: #1e3a8a; color: #e0f2fe; }
+    button.delete { background: #dc2626; color: white; }
+    button.toggle { background: #475569; color: white; }
+    button.reset { background: transparent; border: 1px solid #475569; color: #94a3b8; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+    }
+    th, td {
+      text-align: left;
+      padding: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      vertical-align: middle;
+    }
+    th { color: #94a3b8; font-size: 14px; }
+    td img {
+      width: 60px;
+      height: 60px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+    .hidden { opacity: 0.5; text-decoration: line-through; }
+    .actions button { margin-right: 6px; font-size: 13px; }
+    .status {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      font-size: 12px;
+    }
+  </style>
 </head>
-<body class="dark-theme">
-    <div class="container">
-        <h1>🛒 Quản lý danh mục sản phẩm</h1>
+<body>
+  <div class="container">
+    <h1>Quản lý danh mục sản phẩm</h1>
 
-        <!-- Thêm sản phẩm -->
-        <section class="form-section">
-            <h2>➕ Thêm sản phẩm</h2>
-            <form id="addProductForm">
-                <label>Loại sản phẩm:</label>
-                <input type="text" id="productType" placeholder="Ví dụ: Valorant">
+    <!-- Form thêm / sửa sản phẩm -->
+    <div class="card">
+      <h3>Thêm / Sửa sản phẩm</h3>
+      <label>Loại sản phẩm</label>
+      <select id="prodType">
+        <option value="Valorant">Valorant</option>
+        <option value="Steam">Steam</option>
+        <option value="GiftCard">GiftCard</option>
+      </select>
 
-                <label>Mã sản phẩm:</label>
-                <input type="text" id="productCode" placeholder="VD: VAL001">
+      <label>Mã sản phẩm</label>
+      <input type="text" id="prodCode" placeholder="VD: VAL001" />
 
-                <label>Tên sản phẩm:</label>
-                <input type="text" id="productName" placeholder="Acc Valorant VIP">
+      <label>Tên sản phẩm</label>
+      <input type="text" id="prodName" placeholder="VD: Tài khoản Valorant Diamond" />
 
-                <label>Hình ảnh:</label>
-                <input type="file" id="productImage" accept="image/*">
+      <label>Hình ảnh sản phẩm</label>
+      <input type="file" id="prodImg" accept="image/*" />
 
-                <label>Mô tả:</label>
-                <textarea id="productDesc" rows="3" placeholder="Nhập mô tả sản phẩm..."></textarea>
+      <label>Mô tả</label>
+      <textarea id="prodDesc" rows="3" placeholder="Mô tả ngắn gọn về sản phẩm"></textarea>
 
-                <button type="submit" class="btn">Thêm sản phẩm</button>
-            </form>
-        </section>
-
-        <!-- Danh sách sản phẩm -->
-        <section class="table-section">
-            <h2>📦 Danh sách sản phẩm</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Mã</th>
-                        <th>Loại</th>
-                        <th>Tên</th>
-                        <th>Hình</th>
-                        <th>Mô tả</th>
-                        <th>Hành động</th>
-                    </tr>
-                </thead>
-                <tbody id="productTable">
-                    <tr>
-                        <td>VAL001</td>
-                        <td>Valorant</td>
-                        <td>Acc VIP</td>
-                        <td><img src="images/sample-product.jpg" alt="Acc Valorant" width="80"></td>
-                        <td>Tài khoản cấp Kim Cương, nhiều skin hiếm.</td>
-                        <td>
-                            <button class="btn-edit">Sửa</button>
-                            <button class="btn-delete">Ẩn</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+      <div style="margin-top:10px; display:flex; gap:8px;">
+        <button id="btnSave" class="add">Lưu</button>
+        <button id="btnReset" class="reset">Xóa form</button>
+      </div>
+      <small id="formMsg" style="display:block;margin-top:8px;color:#94a3b8;">Dữ liệu được lưu tạm bằng LocalStorage (demo).</small>
     </div>
 
-    <script>
-        // Chức năng thêm sản phẩm mẫu (giả lập)
-        const form = document.getElementById('addProductForm');
-        const table = document.getElementById('productTable');
+    <!-- Danh sách sản phẩm -->
+    <div class="card">
+      <h3>Danh sách sản phẩm</h3>
+      <div id="prodTableWrap"></div>
+    </div>
+  </div>
 
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
+  <script>
+    const LS_KEY = 'PRODUCT_LIST';
 
-            const code = document.getElementById('productCode').value;
-            const type = document.getElementById('productType').value;
-            const name = document.getElementById('productName').value;
-            const desc = document.getElementById('productDesc').value;
-            const image = 'images/sample-product.jpg'; // demo ảnh tạm
+    function getProducts() {
+      try { return JSON.parse(localStorage.getItem(LS_KEY)) || []; }
+      catch { return []; }
+    }
+    function setProducts(data) { localStorage.setItem(LS_KEY, JSON.stringify(data)); }
+    function genId() { return 'p' + Math.random().toString(36).substr(2, 8); }
 
-            const newRow = document.createElement('tr');
-            newRow.innerHTML = `
-                <td>${code}</td>
-                <td>${type}</td>
-                <td>${name}</td>
-                <td><img src="${image}" width="80"></td>
-                <td>${desc}</td>
-                <td>
-                    <button class="btn-edit">Sửa</button>
-                    <button class="btn-delete">Ẩn</button>
-                </td>
-            `;
-            table.appendChild(newRow);
-            form.reset();
-        });
-    </script>
+    function renderTable() {
+      const prods = getProducts();
+      const wrap = document.getElementById('prodTableWrap');
+      if (prods.length === 0) {
+        wrap.innerHTML = '<p style="color:#94a3b8">Chưa có sản phẩm nào. Hãy thêm mới ở trên.</p>';
+        return;
+      }
+
+      let html = '<table><thead><tr><th>Hình</th><th>Mã</th><th>Tên</th><th>Loại</th><th>Trạng thái</th><th>Thao tác</th></tr></thead><tbody>';
+      prods.forEach(p => {
+        html += `<tr class="${p.hidden ? 'hidden' : ''}">
+          <td><img src="${p.image || 'https://via.placeholder.com/60x60'}" alt="img"></td>
+          <td>${escapeHtml(p.code)}</td>
+          <td><strong>${escapeHtml(p.name)}</strong></td>
+          <td>${escapeHtml(p.type)}</td>
+          <td><span class="status">${p.hidden ? 'Đã ẩn' : 'Hiển thị'}</span></td>
+          <td class="actions">
+            <button class="edit" onclick="editProd('${p.id}')">Sửa</button>
+            <button class="delete" onclick="deleteProd('${p.id}')">Xóa</button>
+            <button class="toggle" onclick="toggleProd('${p.id}')">${p.hidden ? 'Hiện' : 'Ẩn'}</button>
+          </td>
+        </tr>`;
+      });
+      html += '</tbody></table>';
+      wrap.innerHTML = html;
+    }
+
+    function escapeHtml(s) {
+      return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+    }
+
+    document.getElementById('btnSave').addEventListener('click', async () => {
+      const type = document.getElementById('prodType').value.trim();
+      const code = document.getElementById('prodCode').value.trim();
+      const name = document.getElementById('prodName').value.trim();
+      const desc = document.getElementById('prodDesc').value.trim();
+      const fileInput = document.getElementById('prodImg');
+      let imageData = '';
+
+      if (fileInput.files[0]) {
+        imageData = await toBase64(fileInput.files[0]);
+      }
+
+      if (!name || !code) return alert('Vui lòng nhập đầy đủ mã và tên sản phẩm.');
+
+      let prods = getProducts();
+      const editId = document.getElementById('btnSave').dataset.editId;
+
+      if (editId) {
+        const p = prods.find(x => x.id === editId);
+        if (!p) return;
+        p.type = type;
+        p.code = code;
+        p.name = name;
+        p.desc = desc;
+        if (imageData) p.image = imageData;
+        setProducts(prods);
+        document.getElementById('formMsg').innerText = 'Đã cập nhật sản phẩm.';
+        delete document.getElementById('btnSave').dataset.editId;
+      } else {
+        const newP = {
+          id: genId(),
+          type, code, name, desc,
+          image: imageData,
+          hidden: false,
+          createdAt: new Date().toISOString()
+        };
+        prods.unshift(newP);
+        setProducts(prods);
+        document.getElementById('formMsg').innerText = 'Đã thêm sản phẩm mới.';
+      }
+
+      resetForm();
+      renderTable();
+    });
+
+    function toBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+      });
+    }
+
+    function editProd(id) {
+      const prods = getProducts();
+      const p = prods.find(x => x.id === id);
+      if (!p) return;
+      document.getElementById('prodType').value = p.type;
+      document.getElementById('prodCode').value = p.code;
+      document.getElementById('prodName').value = p.name;
+      document.getElementById('prodDesc').value = p.desc;
+      document.getElementById('btnSave').dataset.editId = id;
+      document.getElementById('formMsg').innerText = 'Đang sửa sản phẩm: ' + p.name;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function deleteProd(id) {
+      if (!confirm('Bạn có chắc muốn xóa sản phẩm này?')) return;
+      let prods = getProducts();
+      prods = prods.filter(x => x.id !== id);
+      setProducts(prods);
+      renderTable();
+    }
+
+    function toggleProd(id) {
+      let prods = getProducts();
+      const p = prods.find(x => x.id === id);
+      if (!p) return;
+      p.hidden = !p.hidden;
+      setProducts(prods);
+      renderTable();
+    }
+
+    document.getElementById('btnReset').addEventListener('click', resetForm);
+    function resetForm() {
+      document.getElementById('prodType').value = 'Valorant';
+      document.getElementById('prodCode').value = '';
+      document.getElementById('prodName').value = '';
+      document.getElementById('prodDesc').value = '';
+      document.getElementById('prodImg').value = '';
+      document.getElementById('formMsg').innerText = 'Dữ liệu được lưu tạm bằng LocalStorage (demo).';
+      delete document.getElementById('btnSave').dataset.editId;
+    }
+
+    renderTable();
+  </script>
 </body>
 </html>
