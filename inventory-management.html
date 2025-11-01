@@ -92,9 +92,9 @@
           <label>Loại sản phẩm:</label>
           <select id="categoryFilter">
             <option value="">-- Tất cả --</option>
-            <option value="Valorant">Valorant</option>
-            <option value="Steam">Steam</option>
-            <option value="Genshin">Genshin</option>
+            <option value="Liên Quân">Liên Quân</option>
+            <option value="Free Fire">Free Fire</option>
+            <option value="PUBG">PUBG</option>
           </select>
         </div>
         <div>
@@ -130,10 +130,10 @@
     function seedData() {
       if (!localStorage.getItem(LS_KEY)) {
         const data = [
-          {id: 'SP001', name: 'Valorant Account', category: 'Valorant', importQty: 100, exportQty: 95, date: '2025-10-01'},
-          {id: 'SP002', name: 'Steam Gift Card', category: 'Steam', importQty: 50, exportQty: 25, date: '2025-10-02'},
-          {id: 'SP003', name: 'Genshin Account', category: 'Genshin', importQty: 30, exportQty: 28, date: '2025-10-03'},
-          {id: 'SP004', name: 'Valorant Skin Pack', category: 'Valorant', importQty: 80, exportQty: 10, date: '2025-10-05'},
+          {id: 'SP001', name: 'LQ Account', category: 'LQ', importQty: 100, exportQty: 95, date: '2025-10-01'},
+          {id: 'SP002', name: 'FF Gift Card', category: 'LQ', importQty: 50, exportQty: 25, date: '2025-10-02'},
+          {id: 'SP003', name: 'PUBG Account', category: 'PUBG', importQty: 30, exportQty: 28, date: '2025-10-03'},
+          {id: 'SP004', name: 'LQ Skin Pack', category: 'LQ', importQty: 80, exportQty: 10, date: '2025-10-05'},
         ];
         localStorage.setItem(LS_KEY, JSON.stringify(data));
       }
