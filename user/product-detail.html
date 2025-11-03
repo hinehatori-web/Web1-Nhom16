@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chi tiết sản phẩm | AccountShop</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <span id="userInfo"></span>
+    <button id="logoutBtn" style="display:none; margin-left:10px;">Đăng xuất</button>
+    <a href="cart.html" id="cartLink">Giỏ hàng</a>
+    <a href="profile.html" id="profileLink">Trang cá nhân</a>
+  </header>
+
+  <div class="product-detail-container">
+    <img id="productImg" src="" alt="">
+    <div class="product-info">
+      <h2 id="productName"></h2>
+      <p id="productRating" class="rating"></p>
+      <p id="productPrice" class="price"></p>
+      <p id="productDesc"></p>
+
+      <div>
+        <h3>⭐ Đặc điểm nổi bật:</h3>
+        <ul id="productFeatures"></ul>
+      </div>
+
+      <div>
+        <h3>🛡️ Cam kết bảo hành:</h3>
+        <ul id="productWarranty"></ul>
+      </div>
+
+      <div>
+        <h3>💬 Đánh giá người dùng:</h3>
+        <ul id="productUserReviews"></ul>
+      </div>
+
+      <button id="buyNowBtn">Mua ngay</button>
+      <button id="addToCartBtn">Thêm vào giỏ hàng</button>
+    </div>
+  </div>
+
+  <footer>© 2025 AccountShop</footer>
+
+  <script src="js/product-detail.js"></script>
+</body>
+</html>
+
