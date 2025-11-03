@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trang cá nhân | AccountShop</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <span id="userInfo"></span>
+    <button id="logoutBtn" style="display:none; margin-left:10px;">Đăng xuất</button>
+    <a href="index.html" id="homeLink">Trang chủ</a>
+    <a href="cart.html" id="cartLink">Giỏ hàng</a>
+  </header>
+
+  <main>
+    <h2>Thông tin cá nhân</h2>
+    <form id="profileForm">
+      <label for="name">Họ tên:</label>
+      <input type="text" id="name" required>
+      <label for="email">Email:</label>
+      <input type="email" id="email" required>
+      <label for="phone">Số điện thoại:</label>
+      <input type="text" id="phone" required>
+      <label for="password">Mật khẩu mới:</label>
+      <input type="password" id="password" placeholder="Để trống nếu không đổi">
+      <button type="submit">Cập nhật</button>
+    </form>
+
+    <h2>Đơn hàng đã mua</h2>
+    <div id="orderHistory">
+      <p>Chưa có đơn hàng nào.</p>
+    </div>
+  </main>
+
+  <footer>© 2025 AccountShop</footer>
+  <script src="js/profile.js"></script>
+</body>
+</html>
+
+
+
