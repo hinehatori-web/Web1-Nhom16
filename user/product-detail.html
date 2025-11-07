@@ -7,15 +7,22 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+  <!-- Header -->
   <header>
+    <a href="index.html">Trang chủ</a>
+    <a href="cart.html">Giỏ hàng</a>
+    <a href="profile.html">Trang cá nhân</a>
     <span id="userInfo"></span>
     <button id="logoutBtn" style="display:none; margin-left:10px;">Đăng xuất</button>
-    <a href="cart.html" id="cartLink">Giỏ hàng</a>
-    <a href="profile.html" id="profileLink">Trang cá nhân</a>
   </header>
 
+  <!-- Nút quay lại -->
+  <a href="index.html" class="back-btn">← Quay về Trang chủ</a>
+
+  <!-- Chi tiết sản phẩm -->
   <div class="product-detail-container">
-    <img id="productImg" src="" alt="">
+    <img id="productImg" src="" alt="Hình sản phẩm">
     <div class="product-info">
       <h2 id="productName"></h2>
       <p id="productRating" class="rating"></p>
@@ -37,8 +44,10 @@
         <ul id="productUserReviews"></ul>
       </div>
 
-      <button id="buyNowBtn">Mua ngay</button>
-      <button id="addToCartBtn">Thêm vào giỏ hàng</button>
+      <div class="action-buttons">
+        <button id="buyNowBtn">Mua ngay</button>
+        <button id="addToCartBtn">Thêm vào giỏ hàng</button>
+      </div>
     </div>
   </div>
 
@@ -47,4 +56,5 @@
   <script src="js/product-detail.js"></script>
 </body>
 </html>
+
 
