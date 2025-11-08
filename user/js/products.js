@@ -179,22 +179,31 @@ document.addEventListener("DOMContentLoaded", () => {
   // PHÂN TRANG
   // =============================
   function renderPagination() {
-    pagination.innerHTML = "";
-    const totalPages = Math.ceil(filteredList.length / itemsPerPage);
-    if (totalPages <= 1) return;
+  const pagination = document.getElementById("pagination");
+  pagination.innerHTML = "";
 
-    for (let i = 1; i <= totalPages; i++) {
-      const btn = document.createElement("button");
-      btn.textContent = i;
-      btn.className = i === currentPage ? "active" : "";
-      btn.addEventListener("click", () => {
-        currentPage = i;
-        renderProducts();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-      pagination.appendChild(btn);
+  const totalPages = Math.ceil(filteredList.length / itemsPerPage);
+  if (totalPages <= 1) return;
+
+  for (let i = 1; i <= totalPages; i++) {
+    const btn = document.createElement("button");
+    btn.textContent = i;
+
+    // Đổi màu nút hiện tại
+    if (i === currentPage) {
+      btn.classList.add("active");
     }
+
+    btn.addEventListener("click", () => {
+      currentPage = i;
+      renderProducts();
+      renderPagination(); // cập nhật lại màu nút
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    pagination.appendChild(btn);
   }
+}
 
   // =============================
   // SỰ KIỆN NGƯỜI DÙNG
@@ -208,4 +217,5 @@ document.addEventListener("DOMContentLoaded", () => {
   // =============================
   filteredList = Object.values(products).flat();
   renderProducts();
+
 });
