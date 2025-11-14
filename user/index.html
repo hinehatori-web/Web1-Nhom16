@@ -1,59 +1,111 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AccountShop | Trang chủ</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AccountShop - Trang chủ</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <!-- Header -->
-  <header>
-    <span id="userInfo"></span>
-    <button id="logoutBtn" style="display:none; margin-left:10px;">Đăng xuất</button>
-    <a href="cart.html" id="cartLink">Giỏ hàng</a>
-    <a href="profile.html" id="profileLink">Trang cá nhân</a>
-  </header>
 
-  <!-- Hero -->
-  <div class="hero">
-    <h2>Chào mừng đến với AccountShop</h2>
-    <p>Mua acc game uy tín, nhanh chóng, an toàn</p>
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="container nav-wrapper">
+      <div class="logo">AccountShop</div>
+      <ul class="nav-links">
+        <li><a class="active" href="index.html">Trang chủ</a></li>
+        <li><a href="products.html">Sản phẩm</a></li>
+        <li><a href="cart.html">Giỏ hàng</a></li>
+        <li><a href="orders.html">Đơn hàng</a></li>
+        <li><a href="login.html">Đăng nhập</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <h1>Chào mừng đến với AccountShop</h1>
+      <p>Mua bán tài khoản game uy tín — Liên Quân, Liên Minh, Free Fire</p>
+    </div>
+  </section>
+
+  <!-- TÌM KIẾM NHANH -->
+  <div class="basic-search">
+    <input type="text" placeholder="Tìm kiếm tài khoản...">
+    <select>
+      <option>Tất cả</option>
+      <option>Liên Quân Mobile</option>
+      <option>Liên Minh Huyền Thoại</option>
+      <option>Free Fire</option>
+    </select>
+    <button class="search-btn">Tìm</button>
   </div>
 
-  <!-- Lọc & tìm kiếm sản phẩm -->
-  <div class="category-filter">
-    <label>Chọn danh mục: </label>
-    <select id="categorySelect">
-      <option value="all">Tất cả</option>
-      <option value="lienquan">Liên Quân Mobile</option>
-      <option value="lienminh">Liên Minh Huyền Thoại</option>
-      <option value="freefire">Free Fire</option>
-    </select>
+  <!-- SP NỔI BẬT -->
+  <section class="container">
+    <h2 class="section-title" style="margin-top:18px;color:var(--accent)">Sản phẩm nổi bật</h2>
 
-    <!-- Tìm kiếm cơ bản -->
-    <input type="text" id="searchName" placeholder="🔍 Tìm theo tên...">
+    <div class="grid">
 
-    <!-- Tìm kiếm nâng cao -->
-    <div class="advanced-search">
-      <label>Giá từ:</label>
-      <input type="number" id="minPrice" placeholder="0">
-      <label>đến:</label>
-      <input type="number" id="maxPrice" placeholder="2000000">
-      <button id="searchBtn">Tìm kiếm</button>
-    </div> <!-- đóng advanced-search -->
-  </div> <!-- đóng category-filter -->
+      <!-- ITEM 1 -->
+      <div class="card">
+        <img src="assets/images/lienquan/lienquan1.jpg" alt="">
+        <div class="card-title">Acc Liên Quân VIP</div>
+        <div class="desc">Rank cao, full tướng</div>
+        <div class="rating">★★★★★</div>
+        <div class="price">550.000đ</div>
+        <div class="product-stats">
+          <span>⭐ 4.8 (128)</span>
+          <span>🔥 320 mua</span>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-outline" href="product-detail.html">Xem chi tiết</a>
+          <a class="btn btn-primary" href="login.html">Mua ngay</a>
+        </div>
+      </div>
 
-  <!-- Danh sách sản phẩm -->
-  <div class="product-container" id="productContainer"></div>
+      <!-- ITEM 2 -->
+      <div class="card">
+        <img src="assets/images/lienminh/lienminh1.jpg" alt="">
+        <div class="card-title">Acc Liên Minh - 200 Skin</div>
+        <div class="desc">Full skin hiếm</div>
+        <div class="rating">★★★★☆</div>
+        <div class="price">800.000đ</div>
+        <div class="product-stats">
+          <span>⭐ 4.7 (98)</span>
+          <span>🔥 210 mua</span>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-outline" href="product-detail-lmht.html">Xem chi tiết</a>
+          <a class="btn btn-primary" href="login.html">Mua ngay</a>
+        </div>
+      </div>
 
-  <!-- Phân trang -->
-  <div id="pagination" class="pagination"></div>
+      <!-- ITEM 3 -->
+      <div class="card">
+        <img src="assets/images/freefire/freefire1.jpg" alt="">
+        <div class="card-title">Acc Free Fire Full Skin</div>
+        <div class="desc">Acc hiếm, nhiều skin</div>
+        <div class="rating">★★★★☆</div>
+        <div class="price">450.000đ</div>
+        <div class="product-stats">
+          <span>⭐ 4.9 (150)</span>
+          <span>🔥 400 mua</span>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-outline" href="product-detail-freefire.html">Xem chi tiết</a>
+          <a class="btn btn-primary" href="login.html">Mua ngay</a>
+        </div>
+      </div>
 
-  <!-- Footer -->
-  <footer>© 2025 AccountShop</footer>
+    </div>
+  </section>
 
-  <script src="js/auth.js"></script>
-  <script src="js/products.js"></script>
+  <footer>
+    © 2025 AccountShop - Game Zone
+  </footer>
+
 </body>
 </html>
+
