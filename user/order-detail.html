@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chi tiết đơn hàng | AccountShop</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .order-box {
+      background: #1a1d24;
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid #262a33;
+      max-width: 800px;
+      margin: auto;
+      margin-top: 25px;
+    }
+
+    .order-header {
+      font-size: 22px;
+      margin-bottom: 10px;
+      color: var(--accent);
+    }
+
+    .info-row {
+      margin: 10px 0;
+      font-size: 15px;
+      color: #ccc;
+    }
+
+    .order-item {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 10px;
+      border: 1px solid #333;
+      background: #16181d;
+      display: flex;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .order-item img {
+      width: 110px;
+      height: 110px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    .item-info h3 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .back-btn {
+      display: inline-block;
+      padding: 10px 16px;
+      background: var(--accent);
+      color: #000;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+
+    .switch-links {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .switch-links a {
+      color: var(--accent);
+      font-size: 14px;
+      margin: 0 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="logo">AccountShop</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Trang chủ</a></li>
+      <li><a href="products.html">Sản phẩm</a></li>
+      <li><a href="cart.html">Giỏ hàng</a></li>
+      <li><a href="orders.html" class="active">Đơn hàng</a></li>
+      <li><a href="profile.html">Tài khoản</a></li>
+    </ul>
+  </nav>
+
+  <!-- ⭐ CHI TIẾT ĐƠN HÀNG (2 đơn tách theo id) -->
+  <section class="container">
+
+    <!-- ========================= DH001 ========================= -->
+    <div id="DH001" class="order-box">
+      <div class="order-header">Đơn hàng #DH001</div>
+
+      <div class="info-row">Ngày mua: <b>10/11/2025</b></div>
+      <div class="info-row">Trạng thái: <b style="color: var(--success)">Hoàn tất</b></div>
+
+      <div class="order-item">
+        <img src="assets/images/lienquan/lienquan1.jpg">
+        <div class="item-info">
+          <h3>Acc Liên Quân VIP</h3>
+          <p>Rank cao – nhiều trang phục</p>
+          <p><b>Giá: 550.000đ</b></p>
+        </div>
+      </div>
+
+      <a href="orders.html" class="back-btn">← Quay lại đơn hàng</a>
+    </div>
+
+    <!-- ========================= DH002 ========================= -->
+    <div id="DH002" class="order-box" style="display:none;">
+      <div class="order-header">Đơn hàng #DH002</div>
+
+      <div class="info-row">Ngày mua: <b>08/11/2025</b></div>
+      <div class="info-row">Trạng thái: <b style="color: var(--success)">Hoàn tất</b></div>
+
+      <div class="order-item">
+        <img src="assets/images/freefire/freefire1.jpg">
+        <div class="item-info">
+          <h3>Acc Free Fire Full Skin</h3>
+          <p>Nhiều skin hiếm</p>
+          <p><b>Giá: 450.000đ</b></p>
+        </div>
+      </div>
+
+      <a href="orders.html" class="back-btn">← Quay lại đơn hàng</a>
+    </div>
+
+    <div class="switch-links">
+      <a href="order-detail.html?id=DH001">Xem DH001</a> | 
+      <a href="order-detail.html?id=DH002">Xem DH002</a>
+    </div>
+
+  </section>
+
+</body>
+</html>
+
+
+
+
+

@@ -1,25 +1,97 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Giỏ hàng | AccountShop</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <header>
-    <span id="userInfo"></span>
-    <button id="logoutBtn" style="display:none; margin-left:10px;">Đăng xuất</button>
-    <a href="index.html" id="homeLink">Trang chủ</a>
-    <a href="profile.html" id="profileLink">Trang cá nhân</a>
+  <header class="navbar">
+    <div class="nav-wrapper">
+      <div class="logo">AccountShop</div>
+      <nav class="nav-links">
+        <a href="index.html">Trang chủ</a>
+        <a href="products.html">Sản phẩm</a>
+        <a href="cart.html" class="active">Giỏ hàng</a>
+        <a href="orders.html">Đơn hàng</a>
+        <a href="profile.html">Tài khoản</a>
+      </nav>
+    </div>
   </header>
+<section class="cart-container container">
 
-  <div class="product-container" id="cartItems"></div>
-  <p id="totalAmount">Tổng: 0₫</p>
-  <button id="checkoutBtn">Thanh toán</button>
+    <h1>Giỏ hàng của bạn</h1>
 
-  <footer>© 2025 AccountShop</footer>
-  <script src="js/auth.js"></script>
-  <script src="js/cart.js"></script>
+    <table class="cart-table">
+
+        <!-- ITEM 1 -->
+        <tr>
+            <td class="product-box">
+                <img src="assets/images/lienquan/lienquan1.jpg">
+                <div>
+                    <h3>Acc Liên Quân VIP</h3>
+                    <p>Rank cao • Full tướng</p>
+                </div>
+            </td>
+
+            <td class="product-price">550.000đ</td>
+
+            <td class="qty-box">
+                <button class="qty-btn">-</button>
+                <span>1</span>
+                <button class="qty-btn">+</button>
+            </td>
+
+            <td class="product-price">550.000đ</td>
+
+            <td>
+                <button class="remove-btn">X</button>
+            </td>
+        </tr>
+
+        <!-- ITEM 2 -->
+        <tr>
+            <td class="product-box">
+                <img src="assets/images/freefire/freefire1.jpg">
+                <div>
+                    <h3>Acc Free Fire Full Skin</h3>
+                    <p>Nhiều skin hiếm</p>
+                </div>
+            </td>
+
+            <td class="product-price">450.000đ</td>
+
+            <td class="qty-box">
+                <button class="qty-btn">-</button>
+                <span>1</span>
+                <button class="qty-btn">+</button>
+            </td>
+
+            <td class="product-price">450.000đ</td>
+
+            <td>
+                <button class="remove-btn">X</button>
+            </td>
+        </tr>
+
+    </table>
+
+    <!-- TÍNH TIỀN -->
+    <div class="cart-summary">
+        <p><strong>Tạm tính:</strong> 1.000.000đ</p>
+        <p><strong>Phí giao dịch:</strong> 0đ</p>
+        <p><strong>Tổng thanh toán:</strong> <span class="total-pay">1.000.000đ</span></p>
+
+        <button class="btn btn-primary checkout-btn">Thanh toán</button>
+    </div>
+
+</section>
+
+  
+
+  <footer>
+    © 2025 AccountShop - Game Zone
+  </footer>
 </body>
 </html>

@@ -1,60 +1,131 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chi tiết sản phẩm | AccountShop</title>
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết sản phẩm | AccountShop</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
-  <!-- Header -->
-  <header>
-    <a href="index.html">Trang chủ</a>
-    <a href="cart.html">Giỏ hàng</a>
-    <a href="profile.html">Trang cá nhân</a>
-    <span id="userInfo"></span>
-    <button id="logoutBtn" style="display:none; margin-left:10px;">Đăng xuất</button>
-  </header>
+<!-- NAV -->
+<nav class="navbar">
+    <div class="logo">AccountShop</div>
+    <ul class="nav-links">
+        <li><a href="index.html">Trang chủ</a></li>
+        <li><a href="products.html">Sản phẩm</a></li>
+        <li><a href="cart.html">Giỏ hàng</a></li>
+        <li><a href="orders.html">Đơn hàng</a></li>
+        <li><a href="profile.html">Tài khoản</a></li>
+    </ul>
+</nav>
 
-  <!-- Nút quay lại -->
-  <a href="index.html" class="back-btn">← Quay về Trang chủ</a>
+<!-- CHI TIẾT SẢN PHẨM -->
+<section class="product-detail">
 
-  <!-- Chi tiết sản phẩm -->
-  <div class="product-detail-container">
-    <img id="productImg" src="" alt="Hình sản phẩm">
-    <div class="product-info">
-      <h2 id="productName"></h2>
-      <p id="productRating" class="rating"></p>
-      <p id="productPrice" class="price"></p>
-      <p id="productDesc"></p>
-
-      <div>
-        <h3>⭐ Đặc điểm nổi bật:</h3>
-        <ul id="productFeatures"></ul>
-      </div>
-
-      <div>
-        <h3>🛡️ Cam kết bảo hành:</h3>
-        <ul id="productWarranty"></ul>
-      </div>
-
-      <div>
-        <h3>💬 Đánh giá người dùng:</h3>
-        <ul id="productUserReviews"></ul>
-      </div>
-
-      <div class="action-buttons">
-        <button id="buyNowBtn">Mua ngay</button>
-        <button id="addToCartBtn">Thêm vào giỏ hàng</button>
-      </div>
+    <!-- Ảnh Banner -->
+    <div class="product-banner">
+        <img src="assets/images/lienquan/lienquan1.jpg" alt="Ảnh sản phẩm">
     </div>
-  </div>
 
-  <footer>© 2025 AccountShop</footer>
+    <!-- Thông tin chính -->
+    <div class="product-info">
+        <h1>Acc Liên Quân VIP - Full Tướng</h1>
 
-  <script src="js/product-detail.js"></script>
+        <div class="product-rating">★★★★★ 
+            <span style="color:#bbb">(128 đánh giá)</span>
+        </div>
+
+        <div class="product-price">550.000đ</div>
+
+        <div class="detail-actions">
+            <a href="checkout.html" class="btn btn-primary">Mua ngay</a>
+            <a href="cart.html" class="btn btn-outline">Thêm vào giỏ</a>
+        </div>
+    </div>
+
+    <!-- Đặc điểm nổi bật -->
+    <div class="highlight-box">
+        <h3>Đặc điểm nổi bật</h3>
+        <ul style="line-height: 26px;">
+            <li>Full tướng — nhiều skin bậc S+</li>
+            <li>Rank Cao Thủ 35 sao</li>
+            <li>Skin hiếm đầy đủ: Superman, Murad SS, Nakroth LR…</li>
+            <li>Ngọc 90 cấp — tối ưu leo rank</li>
+            <li>Acc trắng thông tin — đổi được email + mật khẩu</li>
+        </ul>
+    </div>
+
+    <!-- Thông tin tài khoản -->
+    <h3 style="color:var(--accent); margin-top:25px;">Thông tin tài khoản</h3>
+
+    <div class="info-table">
+        <div><span>Rank</span><span>Cao Thủ 35 sao</span></div>
+        <div><span>Số tướng</span><span>100/100</span></div>
+        <div><span>Skin</span><span>250+</span></div>
+        <div><span>Skin hiếm</span><span>Có</span></div>
+        <div><span>Đá quý</span><span>3 viên</span></div>
+        <div><span>Ngọc</span><span>Full 90 cấp</span></div>
+    </div>
+
+    <!-- Sản phẩm liên quan -->
+    <h2 class="related-title">Sản phẩm liên quan</h2>
+
+    <div class="related-grid">
+
+        <!-- 1 -->
+        <div class="card">
+            <img src="assets/images/lienquan/lienquan2.jpg" alt="">
+            <h3>Acc Liên Quân Full Tướng</h3>
+            <p class="desc">Nhiều skin – giá rẻ</p>
+            <div class="rating">★★★★★</div>
+            <div class="price">320.000đ</div>
+            <div class="card-actions">
+                <a class="btn btn-outline" href="product-detail.html">Xem chi tiet</a>
+                <a class="btn btn-primary" href="login.html">Mua ngay</a>
+            </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="card">
+            <img src="assets/images/lienminh/lienminh1.jpg" alt="">
+            <h3>Acc Liên Minh 200 Skin</h3>
+            <p class="desc">Nhiều skin hiếm</p>
+            <div class="rating">★★★★☆</div>
+            <div class="price">800.000đ</div>
+            <div class="card-actions">
+                <a class="btn btn-outline" href="product-detail.html">Xem chi tiet</a>
+                <a class="btn btn-primary" href="login.html">Mua ngay</a>
+            </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="card">
+            <img src="assets/images/freefire/freefire1.jpg" alt="">
+            <h3>Acc Free Fire Full Skin</h3>
+            <p class="desc">Nhiều skin hiếm</p>
+            <div class="rating">★★★★☆</div>
+            <div class="price">450.000đ</div>
+            <div class="card-actions">
+                <a class="btn btn-outline" href="product-detail.html">Xem chi tiet</a>
+                <a class="btn btn-primary" href="login.html">Mua ngay</a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<footer style="margin-top:40px;text-align:center;color:var(--muted);padding:25px;">
+    © 2025 AccountShop - Game Zone
+</footer>
+
 </body>
 </html>
+
+
+
+
+
 
 
