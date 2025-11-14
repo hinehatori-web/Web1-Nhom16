@@ -4,14 +4,55 @@
   <meta charset="UTF-8">
   <title>Bảng điều khiển Admin | AccountShop</title>
   <link rel="stylesheet" href="style.css">
+
+  <style>
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 25px;
+      background: #0f172a;
+      color: #e2e8f0;
+      border-bottom: 2px solid #1e293b;
+    }
+
+    .admin-header img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 2px solid #38bdf8;
+      object-fit: cover;
+    }
+
+    .admin-container {
+      display: flex;
+      height: 100vh;
+    }
+
+    .dashboard-img {
+      width: 80%;
+      margin-top: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(56,189,248,0.3);
+    }
+  </style>
 </head>
+
 <body class="dark-theme">
 
+  <!-- HEADER -->
   <header class="admin-header">
     <h1>AccountShop - Quản trị hệ thống</h1>
+
+    <!-- ẢNH ADMIN -->
+    <div class="admin-avatar-box">
+      <img src="images/admin-avatar.png" alt="Admin Avatar">
+    </div>
+
     <a href="admin.html" class="logout-btn">Đăng xuất</a>
   </header>
 
+  <!-- LAYOUT -->
   <div class="admin-container">
     <aside class="sidebar">
       <h2>Chức năng quản trị</h2>
@@ -29,6 +70,8 @@
     <main class="admin-content">
       <h2>Chào mừng bạn đến với khu vực quản trị!</h2>
       <p>Chọn một chức năng bên trái để bắt đầu thao tác quản lý hệ thống.</p>
+
+      <!-- HÌNH DASHBOARD -->
       <img src="images/dashboard-banner.jpg" alt="Dashboard" class="dashboard-img">
     </main>
   </div>
