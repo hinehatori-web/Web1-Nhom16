@@ -1,3 +1,115 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Quản lý người dùng — AccountShop (Prototype)</title>
+  <style>
+    :root {
+      --bg: #0f1724;
+      --card: #0b1220;
+      --muted: #94a3b8;
+      --accent: #06b6d4;
+      --danger: #ef4444;
+      --success: #10b981;
+      --glass: rgba(255,255,255,0.03);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial;background:linear-gradient(180deg,#071029 0%, #0b1220 100%);color:#e6eef8;padding:28px}
+    .wrap{max-width:1100px;margin:0 auto}
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+    h1{font-size:20px;margin:0}
+    .top-actions{display:flex;gap:8px;align-items:center}
+    input[type="text"], input[type="email"], input[type="password"], select {
+      background:var(--glass); border:1px solid rgba(255,255,255,0.04); color:var(--muted); padding:10px;border-radius:8px; outline:none;
+    }
+    button{background:var(--accent);border:none;color:#041324;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:600}
+    button.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+    button.danger{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--danger)}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:14px;border-radius:12px;box-shadow:0 6px 30px rgba(2,6,23,0.6)}
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:12px}
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:10px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.03);font-size:14px;color:#dbeafe}
+    th{color:var(--muted);font-weight:600;font-size:13px}
+    .small{font-size:13px;color:var(--muted)}
+    .badge{display:inline-block;padding:6px 8px;border-radius:999px;background:rgba(255,255,255,0.03);font-size:13px}
+    .btn-sm{padding:6px 8px;border-radius:8px;font-size:13px;cursor:pointer}
+    .btn-lock{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
+    .btn-reset{background:#1f2937;color:#c7f9ff}
+    .muted{color:var(--muted)}
+    .form-row{display:flex;gap:8px;margin-bottom:8px}
+    label{font-size:13px;color:var(--muted);display:block;margin-bottom:6px}
+    .notice{padding:10px;border-radius:8px;background:linear-gradient(180deg, rgba(6,182,212,0.06), rgba(6,182,212,0.02));color:#cfeff6;margin-bottom:10px}
+    .center{text-align:center}
+    .flex{display:flex;gap:8px;align-items:center}
+    .search{width:320px}
+    .tiny{font-size:12px;padding:4px 6px}
+    .locked{opacity:0.6;text-decoration:line-through}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Quản lý người dùng — AccountShop (Admin)</h1>
+        <div class="small muted">Trang này mô phỏng chức năng quản lý user: danh sách, reset mật khẩu, khóa/mở khóa.</div>
+      </div>
+
+      <div class="top-actions">
+        <input id="searchInput" class="search" type="text" placeholder="Tìm theo username hoặc email..." />
+        <button id="btnSeed" class="ghost btn-sm">Tạo 5 user mẫu</button>
+        <button id="btnClear" class="danger btn-sm">Xóa tất cả (demo)</button>
+      </div>
+    </header>
+
+    <div class="grid">
+      <!-- left: user table -->
+      <section class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <strong>Danh sách khách hàng</strong>
+          <div class="small muted">Tổng: <span id="totalCount">0</span></div>
+        </div>
+
+        <div id="tableWrap"></div>
+      </section>
+
+      <!-- right: form -->
+      <aside class="card">
+        <div style="margin-bottom:8px"><strong>Thêm / Sửa user</strong></div>
+
+        <div id="formNotice" class="notice small">Mẹo: Nhấn "Tạo user mẫu" để có dữ liệu thử. Mật khẩu lưu tạm trong localStorage (chỉ demo).</div>
+
+        <div>
+          <label for="f_username">Username</label>
+          <input id="f_username" type="text" placeholder="ví dụ: khachhang01" />
+        </div>
+        <div>
+          <label for="f_email">Email</label>
+          <input id="f_email" type="email" placeholder="ví dụ: a@b.com" />
+        </div>
+        <div>
+          <label for="f_password">Mật khẩu (khi tạo)</label>
+          <input id="f_password" type="password" placeholder="Nhập mật khẩu hoặc để trống để tạo tự động" />
+        </div>
+
+        <div style="margin-top:8px;display:flex;gap:8px">
+          <button id="btnSave">Lưu</button>
+          <button id="btnResetForm" class="ghost">Xóa form</button>
+        </div>
+
+        <hr style="margin:12px 0;border:none;border-top:1px solid rgba(255,255,255,0.03)">
+
+        <div class="small muted">
+          <strong>Ghi chú:</strong>
+          <ul style="padding-left:18px;margin:6px 0 0 0">
+            <li>Mô phỏng: password được lưu plain trong localStorage — **KHÔNG** làm vậy ở production.</li>
+            <li>Reset mật khẩu sẽ sinh mật khẩu mới và hiển thị cho admin (demo).</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+
 <script>
 /* =========================
    User management prototype — FIXED USERS VERSION
