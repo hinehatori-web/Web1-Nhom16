@@ -57,8 +57,6 @@
 
       <div class="top-actions">
         <input id="searchInput" class="search" type="text" placeholder="Tìm theo username hoặc email..." />
-        <button id="btnSeed" class="ghost btn-sm">Tạo 5 user mẫu</button>
-        <button id="btnClear" class="danger btn-sm">Xóa tất cả (demo)</button>
       </div>
     </header>
 
@@ -76,8 +74,6 @@
       <!-- right: form -->
       <aside class="card">
         <div style="margin-bottom:8px"><strong>Thêm / Sửa user</strong></div>
-
-        <div id="formNotice" class="notice small">Mẹo: Nhấn "Tạo user mẫu" để có dữ liệu thử. Mật khẩu lưu tạm trong localStorage (chỉ demo).</div>
 
         <div>
           <label for="f_username">Username</label>
@@ -102,8 +98,6 @@
         <div class="small muted">
           <strong>Ghi chú:</strong>
           <ul style="padding-left:18px;margin:6px 0 0 0">
-            <li>Mô phỏng: password được lưu plain trong localStorage — **KHÔNG** làm vậy ở production.</li>
-            <li>Reset mật khẩu sẽ sinh mật khẩu mới và hiển thị cho admin (demo).</li>
           </ul>
         </div>
       </aside>
@@ -111,10 +105,6 @@
   </div>
 
 <script>
-/* =========================
-   User management prototype — FIXED USERS VERSION
-   Luôn khởi tạo 5 user cố định nếu chưa tồn tại.
-   ========================= */
 
 const LS_KEY = 'ADM_users';
 const wrap = document.getElementById('tableWrap');
