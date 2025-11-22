@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Đăng nhập - GameZone</title>
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    body{
+      margin:0;
+      font-family:"Poppins",sans-serif;
+      background:linear-gradient(180deg,#050305,#0b0b0d);
+      color:#e6eef8;
+    }
+    a{text-decoration:none;color:inherit;}
+    .site-wrapper{max-width:1200px;margin:0 auto;}
+
+    header.gamezone-header{
+      padding:16px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      background:#0f1316;
+      border-bottom:1px solid rgba(255,255,255,0.06);
+    }
+    .logo-text{font-weight:700;color:#2e7d68;font-size:22px;}
+
+    .auth-container{
+      max-width:480px;margin:40px auto;padding:20px;
+    }
+    .auth-card{
+      background:#0f1316;padding:26px;border-radius:14px;
+      border:1px solid rgba(255,255,255,0.04);
+    }
+    .form-group{margin-bottom:16px;}
+    .form-group input{
+      width:100%;padding:10px;border-radius:8px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:#0b0b0d;color:#fff;
+    }
+
+    button.btn-primary{
+      width:100%;padding:12px;border:none;
+      border-radius:10px;font-weight:700;cursor:pointer;
+      background:linear-gradient(90deg,#00e6ff,#00ff7a);
+      color:#001018;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="site-wrapper">
+
+  <header class="gamezone-header">
+    <a href="index.html" class="logo-text">GameZone</a>
+    <nav class="gamezone-nav">
+      <a><i class="fa-solid fa-cart-shopping"></i></a>
+      <a><i class="fa-regular fa-clock"></i></a>
+      <a class="active"><i class="fa-regular fa-circle-user"></i></a>
+    </nav>
+  </header>
+
+  <main class="auth-container">
+    <div class="auth-card">
+
+      <h1>Đăng nhập</h1>
+      <p style="opacity:0.7;margin-bottom:20px;">Chào mừng bạn trở lại GameZone!</p>
+
+      <!-- FORM TĨNH -->
+      <form onsubmit="window.location.href='5_DaDangNhap.html?user=Đoàn Thị Kim Khương'; return false;">
+        
+        <div class="form-group">
+          <label>Email *</label>
+          <input type="text" placeholder="Nhập email">
+        </div>
+
+        <div class="form-group">
+          <label>Mật khẩu *</label>
+          <input type="password" placeholder="Nhập mật khẩu">
+        </div>
+
+        <button type="submit" class="btn-primary">Đăng nhập</button>
+
+      </form>
+
+      <div class="auth-footer" style="margin-top:16px;text-align:center;">
+        Chưa có tài khoản? <a href="1_DangKy.html" style="color:#2e7d68;">Đăng ký ngay</a>
+      </div>
+
+    </div>
+  </main>
+   <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+
+        <div class="footer-main">
+          <div class="footer-brand">
+            <a href="index.html" class="footer-logo">
+              <i class="fa-solid fa-gamepad" style="font-size:40px;color:#2e7d68;"></i>
+              <span>GameZone</span>
+            </a>
+            <p class="footer-tagline">Nơi mua bán tài khoản game uy tín</p>
+          </div>
+
+          <div class="footer-contact">
+            <h3>Thông Tin Liên Hệ</h3>
+
+            <div class="contact-info">
+              <div class="contact-item">
+                <i class="fas fa-globe"></i>
+                <span>gamezone.vn</span>
+              </div>
+
+              <div class="conta</i>
+                <a href="mailto:info@gamezone.example">info@gamezone.example</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2025 GameZone - Mua bán account game. All rights reserved.</p>
+        </div>
+
+      </div>
+    </footer>
+
+</div>
+</body>
+</html>

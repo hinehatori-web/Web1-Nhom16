@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Xác nhận đơn hàng – GameZone</title>
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+  <style>
+    body{
+      font-family: "Poppins", sans-serif;
+      margin:0;
+      background:#0b0b0d;
+      color:#e6eef8;
+    }
+    a{text-decoration:none;color:inherit;}
+    .container{max-width:1200px;margin:0 auto;padding:20px;}
+
+    /* HEADER */
+    .gamezone-header{
+      display:flex;
+      align-items:center;
+      padding:12px 20px;
+      background:#0f1316;
+      border-bottom:1px solid rgba(255,255,255,0.05);
+      position:sticky;top:0;z-index:1000;
+    }
+    .logo-icon{
+      width:44px;height:44px;display:grid;place-items:center;
+      background:linear-gradient(135deg,#ff3b3b,#ff8a00);
+      border-radius:8px;color:#0a0a0a;font-size:20px;
+    }
+    .logo-text{
+      margin-left:10px;font-weight:700;font-size:20px;color:#ff6b6b;
+    }
+
+    .nav-menu{
+      margin-left:auto;display:flex;gap:14px;
+    }
+    .nav-menu a{
+      color:#e6eef8;display:flex;align-items:center;gap:6px;
+    }
+    .nav-menu a.active,
+    .nav-menu a:hover{
+      color:#ff8a6b;
+    }
+
+    /* STEPS */
+    .steps{
+      margin-top:28px;
+      display:flex;
+      justify-content:center;
+      gap:26px;
+    }
+    .step{
+      display:flex;align-items:center;gap:10px;opacity:0.6;
+    }
+    .step-number{
+      width:28px;height:28px;
+      display:grid;place-items:center;
+      background:#2b2b33;color:white;
+      border-radius:50%;font-weight:600;
+    }
+    .step.active{opacity:1;color:#ff8a6b;}
+    .step.active .step-number{
+      background:linear-gradient(135deg,#ff3b3b,#ff8a00);
+      color:#0a0a0a;
+    }
+
+    /* CONFIRM BOX */
+    .confirm-box{
+      max-width:780px;
+      margin:30px auto;
+      background:#17171c;
+      padding:28px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,0.06);
+    }
+
+    .order-success{
+      text-align:center;margin-bottom:24px;
+    }
+    .order-success i{
+      font-size:52px;color:#27ae60;margin-bottom:10px;
+    }
+    .order-success h2{
+      margin:0;color:#ff8a6b;font-size:1.6rem;
+    }
+
+    /* INFO SECTIONS */
+    .info-section{
+      background:#1d1d22;
+      padding:18px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,0.05);
+      margin-bottom:20px;
+    }
+    .info-title{
+      font-size:1.1rem;
+      margin-bottom:12px;
+      font-weight:600;
+      color:#ff8a6b;
+    }
+    .info-row{
+      display:flex;
+      justify-content:space-between;
+      margin:8px 0;
+      color:#d4dae6;
+    }
+    .total{
+      display:flex;
+      justify-content:space-between;
+      margin-top:12px;
+      padding-top:12px;
+      border-top:1px solid rgba(255,255,255,0.1);
+      color:#27ae60;
+      font-weight:700;
+      font-size:1.15rem;
+    }
+
+    /* BUTTON HOME */
+    .btn-home{
+      display:inline-block;
+      margin-top:12px;
+      padding:12px 20px;
+      background:linear-gradient(90deg,#ff3b3b,#ff8a00);
+      border-radius:10px;
+      color:#0a0a0a;
+      font-weight:700;
+    }
+
+    /* FOOTER */
+    .site-footer{
+      background:#0f1316;
+      margin-top:40px;
+      padding:26px 20px;
+      text-align:center;
+      color:#cbd3df;
+      border-top:1px solid rgba(255,255,255,0.05);
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="gamezone-header">
+  <i class="fa-solid fa-gamepad logo-icon"></i>
+  <span class="logo-text">GameZone</span>
+
+  <nav class="nav-menu">
+    <a href="6_GioHang.html"><i class="fa-solid fa-bag-shopping"></i> Giỏ hàng</a>
+    <a href="9_LichSuDonHang.html"><i class="fa-regular fa-clock"></i> Lịch sử</a>
+    <a href="3_ThongTinCaNhan.html"><i class="fa-regular fa-circle-user"></i> Tài khoản</a>
+    <a href="index.html"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
+  </nav>
+</header>
+
+<!-- STEPS -->
+<div class="steps">
+  <div class="step"><div class="step-number">1</div>Giỏ hàng</div>
+  <div class="step"><div class="step-number">2</div>Thanh toán</div>
+  <div class="step active"><div class="step-number">3</div>Xác nhận</div>
+</div>
+
+<!-- MAIN BOX -->
+<div class="confirm-box">
+
+  <div class="order-success">
+    <i class="fa-solid fa-circle-check"></i>
+    <h2>Đặt hàng thành công!</h2>
+    <p>Cảm ơn bạn đã mua tài khoản tại GameZone.</p>
+    <p>Mã đơn hàng của bạn: <strong>GZ-2025-00125</strong></p>
+  </div>
+
+  <!-- Order List -->
+  <div class="info-section">
+    <div class="info-title">Danh sách tài khoản</div>
+
+    <div class="info-row">
+      <span>Acc Liên Quân – Kim Cương ×1</span>
+      <span>700.000₫</span>
+    </div>
+
+    <div class="info-row">
+      <span>Acc Liên Minh – Vàng I ×1</span>
+      <span>600.000₫</span>
+    </div>
+
+    <div class="info-row">
+      <span>Acc Free Fire – Súng Vĩnh Viễn ×1</span>
+      <span>550.000₫</span>
+    </div>
+
+    <div class="total">
+      <span>Tổng cộng:</span>
+      <span>1.850.000₫</span>
+    </div>
+  </div>
+
+  <!-- Shipping Info -->
+  <div class="info-section">
+    <div class="info-title">Thông tin giao hàng</div>
+
+    <div class="info-row"><span>Họ tên:</span><span>Đoàn Thị Kim Khương</span></div>
+    <div class="info-row"><span>Số điện thoại:</span><span>0346087617</span></div>
+    <div class="info-row"><span>Địa chỉ:</span><span>273 An Dương Vương, Phường Chợ Quán, Quận 5, TP.HCM</span></div>
+  </div>
+
+  <!-- Payment -->
+  <div class="info-section">
+    <div class="info-title">Phương thức thanh toán</div>
+    <div class="info-row"><span>Thanh toán:</span><span>Thanh toán khi nhận hàng (COD)</span></div>
+  </div>
+
+  <!-- Back Home -->
+  <div style="text-align:center;">
+    <a href="5_DaDangNhap.html" class="btn-home">Quay về trang chủ</a>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <p>&copy; 2025 GameZone – Nơi mua bán tài khoản game uy tín.</p>
+  <p><i class="fa-solid fa-phone"></i> 034 6087 617</p>
+  <p><i class="fa-solid fa-envelope"></i> info@gamezone.vn</p>
+</footer>
+
+</body>
+</html>
+

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GameZone - Sửa thông tin cá nhân</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== BASE ===== */
+    body{
+      font-family:"Poppins",sans-serif;
+      margin:0;
+      background:#0b0b0d;
+      color:#e6eef8;
+    }
+    a{text-decoration:none;color:inherit;}
+    .container{max-width:1200px;margin:0 auto;padding:20px;}
+
+    /* ===== HEADER ===== */
+    .gamezone-header{
+      display:flex;
+      align-items:center;
+      padding:12px 20px;
+      background:#0f1316;
+      border-bottom:1px solid rgba(255,255,255,0.05);
+      position:sticky;
+      top:0;
+      z-index:1000;
+    }
+    .logo-icon{
+      width:44px;height:44px;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg,#ff3b3b,#ff8a00);
+      color:#0a0a0a;border-radius:8px;font-size:20px;
+    }
+    .logo-text{
+      color:#ff6b6b;font-weight:700;font-size:20px;margin-left:10px;
+    }
+    .gamezone-nav{
+      margin-left:auto;
+      display:flex;
+      gap:16px;
+    }
+    .gamezone-nav a{
+      font-size:18px;
+      color:#e6eef8;
+    }
+    .gamezone-nav a:hover{
+      color:#ffb38a;
+    }
+
+    /* ===== LAYOUT ===== */
+    .profile-container{
+      display:grid;
+      grid-template-columns:260px 1fr;
+      gap:26px;
+      margin-top:26px;
+    }
+
+    /* ===== SIDEBAR ===== */
+    .profile-sidebar{
+      background:#0f1316;
+      padding:20px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.05);
+      text-align:center;
+    }
+    .avatar-placeholder{
+      width:88px;height:88px;border-radius:50%;
+      background:#1a1d22;
+      display:flex;align-items:center;justify-content:center;
+      font-size:34px;color:#ff8a6b;margin:0 auto 14px;
+    }
+    .profile-sidebar h2{
+      font-size:18px;margin-bottom:4px;color:#ff8a6b;
+    }
+    .profile-sidebar p{
+      font-size:14px;color:#bfc8d4;margin-bottom:20px;
+    }
+
+    .profile-menu a{
+      display:flex;align-items:center;
+      gap:10px;
+      padding:10px 12px;
+      border-radius:10px;
+      color:#d7dce3;
+      font-weight:500;
+    }
+    .profile-menu a:hover{
+      background:#1a1d22;
+    }
+    .profile-menu a.active{
+      background:linear-gradient(90deg,#ff3b3b,#ff8a00);
+      color:#0b0b0b;
+      font-weight:700;
+    }
+
+    /* ===== CONTENT ===== */
+    .profile-content{
+      background:#17171c;
+      padding:26px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,0.05);
+    }
+    .profile-content h2{
+      color:#ff8a6b;margin-bottom:8px;
+    }
+    .profile-content p{
+      color:#c6ced8;margin-bottom:20px;
+    }
+
+    /* ===== FORM ===== */
+    .form-section h3{
+      color:#ff8a6b;
+      margin-bottom:10px;
+      font-size:1.1rem;
+    }
+    .form-row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+      margin-bottom:18px;
+    }
+    label{font-weight:600;color:#cbd3df;}
+
+    input,select{
+      width:100%;
+      padding:10px;
+      border-radius:8px;
+      border:1px solid #33363d;
+      background:#0f1316;
+      color:white;
+    }
+    input:focus,select:focus{
+      border-color:#ff8a00;
+      outline:none;
+    }
+
+    /* ===== BUTTONS ===== */
+    .form-actions{
+      display:flex;
+      gap:16px;
+      justify-content:flex-end;
+      margin-top:26px;
+    }
+    .btn-secondary{
+      padding:10px 16px;
+      background:#0f1316;
+      border:1px solid #ff8a6b;
+      border-radius:8px;
+      color:#ff8a6b;
+      font-weight:600;
+    }
+    .btn-secondary:hover{
+      background:#ff3b3b;
+      color:#fff;
+      border-color:#ff3b3b;
+    }
+
+    .btn-primary{
+      padding:10px 18px;
+      background:linear-gradient(90deg,#ff3b3b,#ff8a00);
+      color:#0b0b0b;
+      border-radius:8px;
+      border:none;
+      font-weight:700;
+    }
+
+    /* ===== FOOTER ===== */
+    .site-footer{
+      background:#0f1316;
+      padding:24px 0;
+      margin-top:40px;
+      border-top:1px solid rgba(255,255,255,0.05);
+    }
+    .footer-inner{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      color:#d7dce3;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="gamezone-header">
+  <div class="logo-icon"><i class="fa-solid fa-gamepad"></i></div>
+  <span class="logo-text">GameZone</span>
+
+  <nav class="gamezone-nav">
+    <a href="6_GioHang.html"><i class="fa-solid fa-bag-shopping"></i></a>
+    <a href="9_LichSuDonHang.html"><i class="fa-regular fa-clock"></i></a>
+    <a href="3_ThongTinCaNhan.html"><i class="fa-regular fa-circle-user"></i></a>
+    <a href="index.html"><i class="fa-solid fa-right-from-bracket"></i></a>
+  </nav>
+</header>
+
+
+<main class="container">
+
+  <div class="profile-container">
+
+    <!-- SIDEBAR -->
+    <aside class="profile-sidebar">
+      <div class="avatar-placeholder"><i class="fa-solid fa-user"></i></div>
+      <h2>Đoàn Thị Kim Khương</h2>
+      <p>Người dùng GameZone</p>
+
+      <nav class="profile-menu">
+        <a href="3_ThongTinCaNhan.html"><i class="fa-solid fa-user"></i> Thông tin cá nhân</a>
+        <a href="#" class="active"><i class="fa-solid fa-pen"></i> Chỉnh sửa thông tin</a>
+        <a href="#"><i class="fa-solid fa-map"></i> Địa chỉ giao hàng</a>
+        <a href="9_LichSuDonHang.html"><i class="fa-solid fa-receipt"></i> Lịch sử đơn hàng</a>
+        <a href="#"><i class="fa-solid fa-heart"></i> Yêu thích</a>
+        <a href="index.html"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
+      </nav>
+    </aside>
+
+    <!-- CONTENT -->
+    <section class="profile-content">
+
+      <h2>Sửa thông tin cá nhân</h2>
+      <p>Cập nhật thông tin tài khoản của bạn</p>
+
+      <form>
+
+        <!-- Cơ bản -->
+        <div class="form-section">
+          <h3><i class="fa-solid fa-user"></i> Thông tin cơ bản</h3>
+
+          <div class="form-row">
+            <div>
+              <label>Họ và tên đệm *</label>
+              <input type="text" value="Đoàn Thị Kim">
+            </div>
+
+            <div>
+              <label>Tên *</label>
+              <input type="text" value="Khương">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div>
+              <label>Email *</label>
+              <input type="email" value="khuong@example.com">
+            </div>
+
+            <div>
+              <label>Số điện thoại *</label>
+              <input type="tel" value="0346087617">
+            </div>
+          </div>
+        </div>
+
+        <!-- Bổ sung -->
+        <div class="form-section">
+          <h3><i class="fa-solid fa-circle-info"></i> Thông tin bổ sung</h3>
+
+          <div class="form-row">
+            <div>
+              <label>Ngày sinh</label>
+              <input type="date" value="2006-09-16">
+            </div>
+
+            <div>
+              <label>Giới tính</label>
+              <select>
+                <option>Nam</option>
+                <option selected>Nữ</option>
+                <option>Khác</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- ACTIONS -->
+        <div class="form-actions">
+          <button type="reset" class="btn-secondary">Đặt lại</button>
+          <button class="btn-primary">Cập nhật</button>
+        </div>
+
+      </form>
+
+    </section>
+
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div>
+      <i class="fa-solid fa-gamepad footer-logo"></i>
+      GameZone — Uy tín & chất lượng
+    </div>
+    <div>© 2025 GameZone</div>
+  </div>
+</footer>
+
+</body>
+</html>
+
+
+

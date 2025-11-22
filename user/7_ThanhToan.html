@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Thanh toán – GameZone</title>
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+  <style>
+    /* ===== BASE ===== */
+    body{
+      font-family:"Poppins", sans-serif;
+      margin:0;
+      background:#0b0b0d;
+      color:#e6eef8;
+    }
+    a{text-decoration:none;color:inherit;}
+    .container{max-width:1200px;margin:0 auto;padding:20px;}
+
+    /* ===== HEADER ===== */
+    .gamezone-header{
+      display:flex;
+      align-items:center;
+      padding:12px 20px;
+      background:#0f1316;
+      border-bottom:1px solid rgba(255,255,255,0.05);
+      position:sticky;
+      top:0;
+      z-index:1000;
+    }
+    .logo-icon{
+      width:44px;height:44px;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg,#ff3b3b,#ff8a00);
+      color:#0a0a0a;border-radius:8px;font-size:20px;
+    }
+    .logo-text{
+      color:#ff6b6b;font-weight:700;font-size:20px;margin-left:10px;
+    }
+    .nav-menu{
+      margin-left:auto;
+      display:flex;
+      gap:16px;
+      align-items:center;
+    }
+    .nav-menu a{
+      color:#e6eef8;
+      font-size:15px;
+      display:flex;
+      align-items:center;
+      gap:6px;
+    }
+    .nav-menu a:hover,
+    .nav-menu a.active{
+      color:#ff8a6b;
+    }
+
+    /* ===== STEPS ===== */
+    .steps{
+      display:flex;
+      justify-content:center;
+      margin-top:26px;
+      gap:30px;
+    }
+    .step{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      opacity:0.6;
+    }
+    .step-number{
+      width:28px;height:28px;
+      display:grid;place-items:center;
+      border-radius:50%;
+      background:#2a2a33;
+      color:#fff;
+      font-weight:600;
+    }
+    .step.active{
+      opacity:1;
+      color:#ff8a6b;
+    }
+    .step.active .step-number{
+      background:linear-gradient(135deg,#ff3b3b,#ff8a00);
+      color:#0b0b0b;
+    }
+
+    /* ===== LAYOUT ===== */
+    .checkout-wrapper{
+      display:grid;
+      grid-template-columns:1fr 380px;
+      gap:26px;
+      margin-top:30px;
+      padding:0 20px;
+    }
+
+    /* ===== FORM ===== */
+    .checkout-form{
+      background:#17171c;
+      padding:24px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.05);
+    }
+    .checkout-form h3{
+      color:#ff8a6b;
+      margin-bottom:12px;
+      font-size:1.2rem;
+    }
+    .form-group{
+      margin-bottom:16px;
+      display:flex;
+      flex-direction:column;
+    }
+    label{
+      font-weight:600;
+      margin-bottom:6px;
+      color:#cfd6e4;
+    }
+    input{
+      padding:10px;
+      border-radius:8px;
+      border:1px solid rgba(255,255,255,0.12);
+      background:#0f0f12;
+      color:white;
+    }
+
+    /* ===== PAYMENT METHODS ===== */
+    .payment-method{
+      display:flex;
+      align-items:center;
+      padding:12px;
+      gap:10px;
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:10px;
+      margin-top:10px;
+      cursor:pointer;
+      background:#141418;
+      color:#dce1eb;
+    }
+    .payment-method.selected{
+      border-color:#ff8a6b;
+      background:#1d1d22;
+      color:#ff8a6b;
+    }
+
+    /* ===== ACTIONS ===== */
+    .checkout-actions{
+      margin-top:24px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+    .btn-outline{
+      padding:10px 16px;
+      border:1px solid #ff8a6b;
+      border-radius:10px;
+      color:#ff8a6b;
+      font-weight:600;
+    }
+    .btn-outline:hover{
+      background:#ff8a6b;color:#0a0a0a;
+    }
+    .btn-primary{
+      padding:12px 20px;
+      border:none;
+      border-radius:10px;
+      background:linear-gradient(90deg,#ff3b3b,#ff8a00);
+      color:#0b0b0b;
+      font-weight:700;
+      cursor:pointer;
+    }
+
+    /* ===== ORDER SUMMARY ===== */
+    .order-summary{
+      background:#17171c;
+      padding:24px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.05);
+      height:max-content;
+    }
+    .order-summary h3{
+      color:#ff8a6b;
+      margin-bottom:16px;
+      font-size:1.2rem;
+    }
+    .order-items{
+      border-bottom:1px solid rgba(255,255,255,0.08);
+      padding-bottom:14px;
+      margin-bottom:14px;
+    }
+    .order-item{
+      display:flex;
+      justify-content:space-between;
+      margin-bottom:10px;
+      color:#d6dbea;
+    }
+    .order-total{
+      display:flex;
+      justify-content:space-between;
+      color:#27ae60;
+      font-size:1.25rem;
+      font-weight:700;
+    }
+
+    /* ===== FOOTER ===== */
+    .site-footer{
+      background:#0f1316;
+      margin-top:40px;
+      padding:26px 20px;
+      border-top:1px solid rgba(255,255,255,0.05);
+      text-align:center;
+      color:#cbd3df;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="gamezone-header">
+  <i class="fa-solid fa-gamepad logo-icon"></i>
+  <span class="logo-text">GameZone</span>
+
+  <nav class="nav-menu">
+    <a href="6_GioHang.html"><i class="fa-solid fa-bag-shopping"></i> Giỏ hàng</a>
+    <a href="9_LichSuDonHang.html"><i class="fa-regular fa-clock"></i> Lịch sử</a>
+    <a href="3_ThongTinCaNhan.html"><i class="fa-regular fa-circle-user"></i> Tài khoản</a>
+    <a href="index.html"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
+  </nav>
+</header>
+
+<!-- STEPS -->
+<div class="steps">
+  <div class="step"><div class="step-number">1</div>Giỏ hàng</div>
+  <div class="step active"><div class="step-number">2</div>Thanh toán</div>
+  <div class="step"><div class="step-number">3</div>Xác nhận</div>
+</div>
+
+<!-- MAIN -->
+<div class="checkout-wrapper">
+
+  <!-- FORM -->
+  <section class="checkout-form">
+    <h3>Thông tin giao hàng</h3>
+
+    <div class="form-group">
+      <label>Họ và tên</label>
+      <input type="text" value="Đoàn Thị Kim Khương">
+    </div>
+
+    <div class="form-group">
+      <label>Số điện thoại</label>
+      <input type="text" value="0346087617">
+    </div>
+
+    <div class="form-group">
+      <label>Địa chỉ giao hàng</label>
+      <input type="text" value="273 An Dương Vương, Phường Chợ Quán, Quận 5, TP.HCM">
+    </div>
+
+    <h3 style="margin-top:18px">Phương thức thanh toán</h3>
+
+    <label class="payment-method selected">
+      <input type="radio" hidden checked>
+      <i class="fa-solid fa-money-bill-wave"></i> Thanh toán khi nhận hàng
+    </label>
+
+    <label class="payment-method">
+      <input type="radio" hidden>
+      <i class="fa-solid fa-university"></i> Chuyển khoản ngân hàng
+    </label>
+
+    <label class="payment-method">
+      <input type="radio" hidden>
+      <i class="fa-solid fa-credit-card"></i> Thẻ tín dụng / ghi nợ
+    </label>
+
+    <div class="checkout-actions">
+      <a class="btn-outline" href="6_GioHang.html">← Quay lại</a>
+      <a href="8_xacnhandonhang.html" class="btn-primary">Hoàn tất đơn hàng</a>
+    </div>
+  </section>
+
+  <!-- ORDER SUMMARY -->
+  <aside class="order-summary">
+    <h3>Đơn hàng của bạn</h3>
+
+    <div class="order-items">
+      <div class="order-item">
+        <span>Acc Liên Quân – Kim Cương ×1</span>
+        <span>700.000₫</span>
+      </div>
+      <div class="order-item">
+        <span>Acc Liên Minh – Vàng I ×1</span>
+        <span>600.000₫</span>
+      </div>
+      <div class="order-item">
+        <span>Acc Free Fire – Súng Vĩnh Viễn ×1</span>
+        <span>550.000₫</span>
+      </div>
+    </div>
+
+    <div class="order-total">
+      <span>Tổng cộng:</span>
+      ❤1.850.000₫
+    </div>
+  </aside>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <p>&copy; 2025 GameZone – Nơi mua bán tài khoản game uy tín.</p>
+</footer>
+
+</body>
+</html>
+

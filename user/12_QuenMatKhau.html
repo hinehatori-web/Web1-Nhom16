@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quên mật khẩu - GameZone</title>
+
+    <!-- FONT + ICON -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f0f4ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .forgot-box {
+            background: #ffffff;
+            padding: 34px 30px;
+            width: 380px;
+            border-radius: 18px;
+            box-shadow: 0 8px 26px rgba(0,0,0,0.08);
+        }
+
+        .forgot-box i {
+            font-size: 60px;
+            color: #1f4b6b;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            color: #1f4b6b;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #475569;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            font-size: 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            outline: none;
+            transition: .25s;
+            margin-bottom: 18px;
+        }
+
+        input:focus {
+            border-color: #1f4b6b;
+            box-shadow: 0 0 8px rgba(31, 75, 107, 0.3);
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 12px;
+            background: #1f4b6b;
+            border: none;
+            color: white;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: .25s;
+        }
+
+        .btn-primary:hover {
+            background: #16384f;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="forgot-box">
+
+        <i class="fa-solid fa-lock-keyhole"></i>
+
+        <h1>Quên mật khẩu</h1>
+        <p>Nhập email của bạn để lấy mã xác nhận.</p>
+
+        <!-- BƯỚC 1: NHẬP EMAIL -->
+        <form>
+            <input type="email" placeholder="Nhập email..." required>
+
+            <!-- Nút này chỉ cần đưa xuống hash để hiện phần mã -->
+            <a href="#otp" class="btn-primary">Gửi mã xác nhận</a>
+        </form>
+
+        <!-- BƯỚC 2: NHẬP MÃ (HIỆN KHI NHẤN GỬI MÃ) -->
+        <div id="otp" style="margin-top:25px;">
+            <h1>Nhập mã xác nhận</h1>
+            <p>Chúng tôi đã gửi mã gồm 6 số đến email của bạn.</p>
+
+            <input type="text" maxlength="6" placeholder="Nhập mã 6 số..." required>
+
+            <a class="btn-primary" href="index.html">Xác nhận</a>
+        </div>
+
+        <a class="back" href="index.html">← Quay lại đăng nhập</a>
+
+    </div>
+
+</body>
+</html>
+
