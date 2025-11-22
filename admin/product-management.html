@@ -3,157 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quản lý sản phẩm • HINE ADMIN</title>
+  <title>Quản lý acc game • HINE ADMIN</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-    :root {
-      --bg: #0f0c29;
-      --sidebar: rgba(15,12,41,0.95);
-      --glass: rgba(255,255,255,0.05);
-      --accent: #00f2fe;
-      --accent2: #4facfe;
-      --text: #e0e7ff;
-      --card: rgba(255,255,255,0.08);
-      --border: rgba(255,255,255,0.1);
-    }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body {
-      font-family: 'Inter', "Monaspace Neon", monospace;
-      background: var(--bg);
-      color: var(--text);
-      display: flex;
-      min-height: 100vh;
-    }
-    .sidebar {
-      width: 280px;
-      background: var(--sidebar);
-      backdrop-filter: blur(12px);
-      padding: 24px;
-      position: fixed;
-      height: 100%;
-      border-right: 1px solid var(--border);
-      z-index: 100;
-    }
-    .logo {
-      font-size: 2rem;
-      font-weight: 700;
-      text-align: center;
-      margin-bottom: 50px;
-      background: linear-gradient(90deg, #00f2fe, #4facfe);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .nav a {
-      display: block;
-      padding: 14px 20px;
-      color: var(--text);
-      text-decoration: none;
-      border-radius: 12px;
-      margin-bottom: 8px;
-      transition: all 0.3s;
-    }
-    .nav a:hover, .nav a.active {
-      background: var(--accent);
-      color: #000;
-      font-weight: 600;
-    }
-    .main {
-      margin-left: 280px;
-      padding: 40px;
-      flex: 1;
-    }
-    .header {
-      font-size: 2.4rem;
-      margin-bottom: 30px;
-      background: linear-gradient(90deg, #00f2fe, #4facfe);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .actions {
-      margin-bottom: 20px;
-      text-align: right;
-    }
-    .btn-add {
-      background: var(--accent);
-      color: #000;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    .btn-add:hover { transform: scale(1.05); }
-    
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background: var(--card);
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-    }
-    th, td {
-      padding: 18px;
-      text-align: left;
-      border-bottom: 1px solid var(--border);
-    }
-    th {
-      background: rgba(0,242,254,0.15);
-      font-weight: 600;
-      font-size: 0.95rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    tr:hover {
-      background: rgba(0,242,254,0.08);
-    }
-    .img-thumb {
-      width: 60px;
-      height: 60px;
-      object-fit: cover;
-      border-radius: 8px;
-      border: 2px solid var(--border);
-    }
-    .status {
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 600;
-    }
-    .status.active { background: #22c55e33; color: #22c55e; }
-    .status.inactive { background: #ef444433; color: #ef4444; }
-    .btn {
-      background: var(--accent);
-      color: #000;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
-      margin-right: 8px;
-    }
-    .btn:hover { opacity: 0.9; }
-
-    @media (max-width: 992px) {
-      .sidebar { width: 80px; padding: 20px 10px; }
-      .logo, .nav span { display: none; }
-      .main { margin-left: 80px; padding: 20px; }
-      table { font-size: 0.9rem; }
-      th, td { padding: 12px 8px; }
-    }
+    :root{--bg:#0f0c29;--sidebar:rgba(15,12,41,0.95);--accent:#00f2fe;--text:#e0e7ff;--card:rgba(255,255,255,0.08);--border:rgba(255,255,255,0.1);}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'Inter',"Monaspace Neon",monospace;background:var(--bg);color:var(--text);display:flex;min-height:100vh;}
+    .sidebar{width:280px;background:var(--sidebar);backdrop-filter:blur(12px);padding:24px;position:fixed;height:100%;border-right:1px solid var(--border);}
+    .logo{font-size:2rem;font-weight:700;text-align:center;margin-bottom:50px;background:linear-gradient(90deg,#00f2fe,#4facfe);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    .nav a{display:block;padding:14px 20px;color:var(--text);text-decoration:none;border-radius:12px;margin-bottom:8px;transition:0.3s;}
+    .nav a:hover,.nav a.active{background:var(--accent);color:#000;font-weight:600;}
+    .main{margin-left:280px;padding:40px;flex:1;}
+    .header{font-size:2.4rem;margin-bottom:30px;background:linear-gradient(90deg,#00f2fe,#4facfe);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    .actions{margin-bottom:24px;text-align:right;}
+    .btn-add{background:var(--accent);color:#000;padding:12px 28px;border:none;border-radius:12px;font-weight:600;cursor:pointer;}
+    table{width:100%;border-collapse:collapse;background:var(--card);border-radius:16px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,0.3);}
+    th,td{padding:16px 14px;text-align:left;border-bottom:1px solid var(--border);}
+    th{background:rgba(0,242,254,0.15);font-size:0.9rem;text-transform:uppercase;letter-spacing:0.8px;}
+    tr:hover{background:rgba(0,242,254,0.08);}
+    .thumb{width:70px;height:70px;object-fit:cover;border-radius:10px;border:2px solid var(--border);}
+    .rank{font-weight:700;color:#fcd34d;background:#78350f;padding:4px 10px;border-radius:8px;font-size:0.8rem;}
+    .price{color:#22c55e;font-weight:700;font-size:1.1rem;}
+    .status{padding:6px 14px;border-radius:20px;font-size:0.85rem;font-weight:600;}
+    .status.available{background:#22c55e33;color:#22c55e;}
+    .status.sold{background:#ef444433;color:#ef4444;}
+    .btn{background:var(--accent);color:#000;padding:8px 14px;border:none;border-radius:8px;cursor:pointer;margin-right:6px;font-weight:600;}
+    .btn-del{background:#ef4444;}
+    @media(max-width:992px){.sidebar{width:80px;padding:10px}.logo,.nav span{display:none}.main{margin-left:80px;padding:20px}}
   </style>
 </head>
 <body>
-
-  <!-- Sidebar -->
   <div class="sidebar">
     <div class="logo">HINE ADMIN</div>
     <div class="nav">
       <a href="admin.html">Tổng quan</a>
       <a href="order-management.html">Đơn hàng</a>
-      <a href="product-management.html" class="active">Sản phẩm</a>
-      <a href="category-management.html">Danh mục</a>
+      <a href="product-management.html" class="active">Acc game</a>
+      <a href="category-management.html">Danh mục game</a>
       <a href="inventory-management.html">Kho hàng</a>
       <a href="user-management.html">Người dùng</a>
       <a href="price-management.html">Giá bán</a>
@@ -161,70 +47,56 @@
     </div>
   </div>
 
-  <!-- Main Content -->
   <div class="main">
-    <h1 class="header">Quản lý sản phẩm</h1>
-
-    <div class="actions">
-      <button class="btn-add">+ Thêm sản phẩm mới</button>
-    </div>
+    <h1 class="header">Quản lý acc game</h1>
+    <div class="actions"><button class="btn-add">+ Thêm acc mới</button></div>
 
     <table>
       <thead>
         <tr>
-          <th>Hình ảnh</th>
-          <th>Mã SP</th>
-          <th>Tên sản phẩm</th>
-          <th>Danh mục</th>
-          <th>Giá bán</th>
-          <th>Tồn kho</th>
+          <th>Ảnh</th>
+          <th>Mã acc</th>
+          <th>Game</th>
+          <th>Rank</th>
+          <th>Skin nổi bật</th>
+          <th>Giá</th>
           <th>Trạng thái</th>
           <th>Hành động</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><img src="https://via.placeholder.com/60x60/00f2fe/000000?text=SP01" alt="SP" class="img-thumb"></td>
-          <td>#SP001</td>
-          <td>iPhone 16 Pro Max 256GB</td>
-          <td>Điện thoại</td>
-          <td>₫34,990,000</td>
-          <td>42</td>
-          <td><span class="status active">Còn hàng</span></td>
-          <td>
-            <button class="btn">Sửa</button>
-            <button class="btn" style="background:#f87171">Xóa</button>
-          </td>
+          <td><img src="https://via.placeholder.com/70x70/00f2fe/000?text=LMHT" class="thumb"></td>
+          <td>#ACC123456</td>
+          <td>Liên Minh</td>
+          <td><span class="rank">Thách Đấu</span></td>
+          <td>30 skin rare + icon</td>
+          <td class="price">2,850,000₫</td>
+          <td><span class="status available">Còn hàng</span></td>
+          <td><button class="btn">Sửa</button><button class="btn btn-del">Xóa</button></td>
         </tr>
         <tr>
-          <td><img src="https://via.placeholder.com/60x60/7c3aed/ffffff?text=SP02" alt="SP" class="img-thumb"></td>
-          <td>#SP002</td>
-          <td>MacBook Pro M4 Pro 16"</td>
-          <td>Laptop</td>
-          <td>₫72,500,000</td>
-          <td>8</td>
-          <td><span class="status active">Còn hàng</span></td>
-          <td>
-            <button class="btn">Sửa</button>
-            <button class="btn" style="background:#f87171">Xóa</button>
-          </td>
+          <td><img src="https://via.placeholder.com/70x70/7c3aed/fff?text=VALO" class="thumb"></td>
+          <td>#ACC123457</td>
+          <td>Valorant</td>
+          <td><span class="rank">Radiant</span></td>
+          <td>Full skin Champions</td>
+          <td class="price">4,200,000₫</td>
+          <td><span class="status available">Còn hàng</span></td>
+          <td><button class="btn">Sửa</button><button class="btn btn-del">Xóa</button></td>
         </tr>
         <tr>
-          <td><img src="https://via.placeholder.com/60x60/ef4444/ffffff?text=HẾT" alt="SP" class="img-thumb"></td>
-          <td>#SP003</td>
-          <td>AirPods Pro 2</td>
-          <td>Tai nghe</td>
-          <td>₫6,490,000</td>
-          <td>0</td>
-          <td><span class="status inactive">Hết hàng</span></td>
-          <td>
-            <button class="btn">Sửa</button>
-            <button class="btn" style="background:#f87171">Xóa</button>
-          </td>
+          <td><img src="https://via.placeholder.com/70x70/dc2626/fff?text=SOLD" class="thumb"></td>
+          <td>#ACC123458</td>
+          <td>FIFA Online 4</td>
+          <td>Icon +5</td>
+          <td>Team full TOTY</td>
+          <td class="price">1,950,000₫</td>
+          <td><span class="status sold">Đã bán</span></td>
+          <td><button class="btn">Sửa</button><button class="btn btn-del">Xóa</button></td>
         </tr>
       </tbody>
     </table>
   </div>
-
 </body>
 </html>
