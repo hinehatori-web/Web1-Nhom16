@@ -3,73 +3,101 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Đang tải hệ thống...</title>
-  <meta http-equiv="refresh" content="2; url=admin.html">
+  <title>HINE ACC SHOP • Đang tải...</title>
+  <!-- Chuyển hướng đến trang đăng nhập sau 2 giây -->
+  <meta http-equiv="refresh" content="2; url=login.html">
+
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;700&display=swap');
     :root {
-      --font-monospace: "Monaspace Neon", ui-monospace, monospace;
       --bg: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-      --glass: rgba(255, 255, 255, 0.05);
+      --glass: rgba(255,255,255,0.08);
       --accent: #00f2fe;
       --accent2: #4facfe;
       --text: #e0e7ff;
-      --border: rgba(255, 255, 255, 0.1);
+      --border: rgba(255,255,255,0.12);
     }
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
-      font-family: 'Inter', var(--font-monospace);
+      font-family: 'Inter', "Monaspace Neon", monospace;
       background: var(--bg);
       color: var(--text);
       height: 100vh;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
       overflow: hidden;
     }
-    .container {
+    .loader-box {
       text-align: center;
-      padding: 40px;
-      border-radius: 24px;
-      backdrop-filter: blur(16px);
+      padding: 60px 50px;
       background: var(--glass);
+      backdrop-filter: blur(20px);
+      border-radius: 28px;
       border: 1px solid var(--border);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      box-shadow: 0 25px 80px rgba(0,0,0,0.6);
     }
-    h1 {
-      font-size: 2.5rem;
+    .logo {
+      font-size: 3.2rem;
+      font-weight: 700;
       background: linear-gradient(90deg, var(--accent), var(--accent2));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 16px;
+      letter-spacing: 2px;
     }
-    .loader {
-      width: 80px; height: 80px;
-      border: 6px solid var(--border);
+    .tagline {
+      font-size: 1.3rem;
+      opacity: 0.9;
+      margin: 20px 0 40px;
+    }
+    .spinner {
+      width: 80px;
+      height: 80px;
+      border: 6px solid rgba(255,255,255,0.1);
       border-top: 6px solid var(--accent);
       border-radius: 50%;
       animation: spin 1s linear infinite;
-      margin: 30px auto;
+      margin: 0 auto 30px;
     }
     .progress {
-      width: 300px; height: 6px; background: var(--border); border-radius: 10px; overflow: hidden; margin-top: 20px;
+      width: 340px;
+      height: 8px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 0 auto;
     }
-    .fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--accent), var(--accent2)); animation: load 2s forwards; }
+    .fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      animation: load 2s forwards;
+    }
+    .info {
+      margin-top: 30px;
+      font-size: 0.95rem;
+      opacity: 0.7;
+    }
     @keyframes spin { to { transform: rotate(360deg); } }
     @keyframes load { to { width: 100%; } }
+
     @media (max-width: 480px) {
-      h1 { font-size: 1.8rem; }
-      .progress { width: 250px; }
+      .loader-box { padding: 40px 30px; }
+      .logo { font-size: 2.5rem; }
+      .progress { width: 260px; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>HỆ THỐNG QUẢN TRỊ</h1>
-    <p>Đang khởi tạo giao diện...</p>
-    <div class="loader"></div>
+  <div class="loader-box">
+    <h1 class="logo">HINE SHOP</h1>
+    <p class="tagline">Acc Game Xịn – Giá Tốt – Bảo Hành Dài</p>
+    
+    <div class="spinner"></div>
     <div class="progress"><div class="fill"></div></div>
+    
+    <p class="info">Đang chuyển đến trang đăng nhập...</p>
   </div>
 </body>
 </html>
