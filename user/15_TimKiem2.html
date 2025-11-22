@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tìm kiếm nâng cao - GameZone</title>
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+body{
+  background:#071023;
+  margin:0;
+  font-family:Poppins, sans-serif;
+  color:#e6eef8;
+}
+.container{max-width:1200px;margin:0 auto;padding:20px;}
+
+.header{
+  padding:16px 20px;
+  background:rgba(0,0,0,0.25);
+  backdrop-filter:blur(6px);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;top:0;z-index:10;
+}
+.logo-text{color:#00e6ff;font-weight:700;font-size:20px;text-decoration:none;}
+.header nav a{
+  margin-left:14px;
+  color:#e6eef8;
+  font-size:18px;
+  text-decoration:none;
+}
+.header nav a:hover{color:#00ff7a;}
+
+h1{text-align:center;color:#00ff7a;font-size:26px;margin-bottom:20px;font-weight:700}
+
+/* FILTER BOX */
+.filter-box{
+  background:#0f1724;
+  border:1px solid rgba(255,255,255,0.05);
+  border-radius:14px;
+  padding:20px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+.filter-box label{
+  font-weight:600;
+  color:#00e6ff;
+}
+.filter-box select{
+  width:100%;
+  padding:10px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.1);
+  background:#0b1220;
+  color:#e6eef8;
+}
+.btn-filter{
+  grid-column:1 / -1;
+  background:linear-gradient(90deg,#00e6ff,#00ff7a);
+  color:#001018;
+  font-weight:700;
+  padding:12px;
+  text-align:center;
+  border-radius:10px;
+  text-decoration:none;
+}
+
+/* PRODUCT GRID */
+.product-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:20px;
+  margin-top:30px;
+}
+
+.product{
+  background:#0f1724;
+  padding:14px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.05);
+  text-align:center;
+}
+.product img{
+  width:100%;
+  height:150px;
+  object-fit:cover;
+  border-radius:8px;
+}
+.product h3{
+  margin:10px 0 6px;
+  color:#00e6ff;
+}
+.price{color:#00ff7a;font-weight:700;margin-bottom:8px}
+.btn-outline{
+  padding:8px 12px;
+  border:1px solid rgba(255,255,255,0.08);
+  color:#e6eef8;
+  border-radius:8px;
+  text-decoration:none;
+}
+.btn-buy{
+  padding:8px 12px;
+  background:linear-gradient(90deg,#ff3b3b,#ff8a00);
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:700;
+  color:#fff;
+  display:inline-block;
+  margin-top:8px;
+}
+
+/* PAGINATION */
+.pagination{
+  display:flex;
+  justify-content:center;
+  margin-top:28px;
+  gap:10px;
+}
+.pagination a{
+  padding:8px 14px;
+  border-radius:8px;
+  background:#0f1724;
+  border:1px solid rgba(255,255,255,0.08);
+  color:#e6eef8;
+  text-decoration:none;
+}
+.pagination .active{
+  background:linear-gradient(90deg,#00e6ff,#00ff7a);
+  color:#001018;
+  font-weight:700;
+}
+
+/* FOOTER */
+footer{
+  margin-top:40px;
+  padding:20px;
+  border-top:1px solid rgba(255,255,255,0.05);
+  color:#98A0B3;
+  text-align:center;
+}
+</style>
+</head>
+
+<body>
+  <header class="header">
+  <a href="5_DaDangNhap.html" class="logo-text">GameZone</a>
+  <nav>
+    <a href="5_DaDangNhap.html">Trang chủ</a>
+    <a href="3_ThongTinCaNhan.html">Tài khoản</a>
+    <a href="index.html">Đăng xuất</a>
+  </nav>
+</header>
+
+<div class="container">
+
+<h1>Tìm kiếm nâng cao</h1>
+
+<!-- FILTER FORM -->
+<div class="filter-box">
+
+  <div>
+    <label>Chọn game</label>
+    <select>
+      <option>Tất cả</option>
+      <option>Liên Quân Mobile</option>
+      <option>Liên Minh Huyền Thoại</option>
+      <option>Free Fire</option>
+    </select>
+  </div>
+
+  <div>
+    <label>Rank</label>
+    <select>
+      <option>Tất cả</option>
+      <option>Vàng</option>
+      <option>Bạch Kim</option>
+      <option>Kim Cương</option>
+      <option>Cao Thủ</option>
+      <option>Thách Đấu</option>
+    </select>
+  </div>
+
+  <div>
+    <label>Mức giá</label>
+    <select>
+      <option>Tất cả</option>
+      <option>Dưới 300.000₫</option>
+      <option>300.000₫ - 800.000₫</option>
+      <option>Trên 800.000₫</option>
+    </select>
+  </div>
+
+  <div>
+    <label>Số tướng / skin</label>
+    <select>
+      <option>Tất cả</option>
+      <option>Nhiều Skin</option>
+      <option>Nhiều Tướng</option>
+      <option>Skin Hiếm</option>
+    </select>
+  </div>
+
+  <div>
+    <label>Loại hiếm</label>
+    <select>
+      <option>Tất cả</option>
+      <option>Có Skin SSS</option>
+      <option>Có Skin Huyền Thoại</option>
+      <option>Súng Vĩnh Viễn (FF)</option>
+    </select>
+  </div>
+
+  <div>
+    <label>Trạng thái</label>
+    <select>
+      <option>Tất cả</option>
+      <option>Trắng thông tin</option>
+      <option>Đổi được Gmail</option>
+      <option>Không liên kết</option>
+    </select>
+  </div>
+
+  <a class="btn-filter" href="#result">Lọc kết quả</a>
+
+</div>
+
+<!-- RESULTS -->
+<h1 id="result" style="margin-top:40px">Kết quả lọc</h1>
+
+<div class="product-grid">
+
+  <!-- 9 sản phẩm -->
+  <article class="product">
+    <img src="assets/images/lienquan/lienquan1.jpg">
+    <h3>LQ - Rank Kim Cương</h3>
+    <div class="price">700.000₫</div>
+    <a href="4_ChiTietSanPham.html" class="btn-outline">Xem chi tiết</a>
+    <a href="5_DaDangNhap.html" class="btn-buy">Mua ngay</a>
+  </article>
+
+  <article class="product">
+    <img src="assets/images/lienquan/lienquan3.jpg">
+    <h3>LQ - Cao Thủ</h3>
+    <div class="price">1.200.000₫</div>
+    <a href="4_ChiTietSanPham.html" class="btn-outline">Xem chi tiết</a>
+    <a href="5_DaDangNhap.html" class="btn-buy">Mua ngay</a>
+  </article>
+
+  <article class="product">
+    <img src="assets/images/lienquan/lienquan5.jpg">
+    <h3>LQ - Nhiều Skin</h3>
+    <div class="price">900.000₫</div>
+    <a href="4_ChiTietSanPham.html" class="btn-outline">Xem chi tiết</a>
+    <a href="5_DaDangNhap.html" class="btn-buy">Mua ngay</a>
+  </article>
+
+  <article class="product">
+    <img src="assets/images/lienminh/lienminh1.jpg">
+    <h3>LMHT - Vàng I</h3>
+    <div class="price">600.000₫</div>
+    <a href="4_ChiTietSanPham.html" class="btn-outline">Xem chi tiết</a>
+    <a href="5_DaDangNhap.html" class="btn-buy">Mua ngay</a>
+  </article>
+
+  <article class="product">
+    <img src="assets/images/lienminh/lienminh2.jpg">
+    <h3>LMHT - Kim Cương IV</h3>
+    <div class="price">1.500.000₫</div>
+    <a href="4_ChiTietSanPham.html" class="btn-outline">Xem chi tiết</a>
+    <a href="5_DaDangNhap.html" class="btn-buy">Mua ngay</a>
+  </article>
+
+  <article class="product">
+    <img src="assets/images/lienminh/lienminh5.jpg">
+    <h3>LMHT - Champ + Skin</h3>
+    <div class="price">1.100.000₫</div>
+    <a href="4_ChiTietSanPham.html" class="btn-outline">Xem chi tiết</a>
+    <a href="5_DaDangNhap.html" class="btn-buy">Mua ngay</a>
+  </article>
+
+  <article class="product">
+    <img src="assets/images/freefire/freefire1.jpg">
+    <h3>FF - Súng Vĩnh Viễn</h3>
+    <div class="price">550.000₫</div>
+    <a href="4_ChiTietSanPham.html" class="btn-outline">Xem chi tiết</a>
+    <a href="5_DaDangNhap.html" class="btn-buy">Mua ngay</a>
+  </article>
+
+  <article class="product">
+    <img src="assets/images/freefire/freefire3.jpg">
+    <h3>FF - Skin DJ Alok</h3>
+    <div class="price">350.000₫</div>
+    <a href="4_ChiTietSanPham.html" class="btn-outline">Xem chi tiết</a>
+    <a href="5_DaDangNhap.html" class="btn-buy">Mua ngay</a>
+  </article>
+
+  <article class="product">
+    <img src="assets/images/freefire/freefire5.jpg">
+    <h3>FF - Skin Hiếm</h3>
+    <div class="price">520.000₫</div>
+    <a href="4_ChiTietSanPham.html" class="btn-outline">Xem chi tiết</a>
+    <a href="5_DaDangNhap.html" class="btn-buy">Mua ngay</a>
+  </article>
+
+</div>
+
+<!-- PAGINATION -->
+<div class="pagination">
+  <a href="#">«</a>
+  <a class="active" href="#">1</a>
+  <a href="#">2</a>
+  <a href="#">3</a>
+  <a href="#">»</a>
+</div>
+
+</div>
+
+<!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div style="width:44px;height:44;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;color:#001018;font-weight:700">GZ</div>
+        <div>
+          <div style="font-weight:700;color:var(--accent)">GameZone</div>
+          <div class="footer-tagline">Nơi mua bán tài khoản game uy tín</div>
+        </div>
+      </div>
+
+      <div class="footer-contact" style="text-align:right">
+        <div>gamezone.vn</div>
+        <div>034 608 7617</div>
+        <div>&copy; 2025 GameZone</div>
+      </div>
+    </div>
+  </footer>
+
+
+</body>
+</html>
+
+
+
