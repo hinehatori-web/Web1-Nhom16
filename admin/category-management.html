@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản lý loại sản phẩm | AccountShop Admin</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --primary: #00d4ff;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --bg-dark: #0f172a;
+      --bg-card: #1e293b;
+      --text: #e2e8f0;
+      --text-light: #94a3b8;
+      --border: #334155;
+      --sidebar-width: 280px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* Header & Sidebar – đồng bộ tuyệt đối */
+    .admin-header {
+      position: fixed; top: 0; left: 0; right: 0; height: 70px;
+      background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border); display: flex;
+      align-items: center; justify-content: space-between; padding: 0 30px; z-index: 1000;
+    }
+    .logo { display: flex; align-items: center; gap: 15px; font-size: 26px; font-weight: 700; color: var(--primary); text-decoration: none; }
+    .logo i { font-size: 34px; background: linear-gradient(45deg, #00d4ff, #9d4edd); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .page-title { font-size: 20px; color: var(--text-light); }
+    .back-btn { background: rgba(0, 212, 255, 0.15); color: var(--primary); padding: 10px 24px; border-radius: 50px; text-decoration: none; font-weight: 600; border: 1px solid rgba(0, 212, 255, 0.3); transition: all 0.3s; }
+    .back-btn:hover { background: var(--primary); color: #000; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3); }
+
+    .admin-container { display: flex; margin-top: 70px; min-height: calc(100vh - 70px); }
+    .sidebar { width: var(--sidebar-width); background: rgba(30, 41, 59, 0.95); backdrop-filter: blur(10px); padding: 30px 20px; border-right: 1px solid var(--border); position: fixed; left: 0; top: 70px; bottom: 0; overflow-y: auto; }
+    .sidebar h2 { color: var(--primary); margin-bottom: 30px; font-size: 20px; padding-left: 10px; border-left: 4px solid var(--primary); }
+    .sidebar a { display: flex; align-items: center; gap: 15px; padding: 14px 18px; color: var(--text-light); text-decoration: none; border-radius: 12px; margin: 8px 10px; transition: all 0.3s; font-weight: 500; }
+    .sidebar a:hover, .sidebar a.active { background: linear-gradient(90deg, rgba(0, 212, 255, 0.15), transparent); color: var(--primary); transform: translateX(8px); }
+    .sidebar a i { font-size: 20px; width: 30px; }
+
+    .admin-content { flex: 1; margin-left: var(--sidebar-width); padding: 40px; }
+
+    .content-card {
+      background: rgba(30, 41, 59, 0.8); backdrop-filter: blur(12px);
+      border-radius: 20px; padding: 30px; border: 1px solid rgba(0, 212, 255, 0.3);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); margin-bottom: 30px;
+    }
+
+    .card-title {
+      font-size: 26px; background: linear-gradient(90deg, #00d4ff, #9d4edd);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 20px; display: flex; align-items: center; gap: 12px;
+    }
+
+    .demo-notice {
+      background: rgba(251, 191, 36, 0.15); color: #fbbf24; padding: 16px;
+      border-radius: 12px; border-left: 4px solid #fbbf24; font-size: 15px; margin-bottom: 25px;
+    }
+
+    table { width: 100%; border-collapse: separate; border-spacing: 0 12px; margin-top: 10px; }
+    th { background: rgba(0, 212, 255, 0.1); padding: 18px 20px; text-align: left; color: var(--primary); font-weight: 600; font-size: 15px; }
+    td { background: rgba(15, 23, 42, 0.6); padding: 18px 20px; border-radius: 12px; }
+
+    tr:hover td { background: rgba(0, 212, 255, 0.08); transform: scale(1.01); transition: all 0.3s; }
+
+    .status { padding: 8px 16px; border-radius: 50px; font-size: 13px; font-weight: 700; display: inline-block; }
+    .status-active { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .status-hidden { background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.4); }
+
+    .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .btn { padding: 8px 14px; border: none; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: default; display: inline-flex; align-items: center; gap: 6px; }
+    .btn-edit { background: #6366f1; color: white; }
+    .btn-delete { background: #dc2626; color: white; }
+    .btn-toggle { background: #475569; color: white; }
+
+    .category-desc { color: var(--text-light); font-size: 14px; }
+
+    @media (max-width: 992px) {
+      .sidebar { transform: translateX(-100%); }
+      .admin-content { margin-left: 0; padding: 20px; }
+      table, thead, tbody, th, td, tr { display: block; }
+      th { display: none; }
+      td { padding: 15px; border-radius: 12px; margin-bottom: 12px; }
+      td:before { content: attr(data-label); font-weight: bold; color: var(--primary); display: block; margin-bottom: 8px; }
+      .actions { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="admin-header">
+    <a href="admin-dashboard.html" class="logo">
+      AccountShop
+    </a>
+    <div style="display:flex; align-items:center; gap:20px;">
+      <div class="page-title">Quản lý loại sản phẩm</div>
+      <a href="admin-dashboard.html" class="back-btn">Trở về Dashboard</a>
+    </div>
+  </header>
+
+  <div class="admin-container">
+    <aside class="sidebar">
+      <h2>Quản Trị Hệ Thống</h2>
+      <ul style="list-style:none;">
+        <li><a href="admin-dashboard.html">Bảng điều khiển</a></li>
+        <li><a href="user-management.html">Quản lý người dùng</a></li>
+        <li><a href="category-management.html" class="active">Quản lý loại sản phẩm</a></li>
+        <li><a href="product-management.html">Quản lý danh mục sản phẩm</a></li>
+        <li><a href="import-management.html">Quản lý nhập sản phẩm</a></li>
+        <li><a href="price-management.html">Quản lý giá bán</a></li>
+        <li><a href="order-management.html">Quản lý đơn hàng</a></li>
+        <li><a href="inventory-management.html">Quản lý tồn kho</a></li>
+      </ul>
+    </aside>
+
+    <main class="admin-content">
+      <div class="content-card">
+        <h2 class="card-title">
+          Danh sách loại sản phẩm (12 loại đang hoạt động)
+        </h2>
+
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Tên loại</th>
+              <th>Mô tả</th>
+              <th>Số sản phẩm</th>
+              <th>Trạng thái</th>
+              <th style="text-align:center;">Thao tác</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="Tên loại"><strong>Liên Quân Mobile</strong></td>
+              <td data-label="Mô tả" class="category-desc">Tài khoản LQ rank cao, skin hiếm</td>
+              <td data-label="Số SP">248 sản phẩm</td>
+              <td data-label="Trạng thái"><span class="status status-active">Hiển thị</span></td>
+              <td data-label="Thao tác">
+                <div class="actions">
+                  <button class="btn btn-edit">Sửa</button>
+                  <button class="btn btn-delete">Xóa</button>
+                  <button class="btn btn-toggle">Ẩn</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td data-label="Tên loại"><strong>Free Fire</strong></td>
+              <td data-label="Mô tả" class="category-desc">Tài khoản FF rank Huyền Thoại, full skin</td>
+              <td data-label="Số SP">312 sản phẩm</td>
+              <td data-label="Trạng thái"><span class="status status-active">Hiển thị</span></td>
+              <td data-label="Thao tác">
+                <div class="actions">
+                  <button class="btn btn-edit">Sửa</button>
+                  <button class="btn btn-delete">Xóa</button>
+                  <button class="btn btn-toggle">Ẩn</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td data-label="Tên loại"><strong>Valorant</strong></td>
+              <td data-label="Mô tả" class="category-desc">Tài khoản Valorant rank cao + skin VIP</td>
+              <td data-label="Số SP">189 sản phẩm</td>
+              <td data-label="Trạng thái"><span class="status status-active">Hiển thị</span></td>
+              <td data-label="Thao tác">
+                <div class="actions">
+                  <button class="btn btn-edit">Sửa</button>
+                  <button class="btn btn-delete">Xóa</button>
+                  <button class="btn btn-toggle">Ẩn</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td data-label="Tên loại"><strong>Roblox</strong></td>
+              <td data-label="Mô tả" class="category-desc">Gói Robux, tài khoản Robux cao cấp</td>
+              <td data-label="Số SP">96 sản phẩm</td>
+              <td data-label="Trạng thái"><span class="status status-active">Hiển thị</span></td>
+              <td data-label="Thao tác">
+                <div class="actions">
+                  <button class="btn btn-edit">Sửa</button>
+                  <button class="btn btn-delete">Xóa</button>
+                  <button class="btn btn-toggle">Ẩn</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td data-label="Tên loại"><strong>Gift Card</strong></td>
+              <td data-label="Mô tả" class="category-desc">Thẻ Google Play, iTunes, Steam Wallet</td>
+              <td data-label="Số SP">156 sản phẩm</td>
+              <td data-label="Trạng thái"><span class="status status-hidden">Đã ẩn</span></td>
+              <td data-label="Thao tác">
+                <div class="actions">
+                  <button class="btn btn-edit">Sửa</button>
+                  <button class="btn btn-delete">Xóa</button>
+                  <button class="btn btn-toggle" style="background:#10b981;">Hiện lại</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+</body>
+</html>
