@@ -83,8 +83,19 @@
     .btn-lock { background: #475569; color: white; }
     .btn-edit { background: #6366f1; color: white; }
     .btn-delete { background: #dc2626; color: white; }
+    .btn-primary { background: linear-gradient(45deg, #00d4ff, #0099cc); color: #000; }
+    .btn-cancel { background: transparent; border: 1px solid var(--text-light); color: var(--text-light); }
 
-    .user-info small { display: block; color: #94a3b8; margin-top: 4px; font-size: 13px; }
+    .user-info small { display: block; color: var(--text-light); margin-top: 4px; font-size: 13px; }
+
+    .form-group { margin-bottom: 20px; }
+    label { display: block; margin-bottom: 8px; color: var(--text-light); font-weight: 500; }
+    input { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: var(--text); font-size: 16px; transition: all 0.3s; }
+    input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.2); }
+
+    .btn-group { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 20px; }
+
+    button:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
 
     @media (max-width: 992px) {
       .sidebar { transform: translateX(-100%); }
@@ -94,6 +105,7 @@
       td { padding: 15px; border-radius: 12px; margin-bottom: 12px; }
       td:before { content: attr(data-label); font-weight: bold; color: var(--primary); display: block; margin-bottom: 8px; }
       .actions { justify-content: center; }
+      .btn-group { flex-direction: column; }
     }
   </style>
 </head>
@@ -113,11 +125,10 @@
     <aside class="sidebar">
       <h2>Quản Trị Hệ Thống</h2>
       <ul style="list-style:none;">
-       <li><a href="admin-dashboard.html">Bảng điều khiển</a></li>
         <li><a href="user-management.html" class="active">Quản lý người dùng</a></li>
         <li><a href="category-management.html">Quản lý loại sản phẩm</a></li>
-        <li><a href="product-management.html">Quản lý danh mục sản phẩm</a></li>
-        <li><a href="import-management.html">Quản lý nhập sản phẩm</a></li>
+        <li><a href="product-management.html">Quản lý tài khoản game</a></li>
+        <li><a href="import-management.html">Nhập sản phẩm</a></li>
         <li><a href="price-management.html">Quản lý giá bán</a></li>
         <li><a href="order-management.html">Quản lý đơn hàng</a></li>
         <li><a href="inventory-management.html">Quản lý tồn kho</a></li>
@@ -125,11 +136,37 @@
     </aside>
 
     <main class="admin-content">
+      <!-- Form thêm/sửa người dùng -->
+      <div class="content-card">
+        <h2 class="card-title">
+          Thêm / Sửa người dùng
+        </h2>
+        <div class="form-group">
+          <label for="username">Tên đăng nhập</label>
+          <input type="text" id="username" placeholder="Ví dụ: hinatori" />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="Ví dụ: hina@example.com" />
+        </div>
+        <div class="form-group">
+          <label for="password">Mật khẩu mới (nếu thay đổi)</label>
+          <input type="password" id="password" placeholder="Để trống nếu không đổi" />
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-primary">Lưu thay đổi</button>
+          <button class="btn btn-cancel">Xóa form</button>
+        </div>
+      </div>
+
+      <!-- Bảng danh sách người dùng -->
       <div class="content-card">
         <h2 class="card-title">
           Danh sách người dùng (1.284 tài khoản)
         </h2>
 
+        <div class="demo-notice">
+          Bản demo tĩnh – đầy đủ chức năng: Reset mật khẩu, Khóa/Mở khóa, Sửa, Xóa. Dữ liệu mẫu thực tế.
         </div>
 
         <table>
