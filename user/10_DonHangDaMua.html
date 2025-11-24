@@ -1,200 +1,137 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Chi tiết đơn hàng – GameZone</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GameZone - Đơn hàng đã mua</title>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: "Poppins", sans-serif;
-      background: #0c0c0f;
-      color: #e6eef8;
-    }
-    a { text-decoration: none; color: inherit; }
+<style>
+  :root{
+    --bg:#071023;
+    --card:#0f1724;
+    --accent:#00e6ff;
+    --accent2:#00ff7a;
+    --text:#e6eef8;
+    --muted:#98A0B3;
+  }
 
-    /* HEADER */
-    .gamezone-header {
-      display: flex;
-      align-items: center;
-      padding: 12px 20px;
-      background: #101317;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
-    .gamezone-header i {
-      background: linear-gradient(135deg, #ff3b3b, #ff8a00);
-      width: 46px; height: 46px;
-      display: grid; place-items: center;
-      border-radius: 10px;
-      font-size: 20px;
-      color: #000;
-    }
-    .gamezone-header span {
-      margin-left: 10px;
-      color: #ff8a6b;
-      font-size: 20px;
-      font-weight: 700;
-    }
-    .gamezone-nav {
-      margin-left: auto;
-      display: flex;
-      gap: 16px;
-    }
-    .gamezone-nav a:hover {
-      color: #ff8a6b;
-    }
+  body{
+    margin:0;
+    font-family:"Poppins",sans-serif;
+    background:linear-gradient(180deg,#05060a,#071023);
+    color:var(--text);
+  }
 
-    /* PAGE */
-    .container {
-      max-width: 1100px;
-      margin: 30px auto;
-      padding: 0 20px;
-    }
+  a{text-decoration:none;color:inherit;}
 
-    /* HEADER SECTION */
-    .order-detail-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #15151a;
-      padding: 20px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.05);
-      margin-bottom: 24px;
-    }
-    .order-title-section h1 {
-      margin: 0;
-      font-size: 1.7rem;
-      color: #ff8a6b;
-    }
-    .order-meta {
-      color: #aaa;
-      margin-top: 4px;
-    }
-    .order-status-badge {
-      padding: 10px 16px;
-      background: rgba(46,204,113,0.12);
-      color: #2ecc71;
-      border-radius: 30px;
-      font-weight: 600;
-    }
+  /* HEADER */
+  .gamezone-header{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px;background:rgba(0,0,0,0.25);
+    border-bottom:1px solid rgba(255,255,255,0.05);
+    position:sticky;top:0;z-index:999;backdrop-filter:blur(7px);
+  }
+  .logo-text{font-weight:700;color:var(--accent);font-size:22px;}
 
-    /* SECTION BLOCKS */
-    .order-section {
-      background: #15151a;
-      padding: 20px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.05);
-      margin-bottom: 24px;
-    }
-    .section-title {
-      margin: 0 0 14px 0;
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: #ff8a6b;
-    }
+  .gamezone-nav{display:flex;gap:18px;}
+  .gamezone-nav a{color:var(--text);font-size:18px;}
+  .gamezone-nav a:hover{color:var(--accent2);}
 
-    /* SHIPPING INFO GRID */
-    .shipping-info-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-    }
-    .info-group {
-      background: #1d1d22;
-      padding: 12px;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.06);
-    }
-    .info-group.full-width {
-      grid-column: 1 / 3;
-    }
-    .info-group label {
-      font-weight: 600;
-      color: #aaa;
-    }
+  /* CONTAINER */
+  .container{
+    max-width:900px;margin:0 auto;padding:26px;
+  }
 
-    /* ITEM LIST */
-    .order-items {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .order-item {
-      display: flex;
-      align-items: center;
-      padding: 14px;
-      background: #1d1d22;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.05);
-    }
-    .item-image img {
-      width: 80px;
-      height: 80px;
-      object-fit: cover;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-    .item-details {
-      margin-left: 14px;
-      flex: 1;
-    }
-    .item-details h3 {
-      margin: 0;
-      font-size: 1.05rem;
-      color: #ff8a6b;
-    }
-    .item-meta {
-      color: #ccc;
-      margin-top: 4px;
-    }
-    .item-total {
-      font-weight: 700;
-      color: #27ae60;
-    }
+  h1{color:var(--accent2);text-align:center;margin-bottom:16px;}
 
-    /* SUMMARY */
-    .order-summary {
-      margin-top: 10px;
-    }
-    .summary-row {
-      display: flex;
-      justify-content: space-between;
-      margin: 8px 0;
-      color: #ddd;
-    }
-    .summary-row.total {
-      margin-top: 12px;
-      padding-top: 10px;
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: #27ae60;
-      border-top: 1px solid rgba(255,255,255,0.1);
-    }
+  /* ORDER BOX */
+  .order-detail{
+    background:var(--card);
+    padding:26px;border-radius:14px;
+    border:1px solid rgba(255,255,255,0.05);
+  }
 
-    /* FOOTER */
-    .site-footer {
-      text-align: center;
-      margin-top: 40px;
-      padding: 20px 0;
-      background: #101317;
-      border-top: 1px solid rgba(255,255,255,0.05);
-      color: #ccc;
-    
-}
+  .section-title{
+    font-size:20px;
+    font-weight:700;
+    color:var(--accent);
+    margin:18px 0 10px;
+  }
 
-  </style>
+  .info-row{
+    display:flex;justify-content:space-between;
+    padding:6px 0;color:var(--muted);
+  }
+
+  /* PRODUCT LIST */
+  .product-list{
+    margin-top:16px;
+    border-top:1px solid rgba(255,255,255,0.08);
+    padding-top:16px;
+  }
+
+  .product-item{
+    display:flex;justify-content:space-between;
+    padding:12px 0;
+    border-bottom:1px solid rgba(255,255,255,0.06);
+  }
+
+  .product-name{font-weight:600;color:var(--accent);}
+  .product-price{color:var(--accent2);font-weight:700;}
+
+  /* TOTAL */
+  .total-box{
+    margin-top:16px;padding:14px;
+    background:rgba(0,0,0,0.25);
+    border-radius:10px;
+  }
+  .total-row{
+    display:flex;justify-content:space-between;
+    margin-bottom:8px;
+  }
+  .total-final{
+    font-size:22px;font-weight:700;
+    color:var(--accent2);
+  }
+
+  /* BUTTON */
+  .btn-back{
+    display:inline-block;
+    margin-top:20px;
+    padding:12px 18px;
+    border-radius:10px;
+    background:linear-gradient(90deg,var(--accent),var(--accent2));
+    font-weight:700;
+    color:#001018;
+  }
+
+  /* FOOTER */
+  footer.site-footer{
+    margin-top:40px;padding:26px 0;
+    border-top:1px solid rgba(255,255,255,0.05);
+  }
+  .footer-inner{
+    max-width:1200px;margin:0 auto;
+    display:flex;justify-content:space-between;flex-wrap:wrap;
+    color:var(--muted);
+  }
+  .footer-brand span{
+    font-weight:700;font-size:20px;color:var(--accent);
+  }
+  .footer-bottom{
+    text-align:center;margin-top:20px;font-size:14px;color:var(--muted);
+  }
+</style>
 </head>
 
 <body>
 
+<!-- HEADER -->
 <header class="gamezone-header">
-  <i class="fa-solid fa-gamepad"></i>
-  <span>GameZone</span>
+  <a class="logo-text" href="5_DaDangNhap.html">GameZone</a>
 
   <nav class="gamezone-nav">
     <a href="6_GioHang.html"><i class="fa-solid fa-bag-shopping"></i></a>
@@ -204,108 +141,91 @@
   </nav>
 </header>
 
-<main class="container">
+<div class="container">
 
-  <div class="order-detail-header">
-    <div class="order-title-section">
-      <h1>Chi tiết đơn hàng</h1>
-      <div class="order-meta">
-        <span>Mã đơn: #GZ20250045</span> · 
-        <span>Ngày đặt: 20/11/2025</span>
+  <h1>Chi tiết đơn hàng đã mua</h1>
+
+  <div class="order-detail">
+
+    <!-- THÔNG TIN CHUNG -->
+    <div class="section-title"><i class="fa-solid fa-receipt"></i> Thông tin đơn hàng</div>
+
+    <div class="info-row"><span>Mã đơn hàng:</span> <span>#GZ20250312</span></div>
+    <div class="info-row"><span>Ngày đặt:</span> <span>12/03/2025 – 14:22</span></div>
+    <div class="info-row"><span>Trạng thái:</span> <span style="color:var(--accent2);font-weight:700;">Đã hoàn thành</span></div>
+
+    <!-- SẢN PHẨM -->
+    <div class="section-title"><i class="fa-solid fa-box"></i> Sản phẩm</div>
+
+    <div class="product-list">
+
+      <div class="product-item">
+        <span class="product-name">Acc Liên Quân – Kim Cương</span>
+        <span class="product-price">700.000₫</span>
       </div>
+
+      <div class="product-item">
+        <span class="product-name">Acc Free Fire – Súng Vĩnh Viễn</span>
+        <span class="product-price">600.000₫</span>
+      </div>
+
     </div>
 
-    <div class="order-status-badge">
-      <i class="fas fa-check-circle"></i> Đã thanh toán
+    <!-- ĐỊA CHỈ -->
+    <div class="section-title"><i class="fa-solid fa-location-dot"></i> Địa chỉ giao hàng</div>
+
+    <div class="info-row"><span>Họ tên:</span> <span>Đoàn Thị Kim Khương</span></div>
+    <div class="info-row"><span>SĐT:</span> <span>0346087617</span></div>
+    <div class="info-row"><span>Địa chỉ:</span> <span>273 An Dương Vương, P. Chợ Quán, Q.5, TP.HCM</span></div>
+
+    <!-- THANH TOÁN -->
+    <div class="section-title"><i class="fa-solid fa-credit-card"></i> Thanh toán</div>
+
+    <div class="info-row"><span>Phương thức:</span> 
+      <span style="color:var(--accent2);font-weight:600;">Thanh toán khi nhận hàng (COD)</span>
     </div>
+
+    <!-- GHI CHÚ -->
+    <div class="section-title"><i class="fa-solid fa-note-sticky"></i> Ghi chú</div>
+    <p style="opacity:0.8;margin-top:-4px;">Không có ghi chú.</p>
+
+    <!-- TỔNG TIỀN -->
+    <div class="section-title"><i class="fa-solid fa-money-bill-wave"></i> Tổng cộng</div>
+
+    <div class="total-box">
+      <div class="total-row"><span>Tạm tính:</span> <span>1.300.000₫</span></div>
+      <div class="total-row"><span>Phí giao dịch:</span> <span>0₫</span></div>
+      <div class="total-row total-final"><span>Tổng thanh toán:</span> <span>1.300.000₫</span></div>
+    </div>
+    <a href="9_LichSuDonHang.html" class="btn-back">
+      <i class="fa-solid fa-arrow-left"></i> Quay lại lịch sử đơn hàng
+    </a>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+
+    <div class="footer-brand">
+      <span>GameZone</span>
+      <p class="footer-tagline">Nơi mua bán tài khoản game uy tín</p>
+    </div>
+
+    <div>
+      <h3 style="color:var(--accent2);margin-bottom:8px;">Thông Tin Liên Hệ</h3>
+      <div class="contact-item"><i class="fas fa-globe"></i> gamezone.vn</div>
+      <div class="contact-item"><i class="fas fa-phone"></i> 0346 087 617</div>
+      <div class="contact-item"><i class="fas fa-envelope"></i> info@gamezone.example</div>
+    </div>
+
   </div>
 
-  <!-- SHIPPING -->
-  <section class="order-section">
-    <h2 class="section-title"><i class="fas fa-user"></i> Thông tin giao hàng</h2>
-
-    <div class="shipping-info-grid">
-      <div class="info-group">
-        <label>Người nhận:</label><br>
-        <span>Đoàn Thị Kim Khương</span>
-      </div>
-
-      <div class="info-group">
-        <label>Số điện thoại:</label><br>
-        <span>0346087617</span>
-      </div>
-
-      <div class="info-group full-width">
-        <label>Địa chỉ:</label><br>
-        <span>273 An Dương Vương, Phường Chợ Quán, Quận 5, TP.HCM</span>
-      </div>
-
-      <div class="info-group">
-        <label>Ghi chú:</label><br>
-        <span>Giao giờ hành chính</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ITEMS -->
-  <section class="order-section">
-    <h2 class="section-title"><i class="fas fa-gamepad"></i> Tài khoản đã mua</h2>
-
-    <div class="order-items">
-
-      <div class="order-item">
-        <div class="item-image"><img src="assets/images/lienquan/lienquan1.jpg"></div>
-        <div class="item-details">
-          <h3>Acc Liên Quân – Rank Kim Cương</h3>
-          <div class="item-meta">Số lượng: 1</div>
-        </div>
-        <div class="item-total">700.000₫</div>
-      </div>
-
-      <div class="order-item">
-        <div class="item-image"><img src="assets/images/lienminh/lienminh1.jpg"></div>
-        <div class="item-details">
-          <h3>Acc Liên Minh – Vàng I</h3>
-          <div class="item-meta">Số lượng: 1</div>
-        </div>
-        <div class="item-total">600.000₫</div>
-      </div>
-
-      <div class="order-item">
-        <div class="item-image"><img src="assets/images/freefire/freefire1.jpg"></div>
-        <div class="item-details">
-          <h3>Acc Free Fire – Súng Vĩnh Viễn</h3>
-          <div class="item-meta">Số lượng: 1</div>
-        </div>
-        <div class="item-total">550.000₫</div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- SUMMARY -->
-  <section class="order-section">
-    <h2 class="section-title"><i class="fas fa-wallet"></i> Thanh toán</h2>
-
-    <div class="order-summary">
-      <div class="summary-row">
-        <span>Tổng tiền hàng:</span>
-        <span>1.850.000₫</span>
-      </div>
-
-      <div class="summary-row total">
-        <span>Tổng thanh toán:</span>
-        <span>1.850.000₫</span>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<footer class="site-footer">
-  © 2025 GameZone – Nơi mua bán tài khoản game uy tín.
+  <div class="footer-bottom">
+    © 2025 GameZone - Mua bán account game. All rights reserved.
+  </div>
 </footer>
 
 </body>
 </html>
-
