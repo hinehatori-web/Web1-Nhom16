@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quản lý tồn kho | AccountShop Admin</title>
+  <title>Quản lý đơn hàng | AccountShop Admin</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   
   <style>
@@ -28,7 +28,6 @@
       min-height: 100vh;
     }
 
-    /* Header & Sidebar – giữ nguyên đẹp lung linh */
     .admin-header {
       position: fixed; top: 0; left: 0; right: 0; height: 70px;
       background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(12px);
@@ -62,114 +61,45 @@
       margin-bottom: 20px; display: flex; align-items: center; gap: 12px;
     }
 
-    .demo-notice {
-      background: rgba(251, 191, 36, 0.15); color: #fbbf24; padding: 16px;
-      border-radius: 12px; border-left: 4px solid #fbbf24; font-size: 15px; margin-bottom: 25px;
+    table { width: 100%; border-collapse: separate; border-spacing: 0 12px; margin-top: 10px; }
+    th { background: rgba(0, 212, 255, 0.1); padding: 18px 20px; text-align: left; color: var(--primary); font-weight: 600; font-size: 15px; }
+    td { background: rgba(15, 23, 42, 0.6); padding: 18px 20px; border-radius: 12px  }
+
+    tr:hover td { background: rgba(0, 212, 255, 0.08); transform: scale(1.01); transition: all 0.3s; }
+
+    .status { padding: 8px 16px; border-radius: 50px; font-size: 13px; font-weight: 700; display: inline-block; }
+    .status-new { background: rgba(14, 165, 233, 0.2); color: #0ea5e9; border: 1px solid rgba(14, 165, 233, 0.4); }
+    .status-processing { background: rgba(251, 191, 36, 0.2); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.4); }
+    .status-delivered { background: rgba(34, 197, 94, 0.2); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.4); }
+    .status-cancelled { background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.4); }
+
+    .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .btn { padding: 8px 14px; border: none; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.3s; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+    .btn-view { background: #6366f1; color: white; }
+    .btn-update { background: #06b6d4; color: white; }
+    .btn-cancel { background: #dc2626; color: white; }
+
+    /* Modal Xem chi tiết đơn hàng */
+    .modal {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); 
+      backdrop-filter: blur(10px); align-items: center; justify-content: center; z-index: 2000;
     }
-
-    /* Tabs – lấy từ tonkho.html */
-    .tabs {
-      display: flex; border-bottom: 1px solid var(--border); margin-bottom: 1.5rem;
+    .modal.active { display: flex; }
+    .modal-content {
+      background: var(--bg-card); width: 90%; max-width: 600px; border-radius: 20px; 
+      padding: 30px; border: 1px solid rgba(0,212,255,0.4); position: relative;
     }
-
-    .tab {
-      padding: 0.75rem 1.5rem; cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.3s; color: var(--text-light);
+    .modal-close {
+      position: absolute; top: 15px; right: 20px; background: none; border: none;
+      font-size: 28px; color: #94a3b8; cursor: pointer; transition: 0.3s;
     }
-
-    .tab.active {
-      border-bottom-color: var(--primary); color: var(--primary); font-weight: 600;
-    }
-
-    .tab-content { display: none; }
-
-    .tab-content.active { display: block; }
-
-    /* Form styles – lấy từ tonkho.html */
-    .form-group { margin-bottom: 1.5rem; }
-
-    .form-label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-light); }
-
-    .form-control { width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 0.5rem; font-size: 0.875rem; transition: all 0.2s; background: rgba(15,23,42,0.8); color: var(--text); }
-
-    .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 2px rgba(0,212,255,0.2); outline: none; }
-
-    .form-row { display: flex; flex-wrap: wrap; margin: 0 -0.5rem; }
-
-    .form-col { flex: 1; padding: 0 0.5rem; min-width: 200px; }
-
-    /* Button styles – điều chỉnh để đồng bộ */
-    .btn { display: inline-flex; align-items: center; gap: 4px; padding: 0.75rem 1.5rem; border-radius: 6px; border: none; color: white; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.2s; }
-
-    .btn-primary { background: linear-gradient(195deg, var(--primary), #9d4edd); }
-    .btn-primary:hover { background: linear-gradient(195deg, #00bfff, #8b3ed4); }
-
-    .btn-secondary { background: #475569; }
-    .btn-secondary:hover { background: #334155; }
-
-    .btn-warning { background: var(--warning); }
-    .btn-warning:hover { background: #e68a00; }
-
-    .btn-sm { padding: 0.5rem 1rem; font-size: 0.875rem; }
-
-    /* Table styles – giữ nguyên nhưng điều chỉnh cho đồng bộ */
-    table { width: 100%; border-collapse: collapse; background: rgba(15, 23, 42, 0.6); border-radius: 10px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-
-    thead { background: rgba(0, 212, 255, 0.1); color: var(--primary); }
-
-    th, td { padding: 14px 16px; font-size: 14px; text-align: left; border-bottom: 1px solid var(--border); }
-
-    th { text-transform: uppercase; font-size: 12px; letter-spacing: 0.5px; font-weight: 600; }
-
-    tbody tr:nth-child(even) { background-color: rgba(30, 41, 59, 0.8); }
-
-    tbody tr:hover { background-color: rgba(0, 212, 255, 0.08); transition: 0.2s; }
-
-    .text-right { text-align: right; }
-
-    .text-center { text-align: center; }
-
-    /* Status badges – điều chỉnh cho đồng bộ */
-    .status-badge { display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-size: 13px; font-weight: 600; border-radius: 50px; padding: 5px 12px; min-width: 110px; }
-
-    .status-normal { background-color: rgba(16, 185, 129, 0.2); color:#10b981; border:1px solid rgba(16, 185, 129, 0.4); }
-    .status-warning { background-color: rgba(245, 158, 11, 0.2); color:#f59e0b; border:1px solid rgba(245, 158, 11, 0.4); }
-    .status-danger { background-color: rgba(239, 68, 68, 0.2); color:#ef4444; border:1px solid rgba(239, 68, 68, 0.4); }
-
-    /* Category info – tương tự product-info */
-    .category-info { display: flex; align-items: center; gap: 1rem; }
-
-    .category-icon { font-size: 24px; color: var(--primary); flex-shrink: 0; }
-
-    .category-details { flex: 1; }
-
-    .category-name { font-weight: 600; margin-bottom: 0.25rem; }
-
-    .category-desc { font-size: 0.85rem; color: var(--text-light); }
-
-    /* Alert section – lấy từ tonkho.html */
-    .alert-section { background: rgba(251, 191, 36, 0.15); border: 1px solid rgba(251, 191, 36, 0.3); border-radius: 0.5rem; padding: 1rem; margin-bottom: 1.5rem; }
-
-    .alert-header { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; }
-
-    .alert-title { font-weight: 600; color: var(--warning); }
-
-    /* Summary cards – lấy từ tonkho.html */
-    .summary-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
-
-    .summary-card { background: rgba(30, 41, 59, 0.8); border-radius: 10px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-
-    .summary-title { font-size: 14px; color: var(--text-light); margin-bottom: 0.5rem; }
-
-    .summary-value { font-size: 24px; font-weight: 700; }
-
-    .summary-icon { font-size: 32px; opacity: 0.3; position: absolute; right: 1rem; bottom: 1rem; }
-
-    /* Search form – lấy từ tonkho.html */
-    .search-form { background: rgba(15, 23, 42, 0.6); padding: 1.5rem; border-radius: 0.5rem; margin-bottom: 1.5rem; }
-
-    .search-row { display: flex; gap: 1rem; align-items: flex-end; }
-
-    .search-actions { display: flex; gap: 0.5rem; }
+    .modal-close:hover { color: var(--primary); }
+    .modal-header { font-size: 26px; color: var(--primary); margin-bottom: 25px; text-align: center; }
+    .detail-row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--border); }
+    .detail-row:last-child { border-bottom: none; }
+    .detail-label { color: var(--text-light); font-weight: 600; }
+    .detail-value { color: var(--text); text-align: right; }
 
     @media (max-width: 992px) {
       .sidebar { transform: translateX(-100%); }
@@ -179,8 +109,6 @@
       td { padding: 15px; border-radius: 12px; margin-bottom: 12px; }
       td:before { content: attr(data-label); font-weight: bold; color: var(--primary); display: block; margin-bottom: 8px; }
       .actions { justify-content: center; }
-      .search-row { flex-direction: column; align-items: stretch; }
-      .summary-cards { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -191,7 +119,7 @@
       AccountShop
     </a>
     <div style="display:flex; align-items:center; gap:20px;">
-      <div class="page-title">Quản lý loại sản phẩm</div>
+      <div class="page-title">Quản lý đơn hàng</div>
       <a href="admin-dashboard.html" class="back-btn">Trở về Dashboard</a>
     </div>
   </header>
@@ -206,340 +134,161 @@
         <li><a href="product-management.html">Quản lý danh mục sản phẩm</a></li>
         <li><a href="import-management.html">Quản lý nhập sản phẩm</a></li>
         <li><a href="price-management.html">Quản lý giá bán</a></li>
-        <li><a href="order-management.html">Quản lý đơn hàng</a></li>
-        <li><a href="inventory-management.html" class="active">Quản lý tồn kho</a></li>
+        <li><a href="order-management.html" class="active">Quản lý đơn hàng</a></li>
+        <li><a href="inventory-management.html">Quản lý tồn kho</a></li>
       </ul>
     </aside>
 
     <main class="admin-content">
       <div class="content-card">
         <h2 class="card-title">
-          Quản lý tồn kho
+          Danh sách đơn hàng (128 đơn hàng trong 30 ngày gần nhất)
         </h2>
 
-        <div class="tabs">
-          <div class="tab active" data-tab="tab-list">Danh sách loại sản phẩm</div>
-          <div class="tab" data-tab="tab-add">Thêm loại sản phẩm mới</div>
-          <div class="tab" data-tab="tab-report">Báo cáo loại sản phẩm</div>
-          <div class="tab" data-tab="tab-alert">Cảnh báo loại sản phẩm</div>
-        </div>
-
-        <!-- Tab 1: Danh sách loại sản phẩm -->
-        <div id="tab-list" class="tab-content active">
-          <div class="demo-notice">
-            Danh sách 12 loại sản phẩm đang hoạt động. Sử dụng tìm kiếm để lọc nhanh.
-          </div>
-
-          <div class="search-form">
-            <div class="search-row">
-              <div class="form-group form-col">
-                <label class="form-label">Tìm kiếm theo tên</label>
-                <input type="text" class="form-control" placeholder="Nhập tên loại sản phẩm...">
-              </div>
-              <div class="form-group form-col">
-                <label class="form-label">Trạng thái</label>
-                <select class="form-control">
-                  <option>Tất cả</option>
-                  <option>Hiển thị</option>
-                  <option>Đã ẩn</option>
-                </select>
-              </div>
-              <div class="search-actions">
-                <button class="btn btn-primary"><i class="fas fa-search"></i> Tìm kiếm</button>
-                <button class="btn btn-secondary" id="reset-search"><i class="fas fa-undo"></i> Reset</button>
-              </div>
-            </div>
-          </div>
-
-          <table>
-            <thead>
-              <tr>
-                <th>STT</th>
-                <th>Tên loại sản phẩm</th>
-                <th>Mô tả</th>
-                <th>Số sản phẩm</th>
-                <th>Trạng thái</th>
-                <th class="text-center">Thao tác</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>
-                  <div class="category-info">
-                    <i class="fas fa-gamepad category-icon"></i>
-                    <div class="category-details">
-                      <div class="category-name">Liên Quân Mobile</div>
-                      <div class="category-desc">Tài khoản LQ rank cao, skin hiếm</div>
-                    </div>
-                  </div>
-                </td>
-                <td class="text-center">248</td>
-                <td class="text-center"><span class="status-badge status-normal">Hiển thị</span></td>
-                <td class="text-center">
-                  <div class="actions">
-                    <button class="btn btn-edit btn-sm"><i class="fas fa-edit"></i> Sửa</button>
-                    <button class="btn btn-delete btn-sm"><i class="fas fa-trash"></i> Xóa</button>
-                    <button class="btn btn-toggle btn-sm"><i class="fas fa-eye-slash"></i> Ẩn</button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>
-                  <div class="category-info">
-                    <i class="fas fa-gamepad category-icon"></i>
-                    <div class="category-details">
-                      <div class="category-name">Free Fire</div>
-                      <div class="category-desc">Tài khoản FF rank Huyền Thoại, full skin</div>
-                    </div>
-                  </div>
-                </td>
-                <td class="text-center">312</td>
-                <td class="text-center"><span class="status-badge status-normal">Hiển thị</span></td>
-                <td class="text-center">
-                  <div class="actions">
-                    <button class="btn btn-edit btn-sm"><i class="fas fa-edit"></i> Sửa</button>
-                    <button class="btn btn-delete btn-sm"><i class="fas fa-trash"></i> Xóa</button>
-                    <button class="btn btn-toggle btn-sm"><i class="fas fa-eye-slash"></i> Ẩn</button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>
-                  <div class="category-info">
-                    <i class="fas fa-gamepad category-icon"></i>
-                    <div class="category-details">
-                      <div class="category-name">Valorant</div>
-                      <div class="category-desc">Tài khoản Valorant rank cao + skin VIP</div>
-                    </div>
-                  </div>
-                </td>
-                <td class="text-center">189</td>
-                <td class="text-center"><span class="status-badge status-normal">Hiển thị</span></td>
-                <td class="text-center">
-                  <div class="actions">
-                    <button class="btn btn-edit btn-sm"><i class="fas fa-edit"></i> Sửa</button>
-                    <button class="btn btn-delete btn-sm"><i class="fas fa-trash"></i> Xóa</button>
-                    <button class="btn btn-toggle btn-sm"><i class="fas fa-eye-slash"></i> Ẩn</button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>
-                  <div class="category-info">
-                    <i class="fas fa-gamepad category-icon"></i>
-                    <div class="category-details">
-                      <div class="category-name">Roblox</div>
-                      <div class="category-desc">Gói Robux, tài khoản Robux cao cấp</div>
-                    </div>
-                  </div>
-                </td>
-                <td class="text-center">96</td>
-                <td class="text-center"><span class="status-badge status-normal">Hiển thị</span></td>
-                <td class="text-center">
-                  <div class="actions">
-                    <button class="btn btn-edit btn-sm"><i class="fas fa-edit"></i> Sửa</button>
-                    <button class="btn btn-delete btn-sm"><i class="fas fa-trash"></i> Xóa</button>
-                    <button class="btn btn-toggle btn-sm"><i class="fas fa-eye-slash"></i> Ẩn</button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td>
-                  <div class="category-info">
-                    <i class="fas fa-gamepad category-icon"></i>
-                    <div class="category-details">
-                      <div class="category-name">Gift Card</div>
-                      <div class="category-desc">Thẻ Google Play, iTunes, Steam Wallet</div>
-                    </div>
-                  </div>
-                </td>
-                <td class="text-center">156</td>
-                <td class="text-center"><span class="status-badge status-danger">Đã ẩn</span></td>
-                <td class="text-center">
-                  <div class="actions">
-                    <button class="btn btn-edit btn-sm"><i class="fas fa-edit"></i> Sửa</button>
-                    <button class="btn btn-delete btn-sm"><i class="fas fa-trash"></i> Xóa</button>
-                    <button class="btn btn-toggle btn-sm" style="background:#10b981;"><i class="fas fa-eye"></i> Hiện lại</button>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <!-- Tab 2: Thêm loại sản phẩm mới -->
-        <div id="tab-add" class="tab-content">
-          <div class="demo-notice">
-            Thêm loại sản phẩm mới vào hệ thống.
-          </div>
-
-          <form>
-            <div class="form-row">
-              <div class="form-group form-col">
-                <label class="form-label">Tên loại sản phẩm</label>
-                <input type="text" class="form-control" placeholder="Nhập tên loại...">
-              </div>
-              <div class="form-group form-col">
-                <label class="form-label">Mô tả</label>
-                <input type="text" class="form-control" placeholder="Nhập mô tả ngắn gọn...">
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group form-col">
-                <label class="form-label">Trạng thái</label>
-                <select class="form-control">
-                  <option>Hiển thị</option>
-                  <option>Ẩn</option>
-                </select>
-              </div>
-            </div>
-            <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Thêm loại sản phẩm</button>
-          </form>
-        </div>
-
-        <!-- Tab 3: Báo cáo loại sản phẩm -->
-        <div id="tab-report" class="tab-content">
-          <div class="demo-notice">
-            Báo cáo thống kê loại sản phẩm. Chọn khoảng thời gian để xem báo cáo.
-          </div>
-
-          <div class="search-form">
-            <div class="search-row">
-              <div class="form-group form-col">
-                <label class="form-label">Từ ngày</label>
-                <input type="date" class="form-control" id="from-date">
-              </div>
-              <div class="form-group form-col">
-                <label class="form-label">Đến ngày</label>
-                <input type="date" class="form-control" id="to-date">
-              </div>
-              <div class="search-actions">
-                <button class="btn btn-primary"><i class="fas fa-chart-bar"></i> Xem báo cáo</button>
-                <button class="btn btn-secondary" id="reset-report"><i class="fas fa-undo"></i> Reset</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="summary-cards">
-            <div class="summary-card">
-              <div class="summary-title">Tổng loại sản phẩm</div>
-              <div class="summary-value">12</div>
-              <i class="fas fa-tags summary-icon"></i>
-            </div>
-            <div class="summary-card">
-              <div class="summary-title">Loại đang hiển thị</div>
-              <div class="summary-value">10</div>
-              <i class="fas fa-eye summary-icon"></i>
-            </div>
-            <div class="summary-card">
-              <div class="summary-title">Loại đã ẩn</div>
-              <div class="summary-value">2</div>
-              <i class="fas fa-eye-slash summary-icon"></i>
-            </div>
-            <div class="summary-card">
-              <div class="summary-title">Tổng sản phẩm</div>
-              <div class="summary-value">1,001</div>
-              <i class="fas fa-boxes summary-icon"></i>
-            </div>
-          </div>
-
-          <table>
-            <thead>
-              <tr>
-                <th>STT</th>
-                <th>Tên loại</th>
-                <th>Số sản phẩm</th>
-                <th>Trạng thái</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- Dữ liệu báo cáo tương tự danh sách -->
-              <tr>
-                <td>1</td>
-                <td>Liên Quân Mobile</td>
-                <td class="text-center">248</td>
-                <td class="text-center"><span class="status-badge status-normal">Hiển thị</span></td>
-              </tr>
-              <!-- Thêm các dòng khác tương tự -->
-            </tbody>
-          </table>
-        </div>
-
-        <!-- Tab 4: Cảnh báo loại sản phẩm -->
-        <div id="tab-alert" class="tab-content">
-          <div class="alert-section">
-            <div class="alert-header">
-              <i class="fas fa-exclamation-triangle"></i>
-              <div class="alert-title">Cảnh báo loại sản phẩm</div>
-            </div>
-            <p>Có 1 loại sản phẩm đang ẩn và có thể cần kiểm tra lại.</p>
-          </div>
-
-          <table>
-            <thead>
-              <tr>
-                <th>STT</th>
-                <th>Tên loại</th>
-                <th>Mô tả</th>
-                <th>Số sản phẩm</th>
-                <th>Trạng thái</th>
-                <th class="text-center">Thao tác</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>Gift Card</td>
-                <td>Thẻ Google Play, iTunes, Steam Wallet</td>
-                <td class="text-center">156</td>
-                <td class="text-center"><span class="status-badge status-danger">Đã ẩn</span></td>
-                <td class="text-center">
-                  <button class="btn btn-warning btn-sm"><i class="fas fa-sync"></i> Hiện lại</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <table id="orderTable">
+          <thead>
+            <tr>
+              <th>Mã đơn</th>
+              <th>Khách hàng</th>
+              <th>Ngày đặt</th>
+              <th>Sản phẩm</th>
+              <th>Tổng tiền</th>
+              <th>Trạng thái</th>
+              <th style="text-align:center;">Thao tác</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="Mã" class="order-id">OD1288</td>
+              <td data-label="Khách" class="order-customer">Nguyễn Văn Hoàng</td>
+              <td data-label="Ngày" class="order-date">23/11/2025 19:45</td>
+              <td data-label="Sản phẩm" class="order-product">Free Fire Rank Huyền Thoại 1</td>
+              <td data-label="Tổng" class="order-total"><strong>1,250,000 ₫</strong></td>
+              <td data-label="Trạng thái"><span class="status status-new">Mới đặt</span></td>
+              <td data-label="Thao tác">
+                <div class="actions">
+                  <button class="btn btn-view" onclick="viewOrderDetail(this)">Xem chi tiết</button>
+                  <button class="btn btn-update">Cập nhật trạng thái</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td data-label="Mã" class="order-id">OD1287</td>
+              <td data-label="Khách" class="order-customer">Trần Minh Tuấn</td>
+              <td data-label="Ngày" class="order-date">23/11/2025 18:20</td>
+              <td data-label="Sản phẩm" class="order-product">Liên Quân Kim Cương + 120 Skin</td>
+              <td data-label="Tổng" class="order-total"><strong>980,000 ₫</strong></td>
+              <td data-label="Trạng thái"><span class="status status-processing">Đã xử lý</span></td>
+              <td data-label="Thao tác">
+                <div class="actions">
+                  <button class="btn btn-view" onclick="viewOrderDetail(this)">Xem chi tiết</button>
+                  <button class="btn btn-update">Giao hàng</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td data-label="Mã" class="order-id">OD1286</td>
+              <td data-label="Khách" class="order-customer">Lê Thị Mai</td>
+              <td data-label="Ngày" class="order-date">22/11/2025 22:10</td>
+              <td data-label="Sản phẩm" class="order-product">Robux 10.000</td>
+              <td data-label="Tổng" class="order-total"><strong>1,850,000 ₫</strong></td>
+              <td data-label="Trạng thái"><span class="status status-delivered">Đã giao</span></td>
+              <td data-label="Thao tác">
+                <div class="actions">
+                  <button class="btn btn-view" onclick="viewOrderDetail(this)">Xem chi tiết</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td data-label="Mã" class="order-id">OD1285</td>
+              <td data-label="Khách" class="order-customer">Phạm Quốc Anh</td>
+              <td data-label="Ngày" class="order-date">22/11/2025 15:30</td>
+              <td data-label="Sản phẩm" class="order-product">Valorant Rank Immortal</td>
+              <td data-label="Tổng" class="order-total"><strong>2,200,000 ₫</strong></td>
+              <td data-label="Trạng thái"><span class="status status-cancelled">Đã hủy</span></td>
+              <td data-label="Thao tác">
+                <div class="actions">
+                  <button class="btn btn-view" onclick="viewOrderDetail(this)">Xem chi tiết</button>
+                  <button class="btn btn-cancel">Xóa đơn</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </main>
   </div>
 
+  <!-- Modal Xem chi tiết đơn hàng -->
+  <div id="detailModal" class="modal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeDetailModal()">X</button>
+      <div class="modal-header">
+        Chi tiết đơn hàng
+      </div>
+      <div id="detailContent">
+        <div class="detail-row">
+          <span class="detail-label">Mã đơn hàng:</span>
+          <span class="detail-value" id="detailId">-</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Khách hàng:</span>
+          <span class="detail-value" id="detailCustomer">-</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Ngày đặt hàng:</span>
+          <span class="detail-value" id="detailDate">-</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Sản phẩm:</span>
+          <span class="detail-value" id="detailProduct">-</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Tổng tiền:</span>
+          <span class="detail-value" id="detailTotal">-</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Trạng thái:</span>
+          <span class="detail-value" id="detailStatus">-</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
-    // Tab functionality – lấy từ tonkho.html
-    document.querySelectorAll('.tab').forEach(tab => {
-      tab.addEventListener('click', function() {
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-        
-        this.classList.add('active');
-        const tabId = this.getAttribute('data-tab');
-        document.getElementById(tabId).classList.add('active');
-      });
-    });
+    function viewOrderDetail(btn) {
+      const row = btn.closest('tr');
+      
+      const orderId = row.querySelector('.order-id').textContent;
+      const customer = row.querySelector('.order-customer').textContent;
+      const date = row.querySelector('.order-date').textContent;
+      const product = row.querySelector('.order-product').textContent;
+      const total = row.querySelector('.order-total').textContent;
+      const statusElement = row.querySelector('.status');
+      const statusText = statusElement ? statusElement.textContent : 'Không xác định';
 
-    // Reset buttons – lấy từ tonkho.html
-    document.getElementById('reset-search').addEventListener('click', function() {
-      const inputs = document.querySelectorAll('.search-form input, .search-form select');
-      inputs.forEach(input => input.value = '');
-    });
+      document.getElementById('detailId').textContent = orderId;
+      document.getElementById('detailCustomer').textContent = customer;
+      document.getElementById('detailDate').textContent = date;
+      document.getElementById('detailProduct').textContent = product;
+      document.getElementById('detailTotal').textContent = total;
+      document.getElementById('detailStatus').textContent = statusText;
 
-    document.getElementById('reset-report').addEventListener('click', function() {
-      const inputs = document.querySelectorAll('#tab-report input, #tab-report select');
-      inputs.forEach(input => input.value = '');
-    });
+      document.getElementById('detailModal').classList.add('active');
+    }
 
-    // Set today's date as default for date inputs – lấy từ tonkho.html
-    const today = new Date().toISOString().split('T')[0];
-    document.getElementById('to-date').value = today;
-    
-    const oneMonthAgo = new Date();
-    oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
-    document.getElementById('from-date').value = oneMonthAgo.toISOString().split('T')[0];
+    function closeDetailModal() {
+      document.getElementById('detailModal').classList.remove('active');
+    }
+
+    // Đóng modal khi click bên ngoài
+    window.addEventListener('click', function(e) {
+      const modal = document.getElementById('detailModal');
+      if (e.target === modal) {
+        closeDetailModal();
+      }
+    });
   </script>
+
 </body>
 </html>
