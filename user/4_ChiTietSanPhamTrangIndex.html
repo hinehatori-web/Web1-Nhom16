@@ -1,190 +1,186 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Chi tiết sản phẩm - GameZone</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GameZone - Chi tiết tài khoản</title>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
-<style>
-  body{
-    font-family:"Poppins",sans-serif;
-    margin:0;
-    background:linear-gradient(180deg,#050305 0%,#0b0b0d 100%);
-    color:#e6eef8;
-  }
-  a{text-decoration:none;color:inherit;}
-  .container{max-width:1200px;margin:0 auto;padding:20px;}
+  <style>
+    :root{
+      --bg:#071023; --card:#0f1724; --accent:#00e6ff; --accent2:#00ff7a;
+      --text:#e6eef8; --muted:#98A0B3;
+    }
 
-  /* HEADER */
-  .gamezone-header{
-    display:flex;align-items:center;
-    padding:14px 20px;
-    background:#0f1316;
-    border-bottom:1px solid rgba(255,255,255,0.06);
-    position:sticky;top:0;z-index:1000;
-  }
-  .logo-icon{
-    width:44px;height:44;border-radius:10px;
-    background:linear-gradient(135deg,#ff3b3b,#ff8a00);
-    display:grid;place-items:center;
-    color:#000;font-size:20px;font-weight:700;
-  }
-  .logo-text{font-size:22px;font-weight:700;color:#ff6b6b;margin-left:10px;}
-  .nav-icons{margin-left:auto;display:flex;gap:16px;}
-  .nav-icons a{font-size:18px;color:#e6eef8;}
+    body{
+      margin:0;font-family:Poppins,sans-serif;
+      background:linear-gradient(180deg,#05060a,#071023);
+      color:var(--text);
+    }
 
-  /* MAIN PRODUCT */
-  .product-box{
-    margin-top:24px;
-    display:grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap:28px;
-  }
-  .product-box img{
-    width:100%;border-radius:12px;object-fit:cover;
-    box-shadow:0 0 12px rgba(255,255,255,0.06);
-  }
-  .details h1{
-    color:#ff8a6b;
-    margin-bottom:10px;
-    font-size:28px;
-  }
-  .price{
-    font-size:26px;font-weight:700;
-    color:#00ff9d;margin:10px 0 16px;
-  }
-  .desc{
-    line-height:1.7;
-    color:rgba(255,255,255,0.8);
-    margin-bottom:18px;
-  }
+    /* HEADER */
+    header{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:16px;background:rgba(0,0,0,0.25);
+      border-bottom:1px solid rgba(255,255,255,0.03);
+      position:sticky;top:0;z-index:15;backdrop-filter:blur(6px);
+    }
+    .logo-text{font-weight:700;color:var(--accent);font-size:22px;}
+    header a{color:var(--text);margin-left:14px;}
 
-  .btn-buy{
-    padding:12px 18px;
-    background:linear-gradient(90deg,#ff3b3b,#ff8a00);
-    border:none;border-radius:10px;
-    font-weight:700;font-size:16px;
-    color:#000;
-    display:inline-block;
-    margin-right:10px;
-  }
+    /* WRAPPER */
+    .wrapper{max-width:1100px;margin:30px auto;padding:20px;}
 
-  .btn-back{
-    padding:10px 18px;
-    border-radius:10px;
-    background:#1c1c21;
-    border:1px solid rgba(255,255,255,0.1);
-    color:#ff8a6b;font-weight:600;
-  }
+    .product-box{
+      display:grid;grid-template-columns:1fr 1.3fr;
+      gap:24px;background:var(--card);
+      padding:22px;border-radius:16px;
+      border:1px solid rgba(255,255,255,0.06);
+    }
+    .product-box img{
+      width:100%;border-radius:12px;
+      height:360px;object-fit:cover;
+    }
 
-  /* EXTRA INFO */
-  .info-section{
-    margin-top:30px;
-    background:#17171c;
-    padding:16px;border-radius:12px;
-    border:1px solid rgba(255,255,255,0.05);
-  }
-  .info-section h2{
-    color:#ff8a6b;margin-bottom:12px;
-  }
-  .info-row{margin-bottom:10px;}
+    .title{color:var(--accent);font-size:26px;margin-bottom:6px;}
+    .price{color:var(--accent2);font-size:22px;font-weight:700;margin-bottom:12px;}
 
-  /* FOOTER */
-  footer{
-    margin-top:40px;
-    text-align:center;
-    color:#aab3c2;
-    padding:20px;
-    border-top:1px solid rgba(255,255,255,0.06);
-  }
-</style>
+    /* BUTTONS */
+    .btn{
+      display:inline-block;padding:12px 18px;border-radius:10px;
+      text-decoration:none;font-weight:600;margin-right:10px;
+    }
+    .btn-back{border:1px solid var(--accent);color:var(--accent);}
+    .btn-login{
+      background:linear-gradient(90deg,var(--accent),var(--accent2));
+      color:#001018;font-weight:700;
+    }
+    .btn:hover{opacity:0.85;}
+
+    .section-box{
+      background:rgba(255,255,255,0.03);
+      padding:16px;border-radius:12px;margin-top:18px;
+      border:1px solid rgba(255,255,255,0.05);
+    }
+    .section-box h3{color:var(--accent);margin-bottom:10px;}
+    .section-box ul{padding-left:20px;line-height:1.7;color:var(--muted);}
+     /* FOOTER */
+    footer{
+      margin-top:40px;padding:20px;
+      background:#0f1316;border-top:1px solid rgba(255,255,255,0.05);
+    }
+    .footer-inner{
+      max-width:1200px;margin:auto;
+      display:flex;justify-content:space-between;flex-wrap:wrap;
+    }
+    .footer-brand span{font-weight:700;color:var(--accent);}
+    .footer-tagline{color:var(--muted);font-size:14px;}
+    .footer-contact h3{margin-bottom:10px;color:var(--accent2);}
+    .contact-item{margin-bottom:6px;color:var(--muted);}
+    .footer-bottom{text-align:center;margin-top:14px;color:var(--muted);}
+  </style>
 </head>
 
 <body>
 
-<header class="gamezone-header">
-  <div class="logo-icon"><i class="fa-solid fa-gamepad"></i></div>
-  <div class="logo-text">GameZone</div>
+<!-- HEADER -->
+<header>
+  <a href="index.html" class="logo-text">GameZone</a>
 
-  <div class="nav-icons">
+  <div>
     <a href="2_DangNhap.html"><i class="fa-solid fa-bag-shopping"></i></a>
     <a href="2_DangNhap.html"><i class="fa-regular fa-clock"></i></a>
     <a href="2_DangNhap.html"><i class="fa-regular fa-circle-user"></i></a>
   </div>
 </header>
 
-<div class="container">
+<!-- CONTENT -->
+<div class="wrapper">
 
   <div class="product-box">
-    <img src="assets/images/lienquan/lienquan1.jpg" alt="Sản phẩm">
 
-    <div class="details">
-      <h1>Acc Liên Quân - Rank Kim Cương</h1>
+    <!-- IMAGE -->
+    <img src="assets/images/lienquan/lienquan1.jpg" alt="Acc Liên Quân">
 
+    <!-- RIGHT CONTENT -->
+    <div>
+      <h1 class="title">Acc Liên Quân – Rank Kim Cương</h1>
       <div class="price">700.000₫</div>
+      <!-- ACTION BUTTONS -->
+      <a href="index.html" class="btn btn-back">
+        <i class="fa-solid fa-arrow-left"></i> Quay lại danh sách
+      </a>
 
-      <p class="desc">
-        ✔ Full thông tin <br>
-        ✔ Nhiều tướng + skin <br>
-        ✔ Bảo hành 7 ngày <br>
-        ✔ Giao tài khoản tự động
-      </p>
+      <a href="2_DangNhap.html" class="btn btn-login">
+        <i class="fa-solid fa-right-to-bracket"></i> Đăng nhập để mua
+      </a>
 
-      <a href="2_DangNhap.html" class="btn-buy">Mua ngay</a>
-      <a href="index.html" class="btn-back">← Quay lại</a>
+      <!-- THÔNG TIN CHÍNH -->
+      <div class="section-box">
+        <h3>Thông tin tài khoản</h3>
+        <ul>
+          <li>Rank: Kim Cương (Chuẩn leo rank tốt)</li>
+          <li>Skin: 55+ skin giá trị</li>
+          <li>Tướng: Gần full tướng meta</li>
+          <li>Liên kết: <b>Trắng thông tin</b> (bạn tự thêm SĐT/Email của mình)</li>
+          <li>Đổi mật khẩu: Có</li>
+          <li>Login: Garena / Tài khoản thường</li>
+        </ul>
+      </div>
+
+      <!-- CAM KẾT -->
+      <div class="section-box">
+        <h3>Cam kết từ GameZone</h3>
+        <ul>
+          <li>Tài khoản uy tín – đúng như mô tả 100%</li>
+          <li>Không thu hồi – không hack – không trùng thông tin</li>
+          <li>Hỗ trợ đổi mật khẩu & bảo mật sau mua</li>
+          <li>Giao hàng tự động trong 1–3 phút</li>
+        </ul>
+      </div>
+
+      <!-- BẢO HÀNH -->
+      <div class="section-box">
+        <h3>Bảo hành</h3>
+        <ul>
+          <li>Bảo hành 7 ngày nếu có vấn đề đăng nhập</li>
+          <li>Hỗ trợ kỹ thuật 7h – 22h hằng ngày</li>
+          <li>Cam kết tài khoản không bị thu hồi</li>
+        </ul>
+      </div>
+
     </div>
   </div>
-
-  <div class="info-section">
-    <h2>Thông tin chi tiết</h2>
-    <div class="info-row">• Rank: Kim Cương</div>
-    <div class="info-row">• Tướng: 78</div>
-    <div class="info-row">• Skin: 152</div>
-    <div class="info-row">• Đổi mật khẩu: Có</div>
-    <div class="info-row">• Trạng thái: Còn hàng</div>
-  </div>
-
 </div>
 
- <!-- FOOTER -->
-    <footer class="site-footer">
-      <div class="container footer-inner">
 
-        <div class="footer-main">
-          <div class="footer-brand">
-            <a href="index.html" class="footer-logo">
-              <i class="fa-solid fa-gamepad" style="font-size:40px;color:#2e7d68;"></i>
-              <span>GameZone</span>
-            </a>
-            <p class="footer-tagline">Nơi mua bán tài khoản game uy tín</p>
-          </div>
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
 
-          <div class="footer-contact">
-            <h3>Thông Tin Liên Hệ</h3>
+    <div class="footer-brand">
+      <span>GameZone</span>
+      <p class="footer-tagline">Nơi mua bán tài khoản game uy tín</p>
+    </div>
 
-            <div class="contact-info">
-              <div class="contact-item">
-                <i class="fas fa-globe"></i>
-                <span>gamezone.vn</span>
-              </div>
+    <div>
+      <h3 style="margin-bottom:6px;color:var(--accent);font-size:18px;">Thông Tin Liên Hệ</h3>
 
-              <div class="conta</i>
-                <a href="mailto:info@gamezone.example">info@gamezone.example</a>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="footer-bottom">
-          <p>&copy; 2025 GameZone - Mua bán account game. All rights reserved.</p>
-        </div>
-
+      <div class="contact-info">
+        <div class="contact-item"><i class="fas fa-globe"></i> gamezone.vn</div>
+        <div class="contact-item"><i class="fas fa-phone"></i> 0346 087 617</div>
+        <div class="contact-item"><i class="fas fa-envelope"></i> info@gamezone.example</div>
       </div>
-    </footer>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2025 GameZone - Mua bán account game. All rights reserved.
+  </div>
+</footer>
 
 </body>
 </html>

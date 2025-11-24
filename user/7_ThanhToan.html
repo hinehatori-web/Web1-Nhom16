@@ -11,83 +11,41 @@
         rel="stylesheet">
 
   <style>
-    /* ===== BASE ===== */
+    :root{
+      --accent:#00e6ff;
+      --accent2:#00ff7a;
+      --card:#0f1724;
+      --text:#e6eef8;
+    }
+
     body{
       font-family:"Poppins", sans-serif;
       margin:0;
       background:#0b0b0d;
-      color:#e6eef8;
+      color:var(--text);
     }
     a{text-decoration:none;color:inherit;}
     .container{max-width:1200px;margin:0 auto;padding:20px;}
 
     /* ===== HEADER ===== */
     .gamezone-header{
-      display:flex;
-      align-items:center;
-      padding:12px 20px;
-      background:#0f1316;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:16px;
+      background:rgba(0,0,0,0.25);
       border-bottom:1px solid rgba(255,255,255,0.05);
-      position:sticky;
-      top:0;
-      z-index:1000;
-    }
-    .logo-icon{
-      width:44px;height:44px;
-      display:grid;place-items:center;
-      background:linear-gradient(135deg,#ff3b3b,#ff8a00);
-      color:#0a0a0a;border-radius:8px;font-size:20px;
+      position:sticky;top:0;z-index:1000;
+      backdrop-filter:blur(7px);
     }
     .logo-text{
-      color:#ff6b6b;font-weight:700;font-size:20px;margin-left:10px;
+      font-size:22px;
+      font-weight:700;
+      color:var(--accent);
     }
-    .nav-menu{
-      margin-left:auto;
-      display:flex;
-      gap:16px;
-      align-items:center;
+    .gamezone-nav{
+      display:flex;gap:16px;align-items:center;
     }
-    .nav-menu a{
-      color:#e6eef8;
-      font-size:15px;
-      display:flex;
-      align-items:center;
-      gap:6px;
-    }
-    .nav-menu a:hover,
-    .nav-menu a.active{
-      color:#ff8a6b;
-    }
-
-    /* ===== STEPS ===== */
-    .steps{
-      display:flex;
-      justify-content:center;
-      margin-top:26px;
-      gap:30px;
-    }
-    .step{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      opacity:0.6;
-    }
-    .step-number{
-      width:28px;height:28px;
-      display:grid;place-items:center;
-      border-radius:50%;
-      background:#2a2a33;
-      color:#fff;
-      font-weight:600;
-    }
-    .step.active{
-      opacity:1;
-      color:#ff8a6b;
-    }
-    .step.active .step-number{
-      background:linear-gradient(135deg,#ff3b3b,#ff8a00);
-      color:#0b0b0b;
-    }
+    .gamezone-nav a{color:#e6eef8;font-size:18px;}
+    .gamezone-nav a:hover{color:var(--accent2);}
 
     /* ===== LAYOUT ===== */
     .checkout-wrapper{
@@ -100,120 +58,123 @@
 
     /* ===== FORM ===== */
     .checkout-form{
-      background:#17171c;
+      background:var(--card);
       padding:24px;
       border-radius:14px;
       border:1px solid rgba(255,255,255,0.05);
     }
     .checkout-form h3{
-      color:#ff8a6b;
+      color:var(--accent);
       margin-bottom:12px;
       font-size:1.2rem;
     }
     .form-group{
       margin-bottom:16px;
-      display:flex;
-      flex-direction:column;
     }
     label{
       font-weight:600;
       margin-bottom:6px;
+      display:block;
       color:#cfd6e4;
     }
-    input{
+    input, textarea{
+      width:100%;
       padding:10px;
       border-radius:8px;
       border:1px solid rgba(255,255,255,0.12);
-      background:#0f0f12;
+      background:#0b0b0d;
       color:white;
     }
 
-    /* ===== PAYMENT METHODS ===== */
-    .payment-method{
-      display:flex;
-      align-items:center;
-      padding:12px;
-      gap:10px;
-      border:1px solid rgba(255,255,255,0.08);
-      border-radius:10px;
-      margin-top:10px;
-      cursor:pointer;
-      background:#141418;
-      color:#dce1eb;
-    }
-    .payment-method.selected{
-      border-color:#ff8a6b;
-      background:#1d1d22;
-      color:#ff8a6b;
+    textarea{
+      height:100px;
+      resize:none;
     }
 
-    /* ===== ACTIONS ===== */
-    .checkout-actions{
-      margin-top:24px;
+    /* ===== PAYMENT METHODS ===== */
+    .payment-box{
+      background:#141418;
+      padding:14px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,0.06);
+      margin-bottom:12px;
       display:flex;
-      justify-content:space-between;
       align-items:center;
-    }
-    .btn-outline{
-      padding:10px 16px;
-      border:1px solid #ff8a6b;
-      border-radius:10px;
-      color:#ff8a6b;
-      font-weight:600;
-    }
-    .btn-outline:hover{
-      background:#ff8a6b;color:#0a0a0a;
-    }
-    .btn-primary{
-      padding:12px 20px;
-      border:none;
-      border-radius:10px;
-      background:linear-gradient(90deg,#ff3b3b,#ff8a00);
-      color:#0b0b0b;
-      font-weight:700;
+      gap:12px;
       cursor:pointer;
     }
+    .payment-box input{width:auto;}
+    .payment-box:hover{border-color:var(--accent2);}
 
     /* ===== ORDER SUMMARY ===== */
     .order-summary{
-      background:#17171c;
+      background:var(--card);
       padding:24px;
       border-radius:14px;
       border:1px solid rgba(255,255,255,0.05);
       height:max-content;
     }
     .order-summary h3{
-      color:#ff8a6b;
+      color:var(--accent);
       margin-bottom:16px;
-      font-size:1.2rem;
-    }
-    .order-items{
-      border-bottom:1px solid rgba(255,255,255,0.08);
-      padding-bottom:14px;
-      margin-bottom:14px;
     }
     .order-item{
       display:flex;
       justify-content:space-between;
-      margin-bottom:10px;
+      margin-bottom:12px;
       color:#d6dbea;
-    }
+      }
     .order-total{
       display:flex;
       justify-content:space-between;
-      color:#27ae60;
-      font-size:1.25rem;
+      color:var(--accent2);
+      font-size:1.2rem;
       font-weight:700;
+      margin-top:16px;
     }
 
-    /* ===== FOOTER ===== */
-    .site-footer{
-      background:#0f1316;
-      margin-top:40px;
-      padding:26px 20px;
+    /* ===== BUTTONS ===== */
+    .checkout-actions{
+      margin-top:24px;
+      display:flex;
+      justify-content:space-between;
+      gap:20px;
+    }
+    .btn-outline{
+      padding:10px 16px;
+      border-radius:10px;
+      border:1px solid var(--accent);
+      color:var(--accent);
+      font-weight:700;
+    }
+    .btn-primary{
+      padding:12px 20px;
+      border-radius:10px;
+      background:linear-gradient(90deg,var(--accent),var(--accent2));
+      color:#001018;
+      font-weight:700;
+      border:none;
+    }
+
+    /* ===== FOOTER (CHUẨN MẪU) ===== */
+    footer.site-footer{
+      margin-top:50px;
+      padding:26px 0;
       border-top:1px solid rgba(255,255,255,0.05);
-      text-align:center;
-      color:#cbd3df;
+      background:#0f1316;
+    }
+    .footer-inner{
+      max-width:1200px;margin:0 auto;
+      display:flex;justify-content:space-between;
+      gap:20px;flex-wrap:wrap;color:#98A0B3;
+    }
+    .footer-brand span{
+      font-size:20px;font-weight:700;
+      color:var(--accent);
+    }
+    .footer-bottom{
+      text-align:center;margin-top:20px;
+      color:#98A0B3;
     }
   </style>
 </head>
@@ -222,23 +183,15 @@
 
 <!-- HEADER -->
 <header class="gamezone-header">
-  <i class="fa-solid fa-gamepad logo-icon"></i>
-  <span class="logo-text">GameZone</span>
+  <a href="5_DaDangNhap.html" class="logo-text">GameZone</a>
 
-  <nav class="nav-menu">
-    <a href="6_GioHang.html"><i class="fa-solid fa-bag-shopping"></i> Giỏ hàng</a>
-    <a href="9_LichSuDonHang.html"><i class="fa-regular fa-clock"></i> Lịch sử</a>
-    <a href="3_ThongTinCaNhan.html"><i class="fa-regular fa-circle-user"></i> Tài khoản</a>
-    <a href="index.html"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
+  <nav class="gamezone-nav">
+    <a href="6_GioHang.html"><i class="fa-solid fa-bag-shopping"></i></a>
+    <a href="9_LichSuDonHang.html"><i class="fa-regular fa-clock"></i></a>
+    <a href="3_ThongTinCaNhan.html"><i class="fa-regular fa-circle-user"></i></a>
+    <a href="index.html"><i class="fa-solid fa-right-from-bracket"></i></a>
   </nav>
 </header>
-
-<!-- STEPS -->
-<div class="steps">
-  <div class="step"><div class="step-number">1</div>Giỏ hàng</div>
-  <div class="step active"><div class="step-number">2</div>Thanh toán</div>
-  <div class="step"><div class="step-number">3</div>Xác nhận</div>
-</div>
 
 <!-- MAIN -->
 <div class="checkout-wrapper">
@@ -259,54 +212,54 @@
 
     <div class="form-group">
       <label>Địa chỉ giao hàng</label>
-      <input type="text" value="273 An Dương Vương, Phường Chợ Quán, Quận 5, TP.HCM">
+      <input type="text" value="273 An Dương Vương, P.Chợ Quán, Q.5, TP.HCM">
     </div>
 
-    <h3 style="margin-top:18px">Phương thức thanh toán</h3>
+    <div class="form-group">
+      <label>Ghi chú đơn hàng</label>
+      <textarea placeholder="Ví dụ: Gọi trước khi giao…"></textarea>
+    </div>
 
-    <label class="payment-method selected">
-      <input type="radio" hidden checked>
-      <i class="fa-solid fa-money-bill-wave"></i> Thanh toán khi nhận hàng
+    <h3>Phương thức thanh toán</h3>
+
+    <label class="payment-box">
+      <input type="radio" name="pay" checked>
+      <i class="fa-solid fa-truck"></i> Thanh toán khi nhận hàng (COD)
     </label>
 
-    <label class="payment-method">
-      <input type="radio" hidden>
-      <i class="fa-solid fa-university"></i> Chuyển khoản ngân hàng
+    <label class="payment-box">
+      <input type="radio" name="pay">
+      <i class="fa-regular fa-credit-card"></i> Thanh toán qua thẻ ngân hàng
     </label>
 
-    <label class="payment-method">
-      <input type="radio" hidden>
-      <i class="fa-solid fa-credit-card"></i> Thẻ tín dụng / ghi nợ
+    <label class="payment-box">
+      <input type="radio" name="pay">
+      <i class="fa-brands fa-momo"></i> Thanh toán bằng MoMo
     </label>
-
     <div class="checkout-actions">
-      <a class="btn-outline" href="6_GioHang.html">← Quay lại</a>
-      <a href="8_xacnhandonhang.html" class="btn-primary">Hoàn tất đơn hàng</a>
+      <a class="btn-outline" href="6_GioHang.html">← Quay lại giỏ hàng</a>
+      <a class="btn-outline" href="8_XacNhanDonHang.html"> Xác nhận thanh toán</a>
     </div>
+
   </section>
 
   <!-- ORDER SUMMARY -->
   <aside class="order-summary">
     <h3>Đơn hàng của bạn</h3>
 
-    <div class="order-items">
-      <div class="order-item">
-        <span>Acc Liên Quân – Kim Cương ×1</span>
-        <span>700.000₫</span>
-      </div>
-      <div class="order-item">
-        <span>Acc Liên Minh – Vàng I ×1</span>
-        <span>600.000₫</span>
-      </div>
-      <div class="order-item">
-        <span>Acc Free Fire – Súng Vĩnh Viễn ×1</span>
-        <span>550.000₫</span>
-      </div>
+    <div class="order-item">
+      <span>Acc Liên Quân – Kim Cương ×1</span>
+      <span>700.000₫</span>
+    </div>
+
+    <div class="order-item">
+      <span>Acc Free Fire – Level Cao ×1</span>
+      <span>600.000₫</span>
     </div>
 
     <div class="order-total">
       <span>Tổng cộng:</span>
-      ❤1.850.000₫
+      <span>1.300.000₫</span>
     </div>
   </aside>
 
@@ -314,9 +267,24 @@
 
 <!-- FOOTER -->
 <footer class="site-footer">
-  <p>&copy; 2025 GameZone – Nơi mua bán tài khoản game uy tín.</p>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span>GameZone</span>
+      <p class="footer-tagline">Nơi mua bán tài khoản game uy tín</p>
+    </div>
+
+    <div class="footer-contact">
+      <h3>Thông Tin Liên Hệ</h3>
+      <div class="contact-item"><i class="fas fa-globe"></i> gamezone.vn</div>
+      <div class="contact-item"><i class="fas fa-phone"></i> 0346 087 617</div>
+      <div class="contact-item"><i class="fas fa-envelope"></i> info@gamezone.example</div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    © 2025 GameZone - Mua bán account game. All rights reserved.
+  </div>
 </footer>
 
 </body>
 </html>
-

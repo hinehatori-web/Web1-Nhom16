@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GameZone - Liên Minh Huyền Thoại</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root{
+      --bg:#071023; --card:#0f1724;
+      --accent:#00e6ff; --accent2:#00ff7a;
+      --text:#e6eef8; --muted:#98A0B3;
+    }
+    body{margin:0;background:linear-gradient(180deg,#05060a,#071023);
+      font-family:Poppins, sans-serif;color:var(--text);}
+    a{text-decoration:none;color:inherit}
+
+    /* HEADER */
+    .gamezone-header{
+      padding:14px 20px;display:flex;justify-content:space-between;align-items:center;
+      background:rgba(0,0,0,0.25);border-bottom:1px solid rgba(255,255,255,0.05);
+      backdrop-filter:blur(6px);position:sticky;top:0;z-index:50;
+    }
+    .logo-text{font-size:22px;font-weight:700;color:var(--accent)}
+    .gamezone-nav a{font-size:18px;margin-left:14px}
+
+    /* CATEGORY FILTER */
+    .category-bar{
+      margin:20px auto;max-width:1200px;padding:0 20px;
+      display:flex;gap:10px;
+    }
+    .category-bar a{
+      padding:8px 16px;border-radius:20px;background:#0f1724;
+      color:var(--muted);border:1px solid rgba(255,255,255,0.06);
+      font-weight:600;
+    }
+    .category-bar a.active{
+      background:linear-gradient(90deg,var(--accent),var(--accent2));
+      color:#001018;
+    }
+
+    /* GRID */
+    .container{max-width:1200px;margin:0 auto;padding:20px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .product{
+      background:var(--card);border-radius:12px;padding:14px;
+      border:1px solid rgba(255,255,255,0.05);text-align:center;
+    }
+    .product img{width:100%;height:150px;object-fit:cover;border-radius:8px}
+    .product h3{color:var(--accent);margin:10px 0 6px;font-size:16px}
+    .price{color:var(--accent2);font-weight:700;margin-bottom:8px}
+
+    .btn-outline{
+      padding:8px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);
+      display:inline-block;
+    }
+    .btn-buy{
+      margin-top:6px;padding:8px 12px;border-radius:8px;
+      background:linear-gradient(90deg,var(--accent),var(--accent2));
+      color:#001018;font-weight:700;display:inline-block;
+    }
+
+    /* FOOTER */
+    footer.site-footer{
+      margin-top:40px;padding:26px 0;background:#0f1316;
+      border-top:1px solid rgba(255,255,255,0.05);color:var(--muted)
+    }
+    .footer-inner{
+      max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;
+      flex-wrap:wrap;gap:20px;align-items:center;
+    }
+    .footer-bottom{text-align:center;width:100%;margin-top:12px}
+  </style>
+</head>
+
+<body>
+
+<header class="gamezone-header">
+  <a href="index_lmht.html" class="logo-text">GameZone</a>
+  <nav class="gamezone-nav">
+    <a href="11_Loi.html"><i class="fa-solid fa-bag-shopping"></i></a>
+    <a href="11_Loi.html"><i class="fa-regular fa-clock"></i></a>
+    <a href="11_Loi.html"><i class="fa-regular fa-circle-user"></i></a>
+  </nav>
+</header>
+
+<!-- CATEGORY BAR -->
+<div class="category-bar">
+  <a href="index.html">Tất cả</a>
+  <a href="index_lqm.html" >Liên Quân Mobile</a>
+  <a href="index_lmht.html"class="active">Liên Minh Huyền Thoại</a>
+  <a href="index_ff.html">Free Fire</a>
+</div>
+
+<div class="container">
+  <h2>Liên Minh Huyền Thoại</h2>
+
+  <div class="grid">
+
+    
+    <div class="product">
+      <img src="assets/images/lienminh/lienminh1.jpg">
+      <h3>LMHT - Vàng I</h3>
+      <div class="price">600.000₫</div>
+      <a class="btn-outline" href="4_ChiTietSanPhamTrangIndex.html">Xem</a>
+      <a class="btn-buy" href="11_Loi.html">Mua</a>
+    </div>
+
+    <div class="product">
+      <img src="assets/images/lienminh/lienminh2.jpg">
+      <h3>LMHT - Kim Cương IV</h3>
+      <div class="price">1.500.000₫</div>
+      <a class="btn-outline" href="4_ChiTietSanPhamTrangIndex.html">Xem</a>
+      <a class="btn-buy" href="11_Loi.html">Mua</a>
+    </div>
+    <div class="product">
+      <img src="assets/images/lienminh/lienminh3.jpg">
+      <h3>LMHT - Cao Thủ</h3>
+      <div class="price">1.200.000₫</div>
+      <a class="btn-outline" href="4_ChiTietSanPhamTrangIndex.html">Xem</a>
+      <a class="btn-buy" href="11_Loi.html">Mua</a>
+    </div>
+
+    <div class="product">
+      <img src="assets/images/lienminh/lienminh4.jpg">
+      <h3>LMHT - Thách Đấu</h3>
+      <div class="price">2.500.000₫</div>
+      <a class="btn-outline" href="4_ChiTietSanPhamTrangIndex.html">Xem</a>
+      <a class="btn-buy" href="11_Loi.html">Mua</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+
+    <div class="footer-brand">
+      <span>GameZone</span>
+      <p class="footer-tagline">Nơi mua bán tài khoản game uy tín</p>
+    </div>
+
+    <div>
+      <h3 style="margin-bottom:6px;color:var(--accent);font-size:18px;">Thông Tin Liên Hệ</h3>
+      <div class="contact-info">
+        <div class="contact-item"><i class="fas fa-globe"></i> gamezone.vn</div>
+        <div class="contact-item"><i class="fas fa-phone"></i> 0346 087 617</div>
+        <div class="contact-item"><i class="fas fa-envelope"></i> info@gamezone.example</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2025 GameZone - Mua bán account game. All rights reserved.
+  </div>
+</footer>
+
+</body>
+</html>
