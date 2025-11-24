@@ -1,399 +1,187 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tìm kiếm nâng cao - GameZone</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
   :root{
-    --bg:#071023; --card:#0f1724; --accent:#00e6ff; --accent2:#00ff7a;
+    --bg:#071023; --card:#0f1724;
+    --accent:#00e6ff; --accent2:#00ff7a;
     --text:#e6eef8; --muted:#98A0B3;
   }
-  *{box-sizing:border-box}
+
   body{
     margin:0;
-    font-family:Poppins, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    font-family:Poppins, sans-serif;
     background:linear-gradient(180deg,#05060a,#071023);
     color:var(--text);
   }
+  a{text-decoration:none;color:inherit}
 
-  .container{max-width:1200px;margin:0 auto;padding:20px;}
+  /* HEADER */
+    .gamezone-header{
+      padding:14px 20px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      background:rgba(0,0,0,0.25);
+      border-bottom:1px solid rgba(255,255,255,0.05);
+      backdrop-filter:blur(6px);
+      position:sticky;top:0;z-index:50;
+    }
+    .logo-text{font-size:22px;font-weight:700;color:var(--accent)}
+    .gamezone-nav a{margin-left:14px;font-size:18px;color:var(--text)}
 
-  /* HEADER (đồng nhất) */
-  .header{
-    padding:14px 20px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    background:rgba(0,0,0,0.25);
-    border-bottom:1px solid rgba(255,255,255,0.05);
-    backdrop-filter:blur(6px);
-    position:sticky; top:0; z-index:50;
-  }
-  .logo-text{font-weight:700;color:var(--accent);font-size:20px;text-decoration:none;}
-  .nav-right{display:flex;gap:14px;align-items:center;}
-  .nav-right a{color:var(--text);text-decoration:none;font-size:15px;padding:8px;border-radius:8px}
-  .nav-right a:hover{background:rgba(255,255,255,0.02)}
-
-  /* PAGE TITLE */
-  h1.page-title{
-    text-align:center;margin-top:22px;color:var(--accent2);font-size:24px;font-weight:700;
+  /* TITLE */
+  h1{
+    text-align:center;
+    margin:22px 0;
+    color:var(--accent2);
   }
 
   /* FILTER BOX */
   .filter-box{
-    margin-top:18px;
+    max-width:1200px;margin:0 auto;
     background:var(--card);
-    border:1px solid rgba(255,255,255,0.05);
-    padding:18px;
+    padding:20px;
     border-radius:12px;
-    display:grid;
-    grid-template-columns:repeat(3,minmax(0,1fr));
-    gap:12px;
-    align-items:end;
-  }
-  .filter-box label{color:var(--accent);font-weight:700;margin-bottom:6px;display:block}
-  .filter-box select, .filter-box input{
-    width:100%; padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);
-    background:transparent;color:var(--text);
-  }
-  .btn-filter{
-    grid-column:1 / -1;
-    display:inline-block;text-align:center;padding:12px;border-radius:10px;
-    background:linear-gradient(90deg,var(--accent),var(--accent2));
-    color:#001018;font-weight:700;text-decoration:none;
-  }
-
-  /* PRODUCT GRID (3 columns x 2 rows per page) */
-  .product-grid{
+    border:1px solid rgba(255,255,255,0.05);
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:18px;
-    margin-top:22px;
+    gap:16px;
   }
-  .product{
-    background:var(--card);
-    border-radius:12px;
-    padding:12px;
-    border:1px solid rgba(255,255,255,0.04);
-    text-align:center;
+  label{color:var(--accent);font-weight:600;margin-bottom:6px;display:block}
+  select{
+    width:100%;padding:12px;border-radius:8px;
+    border:1px solid rgba(255,255,255,0.15);
+    background:#0b1220;color:var(--text);
   }
-  .product img{width:100%;height:150px;object-fit:cover;border-radius:8px}
-  .product h3{color:var(--accent);margin:10px 0 6px;font-size:16px}
-  .product .price{color:var(--accent2);font-weight:800;margin-bottom:8px}
-  .actions{display:flex;gap:8px;justify-content:center;margin-top:8px}
-  .btn-outline{padding:8px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);color:var(--text);text-decoration:none}
-   .btn-buy {
-  padding: 8px 12px;
-  border-radius: 8px;
-  background: linear-gradient(90deg, var(--accent), var(--accent2));
-  color: #001018;
-  text-decoration: none;
-  font-weight: 700;
-  display: inline-block;
-  transition: 0.25s;
-}
 
-.btn-buy:hover {
-  opacity: 0.85;
-}
-  /* PAGINATION (radio + label, CSS only, no JS, no anchors) */
-  .pager { display:flex; gap:8px; justify-content:center; margin:20px 0; align-items:center; }
+  /* Fix option color */
+  select option{color:#000;background:#fff}
 
-  /* hide actual radios */
-  .page-radio{display:none}
-
-  .page-label{
-    padding:8px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);
-    color:var(--muted);cursor:pointer;text-decoration:none;
-    background:transparent;
-    user-select:none;
-  }
-  /* active style when corresponding radio is checked */
-  #page-1:checked ~ .container .page-label[for="page-1"],
-  #page-2:checked ~ .container .page-label[for="page-2"]{
+  .btn-filter{
+    grid-column:1 / -1;
+    padding:12px;text-align:center;
+    border-radius:10px;
     background:linear-gradient(90deg,var(--accent),var(--accent2));
     color:#001018;font-weight:700;
+    display:block;margin-top:10px;
   }
 
-  
-  .product{display:none}
-
-  #page-1:checked ~ .container .product.p1 { display:block; }
-  #page-2:checked ~ .container .product.p2 { display:block; }
-
- 
-  body:not(:has(#page-1:checked)) .container .product.p1 { display:block; }
-
-  /* Responsive */
-  @media (max-width:900px){
-    .product-grid{grid-template-columns:repeat(2,1fr)}
-    .filter-box{grid-template-columns:repeat(2,1fr)}
-  }
-  @media (max-width:560px){
-    .product-grid{grid-template-columns:1fr}
-    .filter-box{grid-template-columns:1fr}
-  }
-  /* Sửa lỗi chữ bị mất khi mở select (dropdown) */
-  select,
-  select option {
-  color: #000 !important;  
-  background: #fff !important; 
-}
-
-
-select {
-  background: #0b1220 !important; 
-  color: var(--text) !important;  
-  border: 1px solid rgba(255,255,255,0.15);
-}
-
-/* Tô màu option đang được chọn */
-select option:checked {
-  background: var(--accent) !important;
-  color: #001018 !important;
-}
-
-  /* FOOTER (chuẩn) */
+  /* FOOTER CHUẨN */
   footer.site-footer{
-    margin-top:40px;padding:26px 0;border-top:1px solid rgba(255,255,255,0.05);background:#0f1316;color:var(--muted)
+    margin-top:40px;padding:26px 0;
+    background:#0f1316;
+    border-top:1px solid rgba(255,255,255,0.05);
+    color:var(--muted);
   }
-  .footer-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
-  .footer-brand{display:flex;gap:12px;align-items:center}
-  .footer-brand .logo-box{width:44px;height:44px;border-radius:8px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#001018;font-weight:700}
-  .footer-tagline{color:var(--muted)}
-  .footer-contact h3{margin:0 0 8px 0;color:var(--accent2)}
-  .contact-item{margin-bottom:6px;color:var(--muted)}
-  .footer-bottom{text-align:center;width:100%;margin-top:12px;color:var(--muted)}
+  .footer-inner{
+    max-width:1200px;margin:0 auto;
+    display:flex;justify-content:space-between;
+    gap:20px;flex-wrap:wrap;
+  }
+  .footer-brand span{
+    font-size:20px;font-weight:700;color:var(--accent);
+  }
+  .footer-tagline{margin-top:4px;color:var(--muted)}
+  .contact-item{margin-bottom:6px}
+  .footer-bottom{
+    text-align:center;margin-top:12px;color:var(--muted)
+  }
+
 </style>
 </head>
+
 <body>
 
-  <!-- RADIO (pagination control) - placed BEFORE .container so CSS sibling selector works -->
-  <input type="radio" name="page" id="page-1" class="page-radio" checked>
-  <input type="radio" name="page" id="page-2" class="page-radio">
+<!-- HEADER -->
+<header class="gamezone-header">
+  <a href="5_DaDangNhap.html" class="logo-text">GameZone</a>
 
-  <!-- HEADER -->
-  <header class="header">
-    <a class="logo-text" href="5_DaDangNhap.html">GameZone</a>
+  <nav class="gamezone-nav">
+    <a href="6_GioHang.html"><i class="fa-solid fa-bag-shopping"></i></a>
+    <a href="9_LichSuDonHang.html"><i class="fa-regular fa-clock"></i></a>
+    <a href="3_ThongTinCaNhan.html"><i class="fa-regular fa-circle-user"></i></a>
+    <a href="index.html"><i class="fa-solid fa-right-from-bracket"></i></a>
+  </nav>
+</header>
 
-    <div class="nav-right">
-      <a href="5_DaDangNhap.html" title="Trang chủ"><i class="fa-solid fa-house"></i></a>
-      <a href="3_ThongTinCaNhan.html" title="Tài khoản"><i class="fa-regular fa-circle-user"></i></a>
-      <a href="6_GioHang.html" title="Giỏ hàng"><i class="fa-solid fa-bag-shopping"></i></a>
-      <a href="index.html" title="Đăng xuất"><i class="fa-solid fa-right-from-bracket"></i></a>
-    </div>
-  </header>
 
-  <div class="container">
-    <h1 class="page-title">Tìm kiếm nâng cao</h1>
+<h1>Tìm kiếm nâng cao</h1>
+<!-- FORM LỌC NÂNG CAO (KHÔNG KẾT QUẢ) -->
+<form class="filter-box" action="15_KetQua.html" method="get">
 
-    <!-- FILTER BOX -->
-    <form class="filter-box" action="#result" method="get" onsubmit="return false;">
-      <div>
-        <label>Chọn game</label>
-        <select name="game">
-          <option value="">Tất cả</option>
-          <option>Liên Quân Mobile</option>
-          <option>Liên Minh Huyền Thoại</option>
-          <option>Free Fire</option>
-        </select>
-      </div>
+  <div>
+    <label>Chọn game</label>
+    <select name="game">
+      <option value="">Tất cả</option>
+      <option>Liên Quân Mobile</option>
+      <option>Liên Minh Huyền Thoại</option>
+      <option>Free Fire</option>
+    </select>
+  </div>
 
-      <div>
-        <label>Rank</label>
-        <select name="rank">
-          <option value="">Tất cả</option>
-          <option>Vàng</option>
-          <option>Kim Cương</option>
-          <option>Cao Thủ</option>
-          <option>Thách Đấu</option>
-        </select>
-      </div>
+  <div>
+    <label>Rank</label>
+    <select name="rank">
+      <option value="">Tất cả</option>
+      <option>Vàng</option>
+      <option>Kim Cương</option>
+      <option>Cao Thủ</option>
+      <option>Thách Đấu</option>
+    </select>
+  </div>
 
-      <div>
-        <label>Mức giá</label>
-        <select name="price">
-          <option value="">Tất cả</option>
-          <option>Dưới 300.000₫</option>
-          <option>300.000₫ - 800.000₫</option>
-          <option>Trên 800.000₫</option>
-        </select>
-      </div>
+  <div>
+    <label>Mức giá</label>
+    <select name="price">
+      <option value="">Tất cả</option>
+      <option>Dưới 300.000₫</option>
+      <option>300.000₫ - 800.000₫</option>
+      <option>Trên 800.000₫</option>
+    </select>
+  </div>
 
-      <div>
-        <label>Số tướng / skin</label>
-        <select name="feature">
-          <option value="">Tất cả</option>
-          <option>Nhiều Skin</option>
-          <option>Nhiều Tướng</option>
-          <option>Skin Hiếm</option>
-        </select>
-      </div>
+  <div>
+    <label>Số tướng / skin</label>
+    <select name="feature">
+      <option value="">Tất cả</option>
+      <option>Nhiều Skin</option>
+      <option>Nhiều Tướng</option>
+      <option>Skin Hiếm</option>
+    </select>
+  </div>
 
-      <div>
-        <label>Loại hiếm</label>
-        <select name="rarity">
-          <option value="">Tất cả</option>
-          <option>Có Skin SSS</option>
-          <option>Có Skin Huyền Thoại</option>
-          <option>Súng Vĩnh Viễn (FF)</option>
-        </select>
-      </div>
+  <div>
+    <label>Loại hiếm</label>
+    <select name="rarity">
+      <option value="">Tất cả</option>
+      <option>Có Skin SSS</option>
+      <option>Có Skin Huyền Thoại</option>
+      <option>Súng Vĩnh Viễn (FF)</option>
+    </select>
+  </div>
 
-      <div>
-        <label>Trạng thái</label>
-        <select name="status">
-          <option value="">Tất cả</option>
-          <option>Trắng thông tin</option>
-          <option>Đổi được Gmail</option>
-          <option>Không liên kết</option>
-        </select>
-      </div>
+  <div>
+    <label>Trạng thái</label>
+    <select name="status">
+      <option value="">Tất cả</option>
+      <option>Trắng thông tin</option>
+      <option>Đổi được Gmail</option>
+      <option>Không liên kết</option>
+    </select>
+  </div>
 
-      <a class="btn-filter" href="#result">Lọc kết quả</a>
-    </form>
+  <button type="submit" class="btn-filter" href="15_KetQua.html">Lọc kết quả</button>
+</form>
 
-    <!-- RESULTS -->
-    <h2 id="result" style="margin-top:14px;color:var(--accent);text-align:center;font-size:18px">Kết quả</h2>
-
-    <div class="product-grid">
-      <!-- PAGE 1 products (6 items) - class p1 -->
-      <article class="product p1">
-        <img src="assets/images/lienquan/lienquan1.jpg" alt="Acc LQ 1">
-        <h3>Acc LQ - Kim Cương</h3>
-        <div class="price">700.000₫</div>
-        <div class="actions">
-          <a class="btn-outline" href="4_ChiTietSanPham.html">Xem chi tiết</a>
-          <a class="btn-buy" href="7_ThanhToan.html">Mua ngay</a>
-        </div>
-      </article>
-
-      <article class="product p1">
-        <img src="assets/images/lienquan/lienquan2.jpg" alt="Acc LQ 2">
-        <h3>Acc LQ - Full Tướng</h3>
-        <div class="price">850.000₫</div>
-        <div class="actions">
-          <a class="btn-outline" href="4_ChiTietSanPham.html">Xem chi tiết</a>
-          <a class="btn-buy" href="7_ThanhToan.html">Mua ngay</a>
-        </div>
-      </article>
-
-      <article class="product p1">
-        <img src="assets/images/lienminh/lienminh1.jpg" alt="Acc LMHT 1">
-        <h3>Acc LMHT - Vàng I</h3>
-        <div class="price">600.000₫</div>
-        <div class="actions">
-          <a class="btn-outline" href="4_ChiTietSanPham.html">Xem chi tiết</a>
-          <a class="btn-buy" href="7_ThanhToan.html">Mua ngay</a>
-        </div>
-      </article>
-
-      <article class="product p1">
-        <img src="assets/images/lienminh/lienminh2.jpg" alt="Acc LMHT 2">
-        <h3>Acc LMHT - Kim Cương IV</h3>
-        <div class="price">1.500.000₫</div>
-        <div class="actions">
-          <a class="btn-outline" href="4_ChiTietSanPham.html">Xem chi tiết</a>
-          <a class="btn-buy" href="7_ThanhToan.html">Mua ngay</a>
-        </div>
-      </article>
-
-      <article class="product p1">
-        <img src="assets/images/freefire/freefire1.jpg" alt="Acc FF 1">
-        <h3>Acc FF - Súng Vĩnh Viễn</h3>
-        <div class="price">550.000₫</div>
-        <div class="actions">
-          <a class="btn-outline" href="4_ChiTietSanPham.html">Xem chi tiết</a>
-          <a class="btn-buy" href="7_ThanhToan.html">Mua ngay</a>
-        </div>
-      </article>
-
-      <article class="product p1">
-        <img src="assets/images/freefire/freefire2.jpg" alt="Acc FF 2">
-        <h3>Acc FF - Level Cao</h3>
-        <div class="price">300.000₫</div>
-        <div class="actions">
-          <a class="btn-outline" href="4_ChiTietSanPham.html">Xem chi tiết</a>
-          <a class="btn-buy" href="7_ThanhToan.html">Mua ngay</a>
-        </div>
-      </article>
-
-      <!-- PAGE 2 products (6 items) - class p2 -->
-      <article class="product p2">
-        <img src="assets/images/lienquan/lienquan3.jpg" alt="Acc LQ 3">
-        <h3>Acc LQ - Cao Thủ</h3>
-        <div class="price">1.200.000₫</div>
-        <div class="actions">
-          <a class="btn-outline" href="4_ChiTietSanPham.html">Xem chi tiết</a>
-          <a class="btn-buy" href="7_ThanhToan.html">Mua ngay</a>
-        </div>
-      </article>
-
-      <article class="product p2">
-        <img src="assets/images/lienquan/lienquan4.jpg" alt="Acc LQ 4">
-        <h3>Acc LQ - Rank Tím</h3>
-        <div class="price">600.000₫</div>
-        <div class="actions">
-          <a class="btn-outline" href="4_ChiTietSanPham.html">Xem chi tiết</a>
-          <a class="btn-buy" href="7_ThanhToan.html">Mua ngay</a>
-        </div>
-      </article>
-
-      <article class="product p2">
-        <img src="assets/images/lienminh/lienminh3.jpg" alt="Acc LMHT 3">
-        <h3>Acc LMHT - Cao Thủ</h3>
-        <div class="price">1.200.000₫</div>
-        <div class="actions">
-          <a class="btn-outline" href="4_ChiTietSanPham.html">Xem chi tiết</a>
-          <a class="btn-buy" href="7_ThanhToan.html">Mua ngay</a>
-        </div>
-      </article>
-
-      <article class="product p2">
-        <img src="assets/images/lienminh/lienminh4.jpg" alt="Acc LMHT 4">
-        <h3>Acc LMHT - Thách Đấu</h3>
-        <div class="price">2.500.000₫</div>
-        <div class="actions">
-          <a class="btn-outline" href="4_ChiTietSanPham.html">Xem chi tiết</a>
-          <a class="btn-buy" href="7_ThanhToan.html">Mua ngay</a>
-        </div>
-      </article>
-
-      <article class="product p2">
-        <img src="assets/images/freefire/freefire3.jpg" alt="Acc FF 3">
-        <h3>Acc FF - Skin DJ Alok</h3>
-        <div class="price">420.000₫</div>
-        <div class="actions">
-          <a class="btn-outline" href="4_ChiTietSanPham.html">Xem chi tiết</a>
-          <a class="btn-buy" href="7_ThanhToan.html">Mua ngay</a>
-        </div>
-      </article>
-
-      <article class="product p2">
-        <img src="assets/images/freefire/freefire5.jpg" alt="Acc FF 4">
-        <h3>Acc FF - Skin Hiếm</h3>
-        <div class="price">520.000₫</div>
-        <div class="actions">
-          <a class="btn-outline" href="4_ChiTietSanPham.html">Xem chi tiết</a>
-          <a class="btn-buy" href="7_ThanhToan.html">Mua ngay</a>
-        </div>
-      </article>
-
-    </div> <!-- .product-grid -->
-
-    <!-- PAGINATION CONTROLS: use labels that target the radios above -->
-    <div class="pager" role="navigation" aria-label="Phân trang">
-      <label for="page-1" class="page-label">1</label>
-      <label for="page-2" class="page-label">2</label>
-    </div>
-
-  </div> <!-- .container -->
-
-  <footer class="site-footer">
+<!-- FOOTER -->
+<footer class="site-footer">
   <div class="footer-inner">
 
     <div class="footer-brand">
@@ -403,19 +191,14 @@ select option:checked {
 
     <div>
       <h3 style="margin-bottom:6px;color:var(--accent);font-size:18px;">Thông Tin Liên Hệ</h3>
-
-      <div class="contact-info">
-        <div class="contact-item"><i class="fas fa-globe"></i> gamezone.vn</div>
-        <div class="contact-item"><i class="fas fa-phone"></i> 0346 087 617</div>
-        <div class="contact-item"><i class="fas fa-envelope"></i> info@gamezone.example</div>
-      </div>
+      <div class="contact-item"><i class="fas fa-globe"></i> gamezone.vn</div>
+      <div class="contact-item"><i class="fas fa-phone"></i> 0346 087 617</div>
+      <div class="contact-item"><i class="fas fa-envelope"></i> info@gamezone.example</div>
     </div>
 
   </div>
 
-  <div class="footer-bottom">
-    © 2025 GameZone - Mua bán account game. All rights reserved.
-  </div>
+  <div class="footer-bottom">© 2025 GameZone - Mua bán account game. All rights reserved.</div>
 </footer>
 
 </body>
