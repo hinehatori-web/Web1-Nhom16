@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GameZone - Trang chủ</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GameZone - Trang chủ </title>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -17,151 +16,47 @@
       --text:#e6eef8;
       --muted:#98A0B3;
     }
-    body{
-      margin:0;
-      background:linear-gradient(180deg,#05060a,#071023);
-      font-family:Poppins, sans-serif;
-      color:var(--text);
-    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Poppins, sans-serif;background:linear-gradient(180deg,#05060a,#071023);color:var(--text)}
     a{text-decoration:none;color:inherit}
-
-    /* HEADER */
-    .gamezone-header{
-      padding:14px 20px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      background:rgba(0,0,0,0.25);
-      border-bottom:1px solid rgba(255,255,255,0.05);
-      backdrop-filter:blur(6px);
-      position:sticky;top:0;z-index:50;
-    }
+    .gamezone-header{padding:14px 20px;display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,0.25);border-bottom:1px solid rgba(255,255,255,0.05);backdrop-filter:blur(6px);position:sticky;top:0;z-index:50}
     .logo-text{font-size:22px;font-weight:700;color:var(--accent)}
     .gamezone-nav a{margin-left:14px;font-size:18px;color:var(--text)}
-
-    /* SEARCH */
-    .search-box{max-width:1200px;margin:20px auto;padding:0 20px;}
-    .search-row{display:flex;gap:10px;}
-    .search-input{
-      flex:1;padding:12px;border-radius:10px;
-      background:#0b1220;border:1px solid rgba(255,255,255,0.08);
-      color:var(--text);font-size:15px;
-    }
-    .btn-search{
-      padding:12px 16px;border-radius:10px;font-weight:700;
-      background:linear-gradient(90deg,var(--accent),var(--accent2));
-      color:#001018;
-    }
-    .btn-adv{
-      padding:12px 16px;border-radius:10px;font-weight:700;
-      background:#0f1724;border:1px solid var(--accent);
-      color:var(--accent);
-    }
-    .btn-adv:hover{background:var(--accent);color:#001018;}
-    .suggestions{margin-top:8px;color:var(--muted);font-size:14px;}
-
-    /* LỌC DANH MỤC */
-    .categories{
-      max-width:1200px;margin:20px auto;padding:0 20px;
-      display:flex;gap:12px;flex-wrap:wrap;
-    }
-    .categories a{
-      padding:8px 16px;border-radius:20px;
-      background:#0f1724;border:1px solid rgba(255,255,255,0.08);
-      color:var(--muted);font-weight:600;
-    }
-    .categories a.active,
-    .categories a:hover{
-      background:linear-gradient(90deg,var(--accent),var(--accent2));
-      color:#001018;
-    }
-    /* WELCOME BOX */
-     .welcome-title{
-    text-align:center;
-    font-size:26px;
-    font-weight:700;
-    margin-top:10px;
-    margin-bottom:25px;
-    color:var(--text);
-    letter-spacing:0.5px;
-  }
-  .welcome-title span{
-    background:linear-gradient(90deg, var(--accent), var(--accent2));
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    font-weight:800;
-  }
-
-    /* GRID */
+    .search-box{max-width:1200px;margin:20px auto;padding:0 20px}
+    .search-row{display:flex;gap:10px;align-items:center}
+    .search-input{flex:1;padding:12px;border-radius:10px;background:#0b1220;border:1px solid rgba(255,255,255,0.08);color:var(--text)}
+    .btn-search{padding:12px 16px;border-radius:10px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#001018;border:none;}
+    .btn-adv{padding:12px 16px;border-radius:10px;background:#0f1724;border:1px solid var(--accent);color:var(--accent);}
+    .categories{max-width:1200px;margin:12px auto;padding:0 20px;display:flex;gap:12px;flex-wrap:wrap}
+    .categories a{padding:8px 16px;border-radius:20px;background:#0f1724;color:var(--muted);font-weight:600;border:1px solid rgba(255,255,255,0.06)}
+    .categories a.active,.categories a:hover{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#001018}
     .container{max-width:1200px;margin:0 auto;padding:20px}
+    .welcome{margin-bottom:12px;color:var(--accent2);font-weight:700;font-size:20px}
     .grid{
       display:grid;
-grid-template-columns:repeat(3,1fr);
+      grid-template-columns:repeat(3,1fr);
       gap:18px;
     }
-    .product{
-      background:var(--card);
-      border-radius:12px;
-      padding:14px;
-      border:1px solid rgba(255,255,255,0.05);
-      text-align:center;
-    }
-    .product img{
-      width:100%;height:150px;object-fit:cover;border-radius:8px;
-    }
+    .product{background:var(--card);border-radius:12px;padding:14px;border:1px solid rgba(255,255,255,0.05);text-align:center}
+    .product img{width:100%;height:150px;object-fit:cover;border-radius:8px}
     .product h3{color:var(--accent);margin:10px 0 6px;font-size:16px}
     .price{color:var(--accent2);font-weight:700;margin-bottom:8px}
-
-    .btn-outline{
-      padding:8px 12px;border-radius:8px;
-      border:1px solid rgba(255,255,255,0.1);
-      color:var(--text);
-      display:inline-block;
-    }
-    .btn-buy{
-      margin-top:6px;padding:8px 12px;border-radius:8px;
-      background:linear-gradient(90deg,#00e6ff,#00ff7a);
-      color:#001018;font-weight:700;display:inline-block;
-    }
-
-    /* PAGINATION */
-    .pagination{
-      margin-top:24px;display:flex;justify-content:center;gap:10px;
-    }
-    .pagination a{
-      padding:8px 14px;border-radius:8px;
-      background:#0f1724;border:1px solid rgba(255,255,255,0.08);
-      color:var(--text);
-    }
-    .pagination .active{
-      background:linear-gradient(90deg,var(--accent),var(--accent2));
-      color:#001018;font-weight:700;
-    }
-
-    /* FOOTER */
-    footer.site-footer{
-      margin-top:40px;padding:26px 0;background:#0f1316;
-      border-top:1px solid rgba(255,255,255,0.05);color:var(--muted)
-    }
-    .footer-inner{
-      max-width:1200px;margin:0 auto;
-      display:flex;justify-content:space-between;
-      flex-wrap:wrap;gap:20px;align-items:center;
-    }
-    .footer-brand span{
-      font-size:20px;font-weight:700;color:var(--accent);
-    }
-    .footer-tagline{color:var(--muted);margin-top:4px}
-    .footer-bottom{text-align:center;width:100%;margin-top:12px}
+    .actions{display:flex;gap:8px;justify-content:center;margin-top:8px}
+    .btn-outline{padding:8px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);color:var(--text)}
+    .btn-buy{padding:8px 12px;border-radius:8px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#001018;font-weight:700}
+    .pagination{margin-top:24px;display:flex;justify-content:center;gap:10px}
+    .pagination a{padding:8px 14px;border-radius:8px;background:#0f1724;border:1px solid rgba(255,255,255,0.08);color:var(--text)}
+    .pagination a.active{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#001018;font-weight:700}
+    footer.site-footer{margin-top:40px;padding:26px 0;background:#0f1316;border-top:1px solid rgba(255,255,255,0.05);color:var(--muted)}
+    .footer-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+    @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:560px){.grid{grid-template-columns:1fr}}
   </style>
 </head>
-
 <body>
 
-<!-- HEADER -->
 <header class="gamezone-header">
   <a href="5_DaDangNhap.html" class="logo-text">GameZone</a>
-
   <nav class="gamezone-nav">
     <a href="6_GioHang.html"><i class="fa-solid fa-bag-shopping"></i></a>
     <a href="9_LichSuDonHang.html"><i class="fa-regular fa-clock"></i></a>
@@ -170,100 +65,99 @@ grid-template-columns:repeat(3,1fr);
   </nav>
 </header>
 
-<!-- SEARCH -->
 <div class="search-box">
-  <form>
+  <form action="13_TimKiem.html" method="get">
     <div class="search-row">
-      <input class="search-input" type="text" placeholder="Tìm kiếm tài khoản...">
-      <button class="btn-search" formaction="13_TimKiem.html">Tìm</button>
-      <button class="btn-adv" formaction="15_TimKiem2.html">Nâng Cao</button>
+      <input class="search-input" name="q" type="text" placeholder="Tìm kiếm tài khoản...">
+      <button class="btn-search" type="submit">Tìm</button>
+      <button class="btn-adv" formaction="15_TimKiem2.html">Tìm nâng cao</button>
     </div>
   </form>
-
-  <div class="suggestions">
-    Gợi ý: Liên Quân Mobile • Liên Minh Huyền Thoại • Free Fire
-  </div>
+  <div class="suggestions">Gợi ý: Liên Quân Mobile • Liên Minh Huyền Thoại • Free Fire</div>
 </div>
 
-<!-- LỌC DANH MỤC -->
 <div class="categories">
-  <a href="5_DaDangNhap.html" class="active">Tất cả</a>
+  <a href="5_DaDangNhap.html">Tất cả</a>
   <a href="5_LQ.html">Liên Quân Mobile</a>
-  <a href="5_LMHT.html">Liên Minh Huyền Thoại</a>
+  <a href="5_LMHT.html">Liên Minh huyền Thoại</a>
   <a href="5_FF.html">Free Fire</a>
 </div>
+<main class="container">
+<div class="welcome">Chào mừng trở lại, <strong>Đoàn Thị Kim Khương</strong>!</div>
 
-<!-- WELCOME -->
-<div class="welcome-title">
-  <h2 class="welcome-title">
-  Chào mừng trở lại, <span>Đoàn Thị Kim Khương</span>!
-</h2>
-</div>
-      
+
   <div class="grid">
-
-    <!-- 6 SP  -->
-    <div class="product">
-      <img src="assets/images/lienquan/lienquan4.jpg">
+    <!--  -->
+    <article class="product">
+      <img src="assets/images/lienquan/lienquan4.jpg" alt="">
       <h3>LQ - Rank Tím</h3>
       <div class="price">600.000₫</div>
-      <a class="btn-outline" href="4_ChiTietSanPham.html">Xem</a>
-      <a class="btn-buy" href="7_ThanhToan.html">Mua</a>
-    </div>
+      <div class="actions">
+        <a class="btn-outline" href="4_ChiTietSanPham.html">Xem</a>
+        <a class="btn-buy" href="7_ThanhToan.html">Mua</a>
+      </div>
+    </article>
 
-    <div class="product">
-      <img src="assets/images/lienquan/lienquan5.jpg">
+    <article class="product">
+      <img src="assets/images/lienquan/lienquan5.jpg" alt="">
       <h3>LQ - Nhiều Skin</h3>
       <div class="price">900.000₫</div>
-      <a class="btn-outline" href="4_ChiTietSanPham.html">Xem</a>
-      <a class="btn-buy" href="7_ThanhToan.html">Mua</a>
-    </div>
+      <div class="actions">
+        <a class="btn-outline" href="4_ChiTietSanPham.html">Xem</a>
+        <a class="btn-buy" href="7_ThanhToan.html">Mua</a>
+      </div>
+    </article>
 
-    <div class="product">
-      <img src="assets/images/lienminh/lienminh3.jpg">
+    <article class="product">
+      <img src="assets/images/lienminh/lienminh3.jpg" alt="">
       <h3>LMHT - Cao Thủ</h3>
       <div class="price">1.200.000₫</div>
-      <a class="btn-outline" href="4_ChiTietSanPham.html">Xem</a>
-      <a class="btn-buy" href="7_ThanhToan.html">Mua</a>
-    </div>
+      <div class="actions">
+        <a class="btn-outline" href="4_ChiTietSanPham.html">Xem</a>
+        <a class="btn-buy" href="7_ThanhToan.html">Mua</a>
+      </div>
+    </article>
 
-    <div class="product">
-      <img src="assets/images/lienminh/lienminh4.jpg">
+    <article class="product">
+      <img src="assets/images/lienminh/lienminh4.jpg" alt="">
       <h3>LMHT - Thách Đấu</h3>
       <div class="price">2.500.000₫</div>
-      <a class="btn-outline" href="4_ChiTietSanPham.html">Xem</a>
-      <a class="btn-buy" href="7_ThanhToan.html">Mua</a>
-    </div>
+      <div class="actions">
+        <a class="btn-outline" href="4_ChiTietSanPham.html">Xem</a>
+        <a class="btn-buy" href="7_ThanhToan.html">Mua</a>
+      </div>
+    </article>
 
-    <div class="product">
-      <img src="assets/images/freefire/freefire3.jpg">
+    <article class="product">
+      <img src="assets/images/freefire/freefire3.jpg" alt="">
       <h3>FF - Skin DJ Alok</h3>
-      <div class="price">350.000₫</div>
-      <a class="btn-outline" href="4_ChiTietSanPham.html">Xem</a>
-      <a class="btn-buy" href="7_ThanhToan.html">Mua</a>
-    </div>
+      <div class="price">420.000₫</div>
+      <div class="actions">
+        <a class="btn-outline" href="4_ChiTietSanPham.html">Xem</a>
+        <a class="btn-buy" href="7_ThanhToan.html">Mua</a>
+      </div>
+    </article>
 
-    <div class="product">
-      <img src="assets/images/freefire/freefire5.jpg">
+    <article class="product">
+      <img src="assets/images/freefire/freefire5.jpg" alt="">
       <h3>FF - Skin Hiếm</h3>
       <div class="price">520.000₫</div>
-      <a class="btn-outline" href="4_ChiTietSanPham.html">Xem</a>
-      <a class="btn-buy" href="7_ThanhToan.html">Mua</a>
-    </div>
-
+      <div class="actions">
+        <a class="btn-outline" href="4_ChiTietSanPham.html">Xem</a>
+        <a class="btn-buy" href="7_ThanhToan.html">Mua</a>
+      </div>
+    </article>
   </div>
 
   <div class="pagination">
     <a href="5_DaDangNhap.html">1</a>
     <a class="active">2</a>
+    <a href="5_DaDangNhap_page3.html">3</a>
   </div>
+</main>
 
-</div>
-
-<!-- FOOTER -->
 <footer class="site-footer">
   <div class="footer-inner">
-
     <div class="footer-brand">
       <span>GameZone</span>
       <p class="footer-tagline">Nơi mua bán tài khoản game uy tín</p>
@@ -271,19 +165,15 @@ grid-template-columns:repeat(3,1fr);
 
     <div>
       <h3 style="margin-bottom:6px;color:var(--accent);font-size:18px;">Thông Tin Liên Hệ</h3>
-
       <div class="contact-info">
         <div class="contact-item"><i class="fas fa-globe"></i> gamezone.vn</div>
         <div class="contact-item"><i class="fas fa-phone"></i> 0346 087 617</div>
         <div class="contact-item"><i class="fas fa-envelope"></i> info@gamezone.example</div>
       </div>
     </div>
-
   </div>
 
-  <div class="footer-bottom">
-    © 2025 GameZone - Mua bán account game. All rights reserved.
-  </div>
+  <div class="footer-bottom">© 2025 GameZone - Mua bán account game. All rights reserved.</div>
 </footer>
 
 </body>
