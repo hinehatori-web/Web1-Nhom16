@@ -28,7 +28,7 @@
       min-height: 100vh;
     }
 
-    /* Header & Sidebar – giữ nguyên đẹp lung linh */
+    /* Header & Sidebar – giữ nguyên 100% */
     .admin-header {
       position: fixed; top: 0; left: 0; right: 0; height: 70px;
       background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(12px);
@@ -62,11 +62,6 @@
       margin-bottom: 20px; display: flex; align-items: center; gap: 12px;
     }
 
-    .demo-notice {
-      background: rgba(251, 191, 36, 0.15); color: #fbbf24; padding: 16px;
-      border-radius: 12px; border-left: 4px solid #fbbf24; font-size: 15px; margin-bottom: 25px;
-    }
-
     table { width: 100%; border-collapse: separate; border-spacing: 0 12px; margin-top: 10px; }
     th { background: rgba(0, 212, 255, 0.1); padding: 18px 20px; text-align: left; color: var(--primary); font-weight: 600; font-size: 15px; }
     td { background: rgba(15, 23, 42, 0.6); padding: 18px 20px; border-radius: 12px; }
@@ -80,10 +75,35 @@
     .status-cancelled { background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.4); }
 
     .actions { display: flex; gap: 8px; flex-wrap: wrap; }
-    .btn { padding: 8px 14px; border: none; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: default; display: inline-flex; align-items: center; gap: 6px; }
+    .btn { padding: 8px 14px; border: none; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.3s; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
     .btn-view { background: #6366f1; color: white; }
     .btn-update { background: #06b6d4; color: white; }
     .btn-cancel { background: #dc2626; color: white; }
+
+    /* Modal thuần HTML + CSS */
+    input[type="checkbox"] { display: none; }
+
+    .modal {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center;
+      z-index: 2000; opacity: 0; visibility: hidden; transition: all 0.3s;
+    }
+    .modal:target { opacity: 1; visibility: visible; }
+    .modal-content {
+      background: var(--bg-card); width: 90%; max-width: 600px; border-radius: 20px;
+      padding: 30px; border: 1px solid rgba(0,212,255,0.4); position: relative;
+    }
+    .modal-close {
+      position: absolute; top: 15px; right: 20px; font-size: 28px; color: #94a3b8;
+      text-decoration: none; background: none; border: none; cursor: pointer;
+    }
+    .modal-close:hover { color: var(--primary); }
+    .modal-header { font-size: 26px; color: var(--primary); margin-bottom: 25px; text-align: center; }
+    .detail-row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--border); }
+    .detail-row:last-child { border-bottom: none; }
+    .detail-label { color: var(--text-light); font-weight: 600; }
+    .detail-value { color: var(--text); text-align: right; }
 
     @media (max-width: 992px) {
       .sidebar { transform: translateX(-100%); }
@@ -129,8 +149,6 @@
           Danh sách đơn hàng (128 đơn hàng trong 30 ngày gần nhất)
         </h2>
 
-        </div>
-
         <table>
           <thead>
             <tr>
@@ -144,6 +162,7 @@
             </tr>
           </thead>
           <tbody>
+            <!-- Đơn 1 -->
             <tr>
               <td data-label="Mã">OD1288</td>
               <td data-label="Khách">Nguyễn Văn Hoàng</td>
@@ -153,11 +172,13 @@
               <td data-label="Trạng thái"><span class="status status-new">Mới đặt</span></td>
               <td data-label="Thao tác">
                 <div class="actions">
-                  <button class="btn btn-view">Xem chi tiết</button>
+                  <a href="#order1288" class="btn btn-view">Xem chi tiết</a>
                   <button class="btn btn-update">Cập nhật trạng thái</button>
                 </div>
               </td>
             </tr>
+
+            <!-- Đơn 2 -->
             <tr>
               <td data-label="Mã">OD1287</td>
               <td data-label="Khách">Trần Minh Tuấn</td>
@@ -167,11 +188,13 @@
               <td data-label="Trạng thái"><span class="status status-processing">Đã xử lý</span></td>
               <td data-label="Thao tác">
                 <div class="actions">
-                  <button class="btn btn-view">Xem chi tiết</button>
+                  <a href="#order1287" class="btn btn-view">Xem chi tiết</a>
                   <button class="btn btn-update">Giao hàng</button>
                 </div>
               </td>
             </tr>
+
+            <!-- Đơn 3 -->
             <tr>
               <td data-label="Mã">OD1286</td>
               <td data-label="Khách">Lê Thị Mai</td>
@@ -181,10 +204,12 @@
               <td data-label="Trạng thái"><span class="status status-delivered">Đã giao</span></td>
               <td data-label="Thao tác">
                 <div class="actions">
-                  <button class="btn btn-view">Xem chi tiết</button>
+                  <a href="#order1286" class="btn btn-view">Xem chi tiết</a>
                 </div>
               </td>
             </tr>
+
+            <!-- Đơn 4 -->
             <tr>
               <td data-label="Mã">OD1285</td>
               <td data-label="Khách">Phạm Quốc Anh</td>
@@ -194,7 +219,7 @@
               <td data-label="Trạng thái"><span class="status status-cancelled">Đã hủy</span></td>
               <td data-label="Thao tác">
                 <div class="actions">
-                  <button class="btn btn-view">Xem chi tiết</button>
+                  <a href="#order1285" class="btn btn-view">Xem chi tiết</a>
                   <button class="btn btn-cancel">Xóa đơn</button>
                 </div>
               </td>
@@ -203,6 +228,59 @@
         </table>
       </div>
     </main>
+  </div>
+
+  <!-- 4 Modal chi tiết (thuần HTML + CSS) -->
+  <div id="order1288" class="modal">
+    <div class="modal-content">
+      <a href="#" class="modal-close">X</a>
+      <div class="modal-header">Chi tiết đơn hàng</div>
+      <div class="detail-row"><span class="detail-label">Mã đơn hàng:</span><span class="detail-value">OD1288</span></div>
+      <div class="detail-row"><span class="detail-label">Khách hàng:</span><span class="detail-value">Nguyễn Văn Hoàng</span></div>
+      <div class="detail-row"><span class="detail-label">Ngày đặt hàng:</span><span class="detail-value">23/11/2025 19:45</span></div>
+      <div class="detail-row"><span class="detail-label">Sản phẩm:</span><span class="detail-value">Free Fire Rank Huyền Thoại 1</span></div>
+      <div class="detail-row"><span class="detail-label">Tổng tiền:</span><span class="detail-value">1,250,000 ₫</span></div>
+      <div class="detail-row"><span class="detail-label">Trạng thái:</span><span class="detail-value">Mới đặt</span></div>
+    </div>
+  </div>
+
+  <div id="order1287" class="modal">
+    <div class="modal-content">
+      <a href="#" class="modal-close">X</a>
+      <div class="modal-header">Chi tiết đơn hàng</div>
+      <div class="detail-row"><span class="detail-label">Mã đơn hàng:</span><span class="detail-value">OD1287</span></div>
+      <div class="detail-row"><span class="detail-label">Khách hàng:</span><span class="detail-value">Trần Minh Tuấn</span></div>
+      <div class="detail-row"><span class="detail-label">Ngày đặt hàng:</span><span class="detail-value">23/11/2025 18:20</span></div>
+      <div class="detail-row"><span class="detail-label">Sản phẩm:</span><span class="detail-value">Liên Quân Kim Cương + 120 Skin</span></div>
+      <div class="detail-row"><span class="detail-label">Tổng tiền:</span><span class="detail-value">980,000 ₫</span></div>
+      <div class="detail-row"><span class="detail-label">Trạng thái:</span><span class="detail-value">Đã xử lý</span></div>
+    </div>
+  </div>
+
+  <div id="order1286" class="modal">
+    <div class="modal-content">
+      <a href="#" class="modal-close">X</a>
+      <div class="modal-header">Chi tiết đơn hàng</div>
+      <div class="detail-row"><span class="detail-label">Mã đơn hàng:</span><span class="detail-value">OD1286</span></div>
+      <div class="detail-row"><span class="detail-label">Khách hàng:</span><span class="detail-value">Lê Thị Mai</span></div>
+      <div class="detail-row"><span class="detail-label">Ngày đặt hàng:</span><span class="detail-value">22/11/2025 22:10</span></div>
+      <div class="detail-row"><span class="detail-label">Sản phẩm:</span><span class="detail-value">Robux 10.000</span></div>
+      <div class="detail-row"><span class="detail-label">Tổng tiền:</span><span class="detail-value">1,850,000 ₫</span></div>
+      <div class="detail-row"><span class="detail-label">Trạng thái:</span><span class="detail-value">Đã giao</span></div>
+    </div>
+  </div>
+
+  <div id="order1285" class="modal">
+    <div class="modal-content">
+      <a href="#" class="modal-close">X</a>
+      <div class="modal-header">Chi tiết đơn hàng</div>
+      <div class="detail-row"><span class="detail-label">Mã đơn hàng:</span><span class="detail-value">OD1285</span></div>
+      <div class="detail-row"><span class="detail-label">Khách hàng:</span><span class="detail-value">Phạm Quốc Anh</span></div>
+      <div class="detail-row"><span class="detail-label">Ngày đặt hàng:</span><span class="detail-value">22/11/2025 15:30</span></div>
+      <div class="detail-row"><span class="detail-label">Sản phẩm:</span><span class="detail-value">Valorant Rank Immortal</span></div>
+      <div class="detail-row"><span class="detail-label">Tổng tiền:</span><span class="detail-value">2,200,000 ₫</span></div>
+      <div class="detail-row"><span class="detail-label">Trạng thái:</span><span class="detail-value">Đã hủy</span></div>
+    </div>
   </div>
 
 </body>
