@@ -38,7 +38,7 @@
     .logo i { font-size: 34px; background: linear-gradient(45deg, #00d4ff, #9d4edd); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .page-title { font-size: 20px; color: var(--text-light); }
     .back-btn { background: rgba(0, 212, 255, 0.15); color: var(--primary); padding: 10px 24px; border-radius: 50px; text-decoration: none; font-weight: 600; border: 1px solid rgba(0, 212, 255, 0.3); transition: all 0.3s; }
-    .back-btn:hover { background: var(--primary); color: #000; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3); }
+    .back-btn:hover { background: var(--primary); color: #000; transform: translateYj(-2px); box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3); }
 
     .admin-container { display: flex; margin-top: 70px; min-height: calc(100vh - 70px); }
     .sidebar { width: var(--sidebar-width); background: rgba(30, 41, 59, 0.95); backdrop-filter: blur(10px); padding: 30px 20px; border-right: 1px solid var(--border); position: fixed; left: 0; top: 70px; bottom: 0; overflow-y: auto; }
@@ -77,7 +77,7 @@
     .btn-edit { background: #6366f1; color: white; }
     .btn-delete { background: #dc2626; color: white; }
     .btn-complete { background: #16a34a; color: white; }
-    .btn-disabled { background: #475569; color: #94a3b8; cursor: not-allowed; opacity: 0.7; }
+    .btn-reopen { background: #f59e0b; color: white; }
 
     /* Modal */
     .modal {
@@ -96,7 +96,7 @@
     .modal-header { font-size: 24px; margin-bottom: 20px; color: var(--primary); }
     .form-group { margin-bottom: 20px; }
     .form-group label { display: block; margin-bottom: 8px; color: var(--text-light); }
-    .form-group input, .form-group textarea {
+    .form-group input {
       width: 100%; padding: 12px 16px; background: rgba(15,23,42,0.8); 
       border: 1px solid var(--border); border-radius: 12px; color: var(--text);
     }
@@ -172,8 +172,9 @@
               <td data-label="Trạng thái"><span class="status status-completed">Hoàn thành</span></td>
               <td data-label="Thao tác">
                 <div class="actions">
-                  <button class="btn btn-edit btn-disabled" disabled>Sửa</button>
-                  <button class="btn btn-delete" onclick="deleteImport(this)">Xóa</button>
+                  <button class="btn btn-edit" onclick="openEditModal(this)">Sửa</button>
+                  <button class="btn btn-delete">Xóa</button>
+                  <button class="btn btn-reopen" onclick="reopenImport(this)">Mở lại</button>
                 </div>
               </td>
             </tr>
@@ -187,8 +188,9 @@
               <td data-label="Trạng thái"><span class="status status-completed">Hoàn thành</span></td>
               <td data-label="Thao tác">
                 <div class="actions">
-                  <button class="btn btn-edit btn-disabled" disabled>Sửa</button>
-                  <button class="btn btn-delete" onclick="deleteImport(this)">Xóa</button>
+                  <button class="btn btn-edit" onclick="openEditModal(this)">Sửa</button>
+                  <button class="btn btn-delete">Xóa</button>
+                  <button class="btn btn-reopen" onclick="reopenImport(this)">Mở lại</button>
                 </div>
               </td>
             </tr>
@@ -203,7 +205,7 @@
               <td data-label="Thao tác">
                 <div class="actions">
                   <button class="btn btn-edit" onclick="openEditModal(this)">Sửa</button>
-                  <button class="btn btn-delete" onclick="deleteImport(this)">Xóa</button>
+                  <button class="btn btn-delete">Xóa</button>
                   <button class="btn btn-complete" onclick="completeImport(this)">Hoàn thành</button>
                 </div>
               </td>
@@ -218,8 +220,9 @@
               <td data-label="Trạng thái"><span class="status status-completed">Hoàn thành</span></td>
               <td data-label="Thao tác">
                 <div class="actions">
-                  <button class="btn btn-edit btn-disabled" disabled>Sửa</button>
-                  <button class="btn btn-delete" onclick="deleteImport(this)">Xóa</button>
+                  <button class="btn btn-edit" onclick="openEditModal(this)">Sửa</button>
+                  <button class="btn btn-delete">Xóa</button>
+                  <button class="btn btn-reopen" onclick="reopenImport(this)">Mở lại</button>
                 </div>
               </td>
             </tr>
@@ -273,13 +276,13 @@
       const date = currentRow.querySelector('.import-date').textContent;
       const name = currentRow.querySelector('.import-name').textContent;
       const price = currentRow.querySelector('.import-price').textContent;
-      const qty = currentRow.querySelector('.import-qty').textContent;
+      const qty   = currentRow.querySelector('.import-qty').textContent;
 
       document.getElementById('editCode').value = code;
       document.getElementById('editDate').value = date;
       document.getElementById('editName').value = name;
       document.getElementById('editPrice').value = price;
-      document.getElementById('editQty').value = qty;
+      document.getElementById('editQty').value   = qty;
 
       document.getElementById('editModal').classList.add('active');
     }
@@ -293,16 +296,16 @@
       e.preventDefault();
       if (!currentRow) return;
 
-      const newDate = document.getElementById('editDate').value.trim();
-      const newName = document.getElementById('editName').value.trim();
+      const newDate  = document.getElementById('editDate').value.trim();
+      const newName  = document.getElementById('editName').value.trim();
       const newPrice = parseInt(document.getElementById('editPrice').value) || 0;
-      const newQty = parseInt(document.getElementById('editQty').value) || 0;
-      const total = newPrice * newQty;
+      const newQty   = parseInt(document.getElementById('editQty').value)   || 0;
+      const total    = newPrice * newQty;
 
       currentRow.querySelector('.import-date').textContent = newDate;
       currentRow.querySelector('.import-name').textContent = newName;
       currentRow.querySelector('.import-price').textContent = newPrice;
-      currentRow.querySelector('.import-qty').textContent = newQty;
+      currentRow.querySelector('.import-qty').textContent   = newQty;
       currentRow.querySelector('.import-total strong').textContent = 
         total.toLocaleString('vi-VN') + ' ₫';
 
@@ -312,22 +315,35 @@
     function completeImport(btn) {
       const row = btn.closest('tr');
       const statusSpan = row.querySelector('.status');
-      const editBtn = row.querySelector('.btn-edit');
-      const completeBtn = btn;
+      const actionsDiv = row.querySelector('.actions');
 
       statusSpan.className = 'status status-completed';
       statusSpan.textContent = 'Hoàn thành';
 
-      editBtn.classList.add('btn-disabled');
-      editBtn.disabled = true;
-      completeBtn.remove();
+      actionsDiv.innerHTML = `
+        <button class="btn btn-edit" onclick="openEditModal(this)">Sửa</button>
+        <button class="btn btn-delete">Xóa</button>
+        <button class="btn btn-reopen" onclick="reopenImport(this)">Mở lại</button>
+      `;
     }
 
-    function deleteImport(btn) {
-      if (confirm('Xóa phiếu nhập này? Hành động không thể hoàn tác.')) {
-        btn.closest('tr').remove();
-      }
+    function reopenImport(btn) {
+      const row = btn.closest('tr');
+      const statusSpan = row.querySelector('.status');
+      const actionsDiv = row.querySelector('.actions');
+
+      statusSpan.className = 'status status-pending';
+      statusSpan.textContent = 'Chưa hoàn thành';
+
+      actionsDiv.innerHTML = `
+        <button class="btn btn-edit" onclick="openEditModal(this)">Sửa</button>
+        <button class="btn btn-delete">Xóa</button>
+        <button class="btn btn-complete" onclick="completeImport(this)">Hoàn thành</button>
+      `;
     }
+
+    // Nút Xóa vẫn hiện nhưng không làm gì cả
+    // (Không có hàm deleteImport nữa)
 
     window.addEventListener('click', function(e) {
       const modal = document.getElementById('editModal');
