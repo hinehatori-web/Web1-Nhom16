@@ -153,6 +153,7 @@
         <h2 class="card-title">
           Danh sách sản phẩm đang kinh doanh (68 sản phẩm)
         </h2>
+        <button class="btn btn-save" style="margin-bottom: 20px;" onclick="openAddModal()">Thêm sản phẩm mới</button>
 
         <table id="productTable">
           <thead>
@@ -275,6 +276,38 @@
     </div>
   </div>
 
+  <!-- Modal thêm sản phẩm mới -->
+  <div id="addModal" class="modal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeAddModal()">X</button>
+      <div class="modal-header">Thêm sản phẩm mới</div>
+      <form id="addForm">
+        <div class="form-group">
+          <label>Hình ảnh (URL)</label>
+          <input type="text" id="addImageUrl" placeholder="Nhập URL hình ảnh sản phẩm" required>
+        </div>
+        <div class="form-group">
+          <label>Tên sản phẩm</label>
+          <input type="text" id="addName" required>
+        </div>
+        <div class="form-group">
+          <label>Loại sản phẩm</label>
+          <select id="addCategory">
+            <option value="Free Fire">Free Fire</option>
+            <option value="Liên Quân Mobile">Liên Quân Mobile</option>
+            <option value="Valorant">Valorant</option>
+            <option value="Roblox">Roblox</option>
+            <option value="Gift Card">Gift Card</option>
+          </select>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-cancel" onclick="closeAddModal()">Hủy</button>
+          <button type="submit" class="btn btn-save">Lưu sản phẩm</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <script>
     let currentRow = null;
 
@@ -363,10 +396,27 @@
       }
     }
 
+    // Chức năng thêm sản phẩm (chỉ hiển thị modal, không hoạt động thực)
+    function openAddModal() {
+      document.getElementById('addModal').classList.add('active');
+    }
+
+    function closeAddModal() {
+      document.getElementById('addModal').classList.remove('active');
+    }
+
+    document.getElementById('addForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      // Không thực hiện thêm sản phẩm thực tế
+      closeAddModal();
+    });
+
     // Đóng modal khi click ngoài
     window.addEventListener('click', function(e) {
-      const modal = document.getElementById('editModal');
-      if (e.target === modal) closeEditModal();
+      const editModal = document.getElementById('editModal');
+      const addModal = document.getElementById('addModal');
+      if (e.target === editModal) closeEditModal();
+      if (e.target === addModal) closeAddModal();
     });
   </script>
 
